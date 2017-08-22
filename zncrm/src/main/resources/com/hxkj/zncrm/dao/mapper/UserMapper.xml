@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.UserMapper">
+	<!-- Create a new User -->
+	<insert id="addUser">
+		INSERT INTO TB_USER(USERNAME,PASSWORD,AGE,DELETEFLAG) VALUES("Hello","11111
+		1",10,0)
+	</insert>
+</mapper>

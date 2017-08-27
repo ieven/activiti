@@ -3,7 +3,13 @@
 <mapper namespace="com.hxkj.zncrm.dao.mapper.UserMapper">
 	<!-- Create a new User -->
 	<insert id="addUser">
-		INSERT INTO TB_USER(USERNAME,PASSWORD,AGE,DELETEFLAG) VALUES("Hello","11111
+		INSERT INTO TB_USER(USERNAME,PASSWORD,AGE,DELETEFLAG)
+		VALUES("Hello","11111
 		1",10,0)
 	</insert>
+
+	<select id="login" parameterType="String" resultType="com.hxkj.zncrm.po.User">
+		SELECT ID_ as username,PWD_ as password from act_id_user WHERE
+		ID_ = #{0} and PWD_ = #{1}
+	</select>
 </mapper>

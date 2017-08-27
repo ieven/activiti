@@ -81,9 +81,32 @@ public class LoginPage extends CustomLayout {
         // which is not the case for ajax-generated UI components
         ExplorerLoginForm loginForm = new ExplorerLoginForm();
         addComponent(loginForm, ExplorerLayout.LOCATION_LOGIN);
-
+        //
         // Login listener
         loginForm.addListener(new ActivitiLoginListener());
+
+        // try {
+        //
+        // PropertiesHelper helper = new PropertiesHelper();
+        // String filePath = System.getProperty("hxkj.root") + "/../zncrm.properties";
+        // Map<String, String> map = helper.ReadProperties(filePath);
+        // String userName = map.get("username");
+        // String password = map.get("password");
+        // // Delegate authentication to handler
+        // LoggedInUser loggedInUser = loginHandler.authenticate(userName, password);
+        // if (loggedInUser != null) {
+        // ExplorerApp.get().setUser(loggedInUser);
+        // viewManager.showDefaultPage();
+        // }
+        // else {
+        // // refreshUi();
+        // notificationManager.showErrorNotification(Messages.LOGIN_FAILED_HEADER,
+        // i18nManager.getMessage(Messages.LOGIN_FAILED_INVALID));
+        // }
+        // }
+        // catch (Exception e) {
+        // LOGGER.error("Error at login", e);
+        // }
     }
 
     protected void refreshUi() {
@@ -101,6 +124,7 @@ public class LoginPage extends CustomLayout {
         public void onLogin(LoginEvent event) {
 
             try {
+
                 String userName = event.getLoginParameter("username"); // see the input field names in CustomLoginForm
                 String password = event.getLoginParameter("password"); // see the input field names in CustomLoginForm
                 // Delegate authentication to handler

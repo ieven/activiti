@@ -12,6 +12,7 @@ package org.activiti.explorer;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +29,12 @@ import org.activiti.explorer.ui.content.AttachmentRendererManager;
 import org.activiti.explorer.ui.form.FormPropertyRendererManager;
 import org.activiti.explorer.ui.login.LoginHandler;
 import org.activiti.explorer.ui.variable.VariableRendererManager;
+import org.activiti.util.PropertiesHelper;
+import org.activiti.util.StringHelper;
 import org.activiti.workflow.simple.converter.WorkflowDefinitionConversionFactory;
 import org.activiti.workflow.simple.converter.json.SimpleWorkflowJsonConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
@@ -192,13 +197,31 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
 
     // HttpServletRequestListener -------------------------------------------------------------------
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ExplorerApp.class);
+
     @Override
     public void onRequestStart(HttpServletRequest request, HttpServletResponse response) {
 
         // Set current application object as thread-local to make it easy accessible
         current.set(this);
-
         // Authentication: check if user is found, otherwise send to login page
+        try {
+            PropertiesHelper helper = new PropertiesHelper();
+            String filePath = System.getProperty("hxkj.root") + "/../zncrm.properties";
+            Map<String, String> map = helper.ReadProperties(filePath);
+            String userName = map.get("username");
+            String password = map.get("password");
+            // Delegate authentication to handler
+            if ((!StringHelper.isEmpty(userName)) && (!StringHelper.isEmpty(password))) {
+
+                LoggedInUser loggedInUser = loginHandler.authenticate(userName, password);
+                ExplorerApp.get().setUser(loggedInUser);
+            }
+        }
+        catch (Exception e) {
+            LOGGER.error("Error at login");
+        }
+
         LoggedInUser user = (LoggedInUser) getUser();
         if (user == null) {
             // First, try automatic login

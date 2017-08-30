@@ -1,6 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript"  src="./js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="./js/common/helper.js"></script>
+<script type="text/javascript" src="./js/common/string.js"></script>
 <title></title>
 <style type="text/css">
 body {
@@ -94,7 +97,6 @@ to {
 </style>
 </head>
 <body>
-	<form method="post" action="http://hxzncrm.com/" id="form1">
 		<div class="aspNetHidden">
 			<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
 				value="/wEPDwUJODExNjg3NjI4ZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAgUMSW1hZ2VCdXR0b24xBQxJbWFnZUJ1dHRvbjKAeAcnPPDDkIQzaqLnbCCeOn/1+YdzaiLQxsIVyBq4qg==">
@@ -137,7 +139,7 @@ to {
 														<td style="width: 50px; height: 20px"><img
 															src="./images/login/u.jpg"></td>
 														<td class="upbg"><span style="margin-left: 5px">
-																<input name="dlm" type="text" id="dlm" class="txtbox">
+																<input name="dlm" type="text" id="username" class="txtbox">
 														</span></td>
 													</tr>
 													<tr>
@@ -167,7 +169,7 @@ to {
 																		<td width="63">&nbsp;</td>
 																		<td width="60"><input type="image"
 																			name="ImageButton1" id="ImageButton1"
-																			src="./images/login/button1.jpg"></td>
+																			src="./images/login/button1.jpg" onclick="login()"></td>
 																		<td width="43">&nbsp;</td>
 																		<td><input type="image" name="ImageButton2"
 																			id="ImageButton2"
@@ -188,17 +190,28 @@ to {
 				</tbody>
 			</table>
 		</div>
-	</form>
 	<script type="text/javascript">
-		function getIp(obj) {
-			document.getElementById("HidIp").value = obj.ip;
-			document.getElementById("HidPro").value = obj.pro;
-			document.getElementById("HidCity").value = obj.city;
+		function login() {
+			var username = $('#username').val();
+			var password = $('#password').val();
+			
+			AjaxHelper.call({
+		        url: "rest/login",
+		        data: JSON.stringify({"username":username,"password":password}),
+		        async:true,
+		        cache:false,
+		        type: "POST",
+		        contentType:'application/json; charset=UTF-8',
+		        success: function (result) {
+		            alert("success");
+
+		        },
+		        error:function(result){
+		            alert("error");
+		        }
+		    });
 		}
 	</script>
-	<script type="text/javascript" src="./hxzncrm.com_files/ipJson.jsp"></script>
-
-
 
 </body>
 </html>

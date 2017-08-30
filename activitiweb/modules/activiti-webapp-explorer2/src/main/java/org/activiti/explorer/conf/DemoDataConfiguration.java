@@ -85,17 +85,17 @@ public class DemoDataConfiguration {
 
         if (Boolean.valueOf(environment.getProperty("create.demo.definitions", "true"))) {
             LOGGER.info("Initializing demo process definitions");
-            initProcessDefinitions();
+            // initProcessDefinitions();
         }
 
         if (Boolean.valueOf(environment.getProperty("create.demo.models", "true"))) {
             LOGGER.info("Initializing demo models");
-            initModelData();
+            // initModelData();
         }
 
         if (Boolean.valueOf(environment.getProperty("create.demo.reports", "true"))) {
             LOGGER.info("Initializing demo report data");
-            generateReportData();
+            // generateReportData();
         }
     }
 

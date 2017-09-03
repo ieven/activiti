@@ -8,6 +8,18 @@ public class User {
 
     private String role;
 
+    private String picId;
+
+    public String getPicId() {
+
+        return picId;
+    }
+
+    public void setPicId(String picId) {
+
+        this.picId = picId;
+    }
+
     public String getUsername() {
 
         return username;

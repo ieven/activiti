@@ -1,6 +1,8 @@
 package com.hxkj.zncrm.service.impl;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +28,15 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public User login(String username, String password) {
 
-        User user = userMapper.login(username, password);
+        Map<String, String> map = new HashMap<>(2);
+        map.put("username", username);
+        map.put("password", password);
+        User user = userMapper.login(map);
         if (user == null) {
             return null;
         }
         else {
-            String filePath = System.getProperty("hxkj.root") + "/../zncrm.properties";
+            String filePath = System.getProperty("hxkj.zncrm.root") + "/../zncrm" + username + ".properties";
             try {
                 util.WriteProperties(filePath, "username", username);
                 util.WriteProperties(filePath, "password", password);

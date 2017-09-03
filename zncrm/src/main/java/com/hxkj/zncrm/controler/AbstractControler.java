@@ -11,12 +11,20 @@ public class AbstractControler {
         FAIL, SUCCESS, EXCEPTION
     }
 
-    protected String createResponeJson(RespCode respCode, String respMsg, Object respData) {
+    protected String createResponeJson(String respCode, String respMsg, Object respData) {
 
         HashMap<String, Object> resp = new HashMap<String, Object>();
         resp.put("CODE", respCode);
         resp.put("MSG", respMsg);
         resp.put("DATA", respData);
+        return JSONHelper.toString(resp);
+    }
+
+    protected String createResponeJson(String respCode, String respMsg) {
+
+        HashMap<String, Object> resp = new HashMap<String, Object>();
+        resp.put("CODE", respCode);
+        resp.put("MSG", respMsg);
         return JSONHelper.toString(resp);
     }
 }

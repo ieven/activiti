@@ -8,8 +8,8 @@
 		1",10,0)
 	</insert>
 
-	<select id="login" parameterType="String" resultType="com.hxkj.zncrm.po.User">
-		SELECT ID_ as username,PWD_ as password from act_id_user WHERE
-		ID_ = #{0} and PWD_ = #{1}
+	<select id="login" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
+		SELECT ID_ as username,PWD_ as password,PICTURE_ID_ as picId from act_id_user WHERE
+		ID_ = #{username} and PWD_ = #{password}
 	</select>
 </mapper>

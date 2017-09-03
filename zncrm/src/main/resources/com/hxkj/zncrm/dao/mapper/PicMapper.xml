@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.PicMapper">
+
+	<resultMap type="java.util.Map" id="imgResultMap">
+		<result property="imgBytes" column="BYTES_" jdbcType="BLOB"
+			typeHandler="org.apache.ibatis.type.BlobTypeHandler" />
+	</resultMap>
+
+	<select id="getPicById" parameterType="String" resultMap="imgResultMap">
+		SELECT BYTES_ FROM act_ge_bytearray WHERE ID_ = #{id};
+	</select>
+</mapper>

@@ -21,7 +21,6 @@ import org.activiti.explorer.Messages;
 import org.activiti.explorer.ViewManager;
 import org.activiti.explorer.identity.LoggedInUser;
 import org.activiti.explorer.ui.Images;
-import org.activiti.explorer.ui.profile.ChangePasswordPopupWindow;
 
 import com.vaadin.terminal.Resource;
 import com.vaadin.ui.Alignment;
@@ -31,8 +30,6 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.MenuBar.Command;
-import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.Reindeer;
 
 /**
@@ -151,53 +148,53 @@ public class MainMenuBar extends HorizontalLayout {
         // User name + link to profile
         MenuBar profileMenu = new MenuBar();
         profileMenu.addStyleName(ExplorerLayout.STYLE_HEADER_PROFILE_BOX);
-        MenuItem rootItem = profileMenu.addItem(user.getFirstName() + " " + user.getLastName(), null);
-        rootItem.setStyleName(ExplorerLayout.STYLE_HEADER_PROFILE_MENU);
-
-        if (useProfile()) {
-            // Show profile
-            rootItem.addItem(i18nManager.getMessage(Messages.PROFILE_SHOW), new Command() {
-
-                @Override
-                public void menuSelected(MenuItem selectedItem) {
-
-                    ExplorerApp.get().getViewManager().showProfilePopup(user.getId());
-                }
-            });
-
-            // Edit profile
-            rootItem.addItem(i18nManager.getMessage(Messages.PROFILE_EDIT), new Command() {
-
-                @Override
-                public void menuSelected(MenuItem selectedItem) {
-
-                    // TODO: Show in edit-mode
-                    ExplorerApp.get().getViewManager().showProfilePopup(user.getId());
-                }
-            });
-
-            // Change password
-            rootItem.addItem(i18nManager.getMessage(Messages.PASSWORD_CHANGE), new Command() {
-
-                @Override
-                public void menuSelected(MenuItem selectedItem) {
-
-                    ExplorerApp.get().getViewManager().showPopupWindow(new ChangePasswordPopupWindow());
-                }
-            });
-
-            rootItem.addSeparator();
-        }
-
-        // Logout
-        rootItem.addItem(i18nManager.getMessage(Messages.HEADER_LOGOUT), new Command() {
-
-            @Override
-            public void menuSelected(MenuItem selectedItem) {
-
-                ExplorerApp.get().close();
-            }
-        });
+        // MenuItem rootItem = profileMenu.addItem(user.getFirstName() + " " + user.getLastName(), null);
+        // rootItem.setStyleName(ExplorerLayout.STYLE_HEADER_PROFILE_MENU);
+        //
+        // if (useProfile()) {
+        // // Show profile
+        // rootItem.addItem(i18nManager.getMessage(Messages.PROFILE_SHOW), new Command() {
+        //
+        // @Override
+        // public void menuSelected(MenuItem selectedItem) {
+        //
+        // ExplorerApp.get().getViewManager().showProfilePopup(user.getId());
+        // }
+        // });
+        //
+        // // Edit profile
+        // rootItem.addItem(i18nManager.getMessage(Messages.PROFILE_EDIT), new Command() {
+        //
+        // @Override
+        // public void menuSelected(MenuItem selectedItem) {
+        //
+        // // TODO: Show in edit-mode
+        // ExplorerApp.get().getViewManager().showProfilePopup(user.getId());
+        // }
+        // });
+        //
+        // // Change password
+        // rootItem.addItem(i18nManager.getMessage(Messages.PASSWORD_CHANGE), new Command() {
+        //
+        // @Override
+        // public void menuSelected(MenuItem selectedItem) {
+        //
+        // ExplorerApp.get().getViewManager().showPopupWindow(new ChangePasswordPopupWindow());
+        // }
+        // });
+        //
+        // rootItem.addSeparator();
+        // }
+        //
+        // // Logout
+        // rootItem.addItem(i18nManager.getMessage(Messages.HEADER_LOGOUT), new Command() {
+        //
+        // @Override
+        // public void menuSelected(MenuItem selectedItem) {
+        //
+        // ExplorerApp.get().close();
+        // }
+        // });
 
         addComponent(profileMenu);
         setComponentAlignment(profileMenu, Alignment.TOP_RIGHT);

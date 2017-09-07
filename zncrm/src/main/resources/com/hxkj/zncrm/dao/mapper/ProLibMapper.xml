@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.ProLibMapper">
+
+	<select id="getProLib" parameterType="Map" resultType="com.hxkj.zncrm.dao.domain.ProLib">
+		SELECT * FROM pro_library 
+		<where>
+			<if test="search_key != null">
+				pro_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_series like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_out_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_in_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_pur_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_assist_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_selling_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_phone like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_qq like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_source like '%${search_key}%'
+			</if>
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+	
+	<select id="getProLibCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM pro_library 
+		<where>
+			<if test="search_key != null">
+				pro_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_series like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_out_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_in_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_pur_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_assist_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_selling_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_phone like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_qq like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_source like '%${search_key}%'
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -144,7 +144,7 @@ public class SelectUsersPopupWindow extends PopupWindow {
             @Override
             public void textChange(TextChangeEvent event) {
 
-                System.out.println("event.getText()");
+                System.out.println(event.getText());
                 searchPeople(event.getText());
             }
         });
@@ -192,8 +192,10 @@ public class SelectUsersPopupWindow extends PopupWindow {
         if (searchText.length() >= 2) {
             matchingUsersTable.removeAllItems();
 
+            // List<User> results = ProcessEngines.getDefaultProcessEngine().getIdentityService().createUserQuery()
+            // .userFullNameLike("%" + searchText + "%").list();
             List<User> results = ProcessEngines.getDefaultProcessEngine().getIdentityService().createUserQuery()
-                    .userFullNameLike("%" + searchText + "%").list();
+                    .userFirstNameLike("%" + searchText + "%").list();
 
             for (User user : results) {
                 if (!multiSelect || !selectedUsersTable.containsId(user.getId())) {

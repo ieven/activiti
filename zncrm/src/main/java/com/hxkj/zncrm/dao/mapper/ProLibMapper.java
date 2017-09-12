@@ -22,4 +22,40 @@ public interface ProLibMapper {
      * @return
      */
     public String getProLibCount(Map<String, String> param);
+
+    /**
+     * 更新指定id的产品库
+     * 
+     * @param input
+     * @return
+     */
+    public int updateProLib(Map<String, String> input);
+
+    /**
+     * 删除指定id的产品库
+     * 
+     * @param input
+     * @return
+     */
+    public int delProLib(Map<String, String> input);
+
+    /**
+     * 添加产品
+     * 
+     * @param input
+     * @return
+     */
+    public long addProLib(Map<String, String> input);
+
+    /**
+     * 获取产品图片
+     * 
+     * @param id
+     * @return
+     */
+    public Map<String, Object> getProLibPic(String id);
+
+    public int addProLibPic(Map input);
+
+    public ProLib getProLibById(String id);
 }

@@ -30,6 +30,6 @@ public class BusCusControler extends AbstractControler {
         map.put("ok1", "success1");
         list.add(map);
         list.add(map);
-        return Response.ok().entity(createResponeJson(ResponseConstant.LOGIN_OK, "", list)).build();
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", list)).build();
     }
 }

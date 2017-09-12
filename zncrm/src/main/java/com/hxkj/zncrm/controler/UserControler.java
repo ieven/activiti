@@ -49,7 +49,7 @@ public class UserControler extends AbstractControler {
             return Response.status(404).entity(createResponeJson(ResponseConstant.LOGIN_FAIL, "账号密码错误")).build();
         }
         else {
-            return Response.ok().entity(createResponeJson(ResponseConstant.LOGIN_OK, "", user)).build();
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", user)).build();
         }
     }
 

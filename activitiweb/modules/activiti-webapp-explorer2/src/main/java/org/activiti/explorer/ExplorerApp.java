@@ -204,22 +204,34 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
 
         // Set current application object as thread-local to make it easy accessible
         current.set(this);
-        // Authentication: check if user is found, otherwise send to login page
-        try {
-            PropertiesHelper helper = new PropertiesHelper();
-            String filePath = System.getProperty("hxkj.root") + "/../zncrm.properties";
-            Map<String, String> map = helper.ReadProperties(filePath);
-            String userName = map.get("username");
-            String password = map.get("password");
-            // Delegate authentication to handler
-            if ((!StringHelper.isEmpty(userName)) && (!StringHelper.isEmpty(password))) {
-
-                LoggedInUser loggedInUser = loginHandler.authenticate(userName, password);
-                ExplorerApp.get().setUser(loggedInUser);
-            }
+        String username = "";
+        if (request.getRequestURI().indexOf("zncrmlogout") > -1) {
+            ExplorerApp.get().close();
+            return;
         }
-        catch (Exception e) {
-            LOGGER.error("Error at login");
+        else if (request.getRequestURI().indexOf("zncrmlogin") > -1) {
+            ExplorerApp.get().close();
+            String[] strs = request.getRequestURI().split("\\/");
+            username = strs[strs.length - 1].split("=")[1];
+        }
+        if (!StringHelper.isEmpty(username)) {
+            // Authentication: check if user is found, otherwise send to login page
+            try {
+                PropertiesHelper helper = new PropertiesHelper();
+                String filePath = System.getProperty("hxkj.activiti.root") + "/../zncrm" + username + ".properties";
+                Map<String, String> map = helper.ReadProperties(filePath);
+                String userName = map.get("username");
+                String password = map.get("password");
+                // Delegate authentication to handler
+                if ((!StringHelper.isEmpty(userName)) && (!StringHelper.isEmpty(password))) {
+
+                    LoggedInUser loggedInUser = loginHandler.authenticate(userName, password);
+                    ExplorerApp.get().setUser(loggedInUser);
+                }
+            }
+            catch (Exception e) {
+                LOGGER.error("Error at login");
+            }
         }
 
         LoggedInUser user = (LoggedInUser) getUser();

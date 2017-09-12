@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.ProLibMapper">
+
+	<select id="getProLibById" parameterType="Map" resultType="com.hxkj.zncrm.dao.domain.ProLib">
+		SELECT * FROM pro_library where pro_id = #{id};
+	</select>
+
+	<update id="addProLibPic">
+		UPDATE pro_library set pro_pic=#{pro_pic} where pro_id=#{pro_id}
+	</update>
+
+	<resultMap type="java.util.Map" id="imgResultMap">
+		<result property="imgBytes" column="pro_pic" jdbcType="BLOB"
+			typeHandler="org.apache.ibatis.type.BlobTypeHandler" />
+	</resultMap>
+
+	<select id="getProLibPic" parameterType="String" resultMap="imgResultMap">
+		SELECT pro_pic FROM pro_library WHERE pro_id = #{id};
+	</select>
+	
+	<insert id="addProLib">
+		insert pro_library
+		<set>
+			<if test="pro_name != null">pro_name=#{pro_name},</if>
+			<if test="pro_series != null">pro_series=#{pro_series},</if>
+			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>
+			<if test="pro_in_name != null">pro_in_name=#{pro_in_name},</if>
+			<if test="pro_unit != null">pro_unit=#{pro_unit},</if>
+			<if test="pro_intro != null">pro_intro=#{pro_intro},</if>
+			<if test="pro_pur_price != null">pro_pur_price=#{pro_pur_price},</if>
+			<if test="pro_assist_price != null">pro_assist_price=#{pro_assist_price},</if>
+			<if test="pro_selling_price != null">pro_selling_price=#{pro_selling_price},</if>
+			<if test="pro_linkman != null">pro_linkman=#{pro_linkman},</if>
+			<if test="pro_linkman_phone != null">pro_linkman_phone=#{pro_linkman_phone},</if>
+			<if test="pro_linkman_qq != null">pro_linkman_qq=#{pro_linkman_qq},</if>
+			<if test="pro_source != null">pro_source=#{pro_source}</if>
+		</set>
+		
+		<selectKey keyProperty="pro_id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="delProLib">
+		UPDATE pro_library set status='-1' where pro_id=#{pro_id}
+	</update>
+
+	<update id="updateProLib">
+		UPDATE pro_library
+		<set>
+			<if test="pro_name != null">pro_name=#{pro_name},</if>
+			<if test="pro_series != null">pro_series=#{pro_series},</if>
+			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>
+			<if test="pro_in_name != null">pro_in_name=#{pro_in_name},</if>
+			<if test="pro_unit != null">pro_unit=#{pro_unit},</if>
+			<if test="pro_intro != null">pro_intro=#{pro_intro},</if>
+			<if test="pro_pur_price != null">pro_pur_price=#{pro_pur_price},</if>
+			<if test="pro_assist_price != null">pro_assist_price=#{pro_assist_price},</if>
+			<if test="pro_selling_price != null">pro_selling_price=#{pro_selling_price},</if>
+			<if test="pro_linkman != null">pro_linkman=#{pro_linkman},</if>
+			<if test="pro_linkman_phone != null">pro_linkman_phone=#{pro_linkman_phone},</if>
+			<if test="pro_linkman_qq != null">pro_linkman_qq=#{pro_linkman_qq},</if>
+			<if test="pro_source != null">pro_source=#{pro_source}</if>
+		</set>
+		where pro_id=#{pro_id}
+	</update>
+
+	<select id="getProLib" parameterType="Map" resultType="com.hxkj.zncrm.dao.domain.ProLib">
+		SELECT * FROM pro_library 
+		<where>
+			<if test="search_key != null">
+				pro_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_series like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_out_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_in_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_pur_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_assist_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_selling_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_phone like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_qq like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_source like '%${search_key}%'
+			</if>
+			and status='1' 
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+	
+	<select id="getProLibCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM pro_library 
+		<where>
+			<if test="search_key != null">
+				pro_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_series like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_out_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_in_name like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_pur_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_assist_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_selling_price like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_phone like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_linkman_qq like '%${search_key}%'
+			</if>
+			<if test="search_key != null">
+				or pro_source like '%${search_key}%'
+			</if>
+		</where>
+	</select>
+</mapper>

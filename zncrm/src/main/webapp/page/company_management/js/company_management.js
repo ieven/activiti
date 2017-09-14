@@ -2,68 +2,8 @@ function load_company_management() {
 	$("#mainContent").attr("src", "/zncrm/page/company_management/company_management.html");
 }
 
-var FormFileUpload = function () {
-
-
-    return {
-        //main function to initiate the module
-        init: function () {
-
-             // Initialize the jQuery File Upload widget:
-            $('#fileupload').fileupload({
-                disableImageResize: false,
-                autoUpload: false,
-                disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
-                maxFileSize: 5000000,
-                acceptFileTypes: /(\.|\/)(gif|jpe?g|png|xlsx|xls|ppt|doc)$/i,
-                // Uncomment the following to send cross-domain cookies:
-                //xhrFields: {withCredentials: true},                
-            });
-
-            // Enable iframe cross-domain access via redirect option:
-            $('#fileupload').fileupload(
-                'option',
-                'redirect',
-                window.location.href.replace(
-                    /\/[^\/]*$/,
-                    '/cors/result.html?%s'
-                )
-            );
-
-            // Upload server status check for browsers with CORS support:
-            if ($.support.cors) {
-                $.ajax({
-                    type: 'HEAD'
-                }).fail(function () {
-                    $('<div class="alert alert-danger"/>')
-                        .text('Upload server currently unavailable - ' +
-                                new Date())
-                        .appendTo('#fileupload');
-                });
-            }
-
-            // Load & display existing files:
-            $('#fileupload').addClass('fileupload-processing');
-            $.ajax({
-                // Uncomment the following to send cross-domain cookies:
-                //xhrFields: {withCredentials: true},
-                url: $('#fileupload').attr("action"),
-                dataType: 'multipart/form-data',
-                context: $('#fileupload')[0]
-            }).always(function () {
-                $(this).removeClass('fileupload-processing');
-            }).done(function (result) {
-                $(this).fileupload('option', 'done')
-                .call(this, $.Event('done'), {result: result});
-            });
-        }
-
-    };
-
-}();
-
 var TableEditable = function() {
-
+	
 	var handleTable = function() {
 
 		function restoreRow(oTable, nRow) {
@@ -113,32 +53,34 @@ var TableEditable = function() {
 				+ aData.pro_assist_price + '" name="pro_assist_price">';
 			jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="'
 				+ aData.pro_selling_price + '" name="pro_selling_price">';
-			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_linkman + '" name="pro_linkman">';
-			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_linkman_phone + '" name="pro_linkman_phone">';
-			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_linkman_qq + '" name="pro_linkman_qq">';
-			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_source + '" name="pro_source">';
-			jqTds[13].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
-			jqTds[14].innerHTML = '<input type="text" class="form-control input-small" style="display:none" value="'
+//			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
+//				+ aData.pro_linkman + '" name="pro_linkman">';
+//			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
+//				+ aData.pro_linkman_phone + '" name="pro_linkman_phone">';
+//			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
+//				+ aData.pro_linkman_qq + '" name="pro_linkman_qq">';
+//			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
+//				+ aData.pro_source + '" name="pro_source">';
+			jqTds[9].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
+			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" style="display:none" value="'
 				+ aData.pro_id + '" name="pro_id">';
 		}
 
 		var table = $('#sample_editable_1');
 		
-		table.on('click', '.btn-edit', function (e) {
+		table.on('click', '.btn-download', function (e) {
             e.preventDefault();
-
-            if(this.innerHTML=="修改"){
-            	var nRow = $(this).parents('tr')[0];
-                editRow(oTable, nRow);
-            }else if(this.innerHTML=="保存"){
-            	var nRow = $(this).parents('tr')[0];
-            	restoreRow(oTable, nRow);
-            }
-            
+            var nRow = $(this).parents('tr')[0];
+			var aData = oTable.fnGetData(nRow);
+            var host = window.location.host;
+            window.open("http://"+host+"/zncrm/rest/file/"+aData.file_id);
+        });
+		
+		table.on('click', '.btn-more', function (e) {
+			var nRow = $(this).parents('tr')[0];
+			var aData = oTable.fnGetData(nRow);
+			var host = window.location.host;
+			window.open("http://view.officeapps.live.com/op/view.aspx?"+encodeURIComponent("http://"+host+"/zncrm/rest/file/"+aData.file_id));
         });
 		
 		table.on('click', '.btn-cancel', function (e) {
@@ -152,11 +94,9 @@ var TableEditable = function() {
             	var nRow = $(this).parents('tr')[0];
             	var jqInputs = $('td', nRow);
             	var param = {};
-            	
-            	var length = jqInputs.length-1;
-            	param.pro_id = jqInputs[length].innerText;
+            	param.file_id = jqInputs[0].innerText;
             	AjaxHelper.call({
-    				url : "/zncrm/rest/pro_lib",
+    				url : "/zncrm/rest/file",
     				data : JSON.stringify(param),
     				async : false,
     				cache : false,
@@ -175,9 +115,8 @@ var TableEditable = function() {
 
 		var oTable = table
 				.dataTable({
-
 					"bServerSide" : true,// 这个用来指明是通过服务端来取数据
-					"sAjaxSource" : "/zncrm/rest/pro_lib",// 这个是请求的地址
+					"sAjaxSource" : "/zncrm/rest/file/"+menu.id,// 这个是请求的地址
 					"fnServerData" : retrieveData,
 					"sAjaxDataProp" : "result",
 					"searching" : false,
@@ -198,39 +137,33 @@ var TableEditable = function() {
 					"bLengthChange" : false,
 					"pagingType" : "bootstrap_full_number",
 					"columns" : [ {
-						data : "pro_name"
+						data : "file_id"
 					}, {
-						data : "pro_series"
+						data : "title"
 					}, {
-						data : "pro_out_name"
+						data : "author"
 					}, {
-						data : "pro_in_name"
-					}, {
-						data : "pro_unit"
-					}, {
-						data : "pro_intro"
-					}, {
-						data : "pro_pur_price"
-					}, {
-						data : "pro_assist_price"
-					}, {
-						data : "pro_selling_price"
-					}, {
-						data : "pro_linkman"
-					}, {
-						data : "pro_linkman_phone"
-					}, {
-						data : "pro_linkman_qq"
-					}, {
-						data : "pro_source"
+						data : "last_modify"
 					}, {
 						data : null,
 						defaultContent : ""
-					}, {
-						data : "pro_id",
-						className : "id_display"
-					} ]
+					} ],
+					"createdRow" : function(row, data, index) {
+						// 行渲染回调,在这里可以对该行dom元素进行任何操作
+						// 不使用render，改用jquery文档操作呈现单元格
+						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-download">下载</button>');
+						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
+						var $btnMore = $('<button type="button" class="btn btn-small btn-danger btn-more">预览</button>');
+						$('td', row).eq(4).append($btnEdit).append($btnDel).append($btnMore);
+					}
 				});
+
+		$("#btn-simple-search").click(function(){
+			manager.fuzzySearch = true;
+			var temp = oTable.api();
+			temp.ajax.reload();
+		});	
+
 	}
 
 	return {
@@ -275,6 +208,7 @@ $('#save_button').click(function (e) {
 function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
+	$("#fileupload").attr("action","/zncrm/rest/file/add?username="+$.session.get('username')+"&menu_id="+menu.id);
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),
@@ -300,6 +234,10 @@ function retrieveData(source, data, callback) {
 	});
 }
 
+var menu = {
+		id:"1"
+};
+
 var manager = {
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
@@ -319,3 +257,62 @@ var manager = {
 		return param;
 	}
 };
+
+var FormFileUpload = function () {
+
+    return {
+        //main function to initiate the module
+        init: function () {
+
+             // Initialize the jQuery File Upload widget:
+            $('#fileupload').fileupload({
+                disableImageResize: false,
+                autoUpload: false,
+                disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
+                maxFileSize: 5000000,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png|xlsx|xls|ppt|doc|docx)$/i,
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},                
+            });
+
+            // Enable iframe cross-domain access via redirect option:
+            $('#fileupload').fileupload(
+                'option',
+                'redirect',
+                window.location.href.replace(
+                    /\/[^\/]*$/,
+                    '/cors/result.html?%s'
+                )
+            );
+
+            // Upload server status check for browsers with CORS support:
+            if ($.support.cors) {
+                $.ajax({
+                    type: 'HEAD'
+                }).fail(function () {
+                    $('<div class="alert alert-danger"/>')
+                        .text('Upload server currently unavailable - ' +
+                                new Date())
+                        .appendTo('#fileupload');
+                });
+            }
+
+            // Load & display existing files:
+            $('#fileupload').addClass('fileupload-processing');
+            $.ajax({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: $('#fileupload').attr("action"),
+                dataType: 'multipart/form-data',
+                context: $('#fileupload')[0]
+            }).always(function () {
+                $(this).removeClass('fileupload-processing');
+            }).done(function (result) {
+                $(this).fileupload('option', 'done')
+                .call(this, $.Event('done'), {result: result});
+            });
+        }
+
+    };
+
+}();

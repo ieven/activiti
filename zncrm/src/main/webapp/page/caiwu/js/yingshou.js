@@ -1,5 +1,5 @@
-function load_company_management() {
-	$("#mainContent").attr("src", "/zncrm/page/company_management/company_management.html");
+function load_yingshou() {
+	$("#mainContent").attr("src", "/zncrm/page/caiwu/yingshou.html");
 }
 
 var TableEditable = function() {
@@ -9,6 +9,7 @@ var TableEditable = function() {
 		function restoreRow(oTable, nRow) {
 			
 			var jqInputs = $('input', nRow);
+			console.log(jqInputs);
 			var param = {};
             for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
             	oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
@@ -16,7 +17,7 @@ var TableEditable = function() {
             }
 
 			AjaxHelper.call({
-				url : "/zncrm/rest/pro_lib",
+				url : "/zncrm/rest/yingshou",
 				data : JSON.stringify(param),
 				async : false,
 				cache : false,
@@ -35,52 +36,79 @@ var TableEditable = function() {
 		function editRow(oTable, nRow) {
 			var aData = oTable.fnGetData(nRow);
 			var jqTds = $('>td', nRow);
-			jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="'
-					+ aData.pro_name + '" name="pro_name" >';
+			jqTds[0].innerHTML = '<input readonly="readonly" type="text" class="form-control input-small" value="'
+					+ aData.id + '" name="id" >';
 			jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="'
-					+ aData.pro_series + '" name="pro_series">';
+					+ aData.cus_name + '" name="cus_name">';
 			jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="'
-					+ aData.pro_out_name + '" name="pro_out_name">';
+					+ aData.cus_add + '" name="cus_add">';
 			jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="'
-					+ aData.pro_in_name + '" name="pro_in_name">';
+					+ aData.project_name + '" name="project_name">';
 			jqTds[4].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_unit + '" name="pro_unit">';
+				+ aData.total_loan + '" name="total_loan">';
 			jqTds[5].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_intro + '" name="pro_intro">';
+				+ aData.down_payment + '" name="down_payment">';
 			jqTds[6].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_pur_price + '" name="pro_pur_price">';
+				+ aData.down_payment_time + '" name="down_payment_time">';
 			jqTds[7].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_assist_price + '" name="pro_assist_price">';
+				+ aData.two_payment + '" name="two_payment">';
 			jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.pro_selling_price + '" name="pro_selling_price">';
-//			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
-//				+ aData.pro_linkman + '" name="pro_linkman">';
-//			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
-//				+ aData.pro_linkman_phone + '" name="pro_linkman_phone">';
-//			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
-//				+ aData.pro_linkman_qq + '" name="pro_linkman_qq">';
-//			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
-//				+ aData.pro_source + '" name="pro_source">';
-			jqTds[9].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
-			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" style="display:none" value="'
-				+ aData.pro_id + '" name="pro_id">';
+				+ aData.two_payment_time + '" name="two_payment_time">';
+			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
+				+ aData.final_payment + '" name="final_payment">';
+			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
+				+ aData.final_payment_time + '" name="final_payment_time">';
+			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
+				+ aData.non_payment + '" name="non_payment">';
+			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
+				+ aData.note + '" name="note">';
+			jqTds[13].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
 		}
 
 		var table = $('#sample_editable_1');
 		
-		table.on('click', '.btn-download', function (e) {
+		table.on('click', '.btn-edit', function (e) {
             e.preventDefault();
-            var nRow = $(this).parents('tr')[0];
-			var aData = oTable.fnGetData(nRow);
-            var host = window.location.host;
-            window.open("http://"+host+"/zncrm/rest/file/"+aData.file_id);
+
+            if(this.innerHTML=="修改"){
+            	var nRow = $(this).parents('tr')[0];
+                editRow(oTable, nRow);
+            }else if(this.innerHTML=="保存"){
+            	var nRow = $(this).parents('tr')[0];
+            	restoreRow(oTable, nRow);
+            }
+            
         });
 		
 		table.on('click', '.btn-more', function (e) {
 			var nRow = $(this).parents('tr')[0];
 			var aData = oTable.fnGetData(nRow);
-			var host = window.location.host;
-			window.open("http://view.officeapps.live.com/op/view.aspx?"+encodeURIComponent("http://"+host+"/zncrm/rest/file/"+aData.file_id));
+			var param = {};
+			param.pro_id = aData.pro_id;
+		    AjaxHelper.call({
+				url : "/zncrm/rest/pro_lib/"+aData.pro_id,
+				data : JSON.stringify(param),
+				async : false,
+				cache : false,
+				type : "GET",
+				contentType : 'application/json; charset=UTF-8',
+				dataType : "html",
+				success : function(result) {
+					result = eval("(" + result + ")");
+					result = result.DATA;
+					$("#pro_linkman").text(result.pro_linkman);
+					$("#pro_linkman_phone").text(result.pro_linkman_phone);
+					$("#pro_linkman_qq").text(result.pro_linkman_qq);
+					$("#pro_source").text(result.pro_source);
+				},
+				error : function(result) {
+					alert("服务器异常");
+				}
+			});
+		    var picAddress = "/zncrm/rest/pro_lib/get_pic/"+aData.pro_id;
+		    $("#pro_pic").attr("src",picAddress);
+		    $("#fileupload").attr("action","/zncrm/rest/pro_lib/add_pic/"+aData.pro_id);
+			
         });
 		
 		table.on('click', '.btn-cancel', function (e) {
@@ -94,9 +122,9 @@ var TableEditable = function() {
             	var nRow = $(this).parents('tr')[0];
             	var jqInputs = $('td', nRow);
             	var param = {};
-            	param.file_id = jqInputs[0].innerText;
+            	param.id = jqInputs[0].innerText;
             	AjaxHelper.call({
-    				url : "/zncrm/rest/file",
+    				url : "/zncrm/rest/yingshou",
     				data : JSON.stringify(param),
     				async : false,
     				cache : false,
@@ -115,8 +143,9 @@ var TableEditable = function() {
 
 		var oTable = table
 				.dataTable({
+
 					"bServerSide" : true,// 这个用来指明是通过服务端来取数据
-					"sAjaxSource" : "/zncrm/rest/file/"+menu.id,// 这个是请求的地址
+					"sAjaxSource" : "/zncrm/rest/yingshou",// 这个是请求的地址
 					"fnServerData" : retrieveData,
 					"sAjaxDataProp" : "result",
 					"searching" : false,
@@ -137,13 +166,31 @@ var TableEditable = function() {
 					"bLengthChange" : false,
 					"pagingType" : "bootstrap_full_number",
 					"columns" : [ {
-						data : "file_id"
+						data : "id"
 					}, {
-						data : "title"
+						data : "cus_name"
 					}, {
-						data : "author"
+						data : "cus_add"
 					}, {
-						data : "last_modify"
+						data : "project_name"
+					}, {
+						data : "total_loan"
+					}, {
+						data : "down_payment"
+					}, {
+						data : "down_payment_time"
+					}, {
+						data : "two_payment"
+					}, {
+						data : "two_payment_time"
+					}, {
+						data : "final_payment"
+					}, {
+						data : "final_payment_time"
+					}, {
+						data : "non_payment"
+					}, {
+						data : "note"
 					}, {
 						data : null,
 						defaultContent : ""
@@ -151,10 +198,9 @@ var TableEditable = function() {
 					"createdRow" : function(row, data, index) {
 						// 行渲染回调,在这里可以对该行dom元素进行任何操作
 						// 不使用render，改用jquery文档操作呈现单元格
-						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-download">下载</button>');
+						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						var $btnMore = $('<button type="button" class="btn btn-small btn-danger btn-more">预览</button>');
-						$('td', row).eq(4).append($btnEdit).append($btnDel).append($btnMore);
+						$('td', row).eq(13).append($btnEdit).append($btnDel);
 					}
 				});
 
@@ -185,7 +231,7 @@ $('#save_button').click(function (e) {
     	param[jqInputs[i].name]=jqInputs[i].value;
     }
     AjaxHelper.call({
-		url : "/zncrm/rest/pro_lib/add",
+		url : "/zncrm/rest/yingshou/add",
 		data : JSON.stringify(param),
 		async : false,
 		cache : false,
@@ -208,7 +254,6 @@ $('#save_button').click(function (e) {
 function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
-	$("#fileupload").attr("action","/zncrm/rest/file/add?username="+$.session.get('username')+"&menu_id="+menu.id);
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),
@@ -234,8 +279,8 @@ function retrieveData(source, data, callback) {
 	});
 }
 
-var menu = {
-		id:"1"
+var table_row = {
+		id:""
 };
 
 var manager = {
@@ -270,7 +315,7 @@ var FormFileUpload = function () {
                 autoUpload: false,
                 disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
                 maxFileSize: 5000000,
-                acceptFileTypes: /(\.|\/)(gif|jpe?g|png|xlsx|xls|ppt|doc|docx)$/i,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png|xlsx|xls|ppt|doc)$/i,
                 // Uncomment the following to send cross-domain cookies:
                 //xhrFields: {withCredentials: true},                
             });

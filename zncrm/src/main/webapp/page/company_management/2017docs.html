@@ -75,7 +75,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	rel="stylesheet" type="text/css" />
 <link href="../../assets/admin/layout/css/custom.css" rel="stylesheet"
 	type="text/css" />
-<link href="./css/pro_library.css" rel="stylesheet" type="text/css" />
+<link href="./css/2017docs.css" rel="stylesheet" type="text/css" />
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -94,80 +94,6 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN CONTENT -->
 	<div class="innerContent">
 		<div class="page-content">
-			<!-- <div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat blue-madison">
-						<div class="visual">
-							<i class="fa fa-comments"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 MK - MK
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat red-intense">
-						<div class="visual">
-							<i class="fa fa-bar-chart-o"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 美国胜赏
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat green-haze">
-						<div class="visual">
-							<i class="fa fa-shopping-cart"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 开博尔
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 E-JOIN机柜
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 泊声
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 海美迪
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<div class="modal fade" id="portlet-config" tabindex="-1"
 				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -197,7 +123,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="portlet box blue" id="table_container">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-edit"></i>产品库
+								<i class="fa fa-edit"></i>2017年文档
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -215,14 +141,14 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 									<div class="col-md-2"></div>
 									<div class="col-md-4">
-										<div class="table-group-actions pull-right">
+										<!-- <div class="table-group-actions pull-right">
 											<input type="text" placeholder="模糊查询" id="search_key"
 												class="form-control input-small input-inline">
 											<button class="btn btn-sm yellow table-group-action-submit"
 												id="btn-simple-search">
 												<i class="fa fa-check"></i> 搜索
 											</button>
-										</div>
+										</div> -->
 									</div>
 
 								</div>
@@ -231,17 +157,11 @@ License: You must have a valid license purchased only from themeforest(the above
 								id="sample_editable_1">
 								<thead>
 									<tr>
-										<th>商品名称</th>
-										<th>商品系列</th>
-										<th>厂家商品型号</th>
-										<th>内部商品型号</th>
-										<th>单位</th>
-										<th>说明</th>
-										<th>进价</th>
-										<th>辅助单价</th>
-										<th>售价</th>
+										<th>文档编号</th>
+										<th>标题</th>
+										<th>作者</th>
+										<th>日期</th>
 										<th>操作</th>
-										<th style="display: none">商品id</th>
 									</tr>
 								</thead>
 								<tbody id="pro_lib_tab">
@@ -262,100 +182,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true"></button>
-			<h4 class="modal-title">商品属性</h4>
+			<h4 class="modal-title">文档上传</h4>
 		</div>
 		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-6">
-					<h5>商品名称</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_name">
-					</p>
-					<h5>商品系列</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_series">
-					</p>
-					<h5>厂家商品型号</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_out_name">
-					</p>
-					<h5>内部商品型号</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_in_name">
-					</p>
-					<h5>单位</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_unit">
-					</p>
-					<h5>说明</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_intro">
-					</p>
-					<h5>进价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_pur_price">
-					</p>
-				</div>
-				<div class="col-md-6">
-					<h5>辅助单价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_assist_price">
-					</p>
-					<h5>售价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_selling_price">
-					</p>
-					<h5>联系人</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman">
-					</p>
-					<h5>联系电话</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman_phone">
-					</p>
-					<h5>QQ</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman_qq">
-					</p>
-					<h5>来源</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_source">
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-			<button type="button" class="btn blue" id="save_button">Save
-				changes</button>
-		</div>
-	</div>
-
-	<!-- 添加弹框 -->
-	<div id="more_responsive" class="modal fade" tabindex="-1"
-		data-width="760">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true"></button>
-			<h4 class="modal-title">商品属性</h4>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-4 blog-img blog-tag-data">
-					<img id="pro_pic" src="" alt="图片未上传"
-						class="img-responsive">
-				</div>
-				<div class="col-md-8 blog-article">
-					<h3>联系人</h3>
-					<p id="pro_linkman"></p>
-					<h3>联系电话</h3>
-					<p id="pro_linkman_phone"></p>
-					<h3>QQ</h3>
-					<p id="pro_linkman_qq"></p>
-					<h3>来源</h3>
-					<p id="pro_source"></p>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
@@ -366,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<span class="btn green fileinput-button">
 								<i class="fa fa-plus"></i>
 								<span>
-								上传产品图片 </span>
+								上传文档 </span>
 								<input type="file" name="files[]" multiple="">
 								</span>
 								<!-- The global file processing state -->
@@ -579,7 +408,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="../../assets/admin/pages/scripts/ui-extended-modals.js"></script>
 	<script type="text/javascript" src="../../js/common/helper.js"></script>
 	<script type="text/javascript" src="../../js/common/string.js"></script>
-	<script src="./js/pro_library.js" type="text/javascript"></script>
+	<script src="./js/2017docs.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../../js/common/jquerysession.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 			Metronic.init(); // init metronic core components

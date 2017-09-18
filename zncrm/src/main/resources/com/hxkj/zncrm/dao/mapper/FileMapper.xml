@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="getFileListCount" parameterType="Map" resultType="String">
-		SELECT count(*) FROM upload_file WHERE menu_id = #{menuId};
+		SELECT count(*) FROM upload_file WHERE menu_id = #{menuId} and status=1;
 	</select>
 	
 	<insert id="addFile">

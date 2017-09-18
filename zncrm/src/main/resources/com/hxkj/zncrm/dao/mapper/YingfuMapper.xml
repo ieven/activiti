@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.YingfuMapper">
+
+	<update id="delPayment">
+		UPDATE payment set status='-1' where id=#{id}
+	</update>
+
+	<update id="updatePayment">
+		UPDATE payment
+		<set>
+			<if test="cus_name != null">cus_name=#{cus_name},</if>
+			<if test="cus_add != null">cus_add=#{cus_add},</if>
+			<if test="project_name != null">project_name=#{project_name},</if>
+			<if test="project_price != null">project_price=#{project_price},</if>
+			<if test="project_discount != null">project_discount=#{project_discount},</if>
+			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
+			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
+			<if test="jiesuan_price != null">jiesuan_price=#{jiesuan_price},</if>
+			<if test="jiesuan_time != null">jiesuan_time=#{jiesuan_time},</if>
+			<if test="note != null">note=#{note},</if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<insert id="addPayment">
+		insert payment
+		<set>
+			<if test="cus_name != null">cus_name=#{cus_name},</if>
+			<if test="cus_add != null">cus_add=#{cus_add},</if>
+			<if test="project_name != null">project_name=#{project_name},</if>
+			<if test="project_price != null">project_price=#{project_price},</if>
+			<if test="project_discount != null">project_discount=#{project_discount},</if>
+			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
+			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
+			<if test="jiesuan_price != null">jiesuan_price=#{jiesuan_price},</if>
+			<if test="jiesuan_time != null">jiesuan_time=#{jiesuan_time},</if>
+			<if test="note != null">note=#{note},</if>
+		</set>
+
+		<selectKey keyProperty="id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<select id="getPaymentList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.PaymentEntity">
+		SELECT * FROM payment
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_discount like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or transaction_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan_time like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or note like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and status='1'
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+
+	<select id="getPaymentCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM payment
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or project_discount like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or transaction_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan_time like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or note like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and status='1'
+		</where>
+	</select>
+
+</mapper>

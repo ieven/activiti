@@ -2,12 +2,14 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.ProLibMapper">
 
-	<select id="getProLibById" parameterType="Map" resultType="com.hxkj.zncrm.dao.domain.ProLib">
+	<select id="getProLibById" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProLib">
 		SELECT * FROM pro_library where pro_id = #{id};
 	</select>
 
 	<update id="addProLibPic">
-		UPDATE pro_library set pro_pic=#{pro_pic} where pro_id=#{pro_id}
+		UPDATE pro_library set pro_pic=#{pro_pic} where
+		pro_id=#{pro_id}
 	</update>
 
 	<resultMap type="java.util.Map" id="imgResultMap">
@@ -18,7 +20,7 @@
 	<select id="getProLibPic" parameterType="String" resultMap="imgResultMap">
 		SELECT pro_pic FROM pro_library WHERE pro_id = #{id};
 	</select>
-	
+
 	<insert id="addProLib">
 		insert pro_library
 		<set>
@@ -36,7 +38,7 @@
 			<if test="pro_linkman_qq != null">pro_linkman_qq=#{pro_linkman_qq},</if>
 			<if test="pro_source != null">pro_source=#{pro_source}</if>
 		</set>
-		
+
 		<selectKey keyProperty="pro_id" resultType="long">
 			select
 			LAST_INSERT_ID()
@@ -44,7 +46,8 @@
 	</insert>
 
 	<update id="delProLib">
-		UPDATE pro_library set status='-1' where pro_id=#{pro_id}
+		UPDATE pro_library set status='-1' where
+		pro_id=#{pro_id}
 	</update>
 
 	<update id="updateProLib">
@@ -67,83 +70,93 @@
 		where pro_id=#{pro_id}
 	</update>
 
-	<select id="getProLib" parameterType="Map" resultType="com.hxkj.zncrm.dao.domain.ProLib">
-		SELECT * FROM pro_library 
+	<select id="getProLib" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProLib">
+		SELECT * FROM pro_library
 		<where>
 			<if test="search_key != null">
-				pro_name like '%${search_key}%'
+				(
+				<if test="search_key != null">
+					pro_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_series like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_out_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_in_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_pur_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_assist_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_selling_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman_qq like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_source like '%${search_key}%'
+				</if>
+				)
 			</if>
-			<if test="search_key != null">
-				or pro_series like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_out_name like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_in_name like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_pur_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_assist_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_selling_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman_phone like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman_qq like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_source like '%${search_key}%'
-			</if>
-			and status='1' 
+			and status='1'
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
-	
+
 	<select id="getProLibCount" parameterType="Map" resultType="String">
-		SELECT count(*) FROM pro_library 
+		SELECT count(*) FROM pro_library
 		<where>
 			<if test="search_key != null">
-				pro_name like '%${search_key}%'
+				(
+				<if test="search_key != null">
+					pro_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_series like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_out_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_in_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_pur_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_assist_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_selling_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_linkman_qq like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_source like '%${search_key}%'
+				</if>
+				)
 			</if>
-			<if test="search_key != null">
-				or pro_series like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_out_name like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_in_name like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_pur_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_assist_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_selling_price like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman_phone like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_linkman_qq like '%${search_key}%'
-			</if>
-			<if test="search_key != null">
-				or pro_source like '%${search_key}%'
-			</if>
+			and status='1'
 		</where>
 	</select>
 </mapper>

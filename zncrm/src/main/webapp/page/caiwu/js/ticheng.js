@@ -1,5 +1,5 @@
-function load_yingshou() {
-	$("#mainContent").attr("src", "/zncrm/page/caiwu/yingshou.html");
+function load_ticheng() {
+	$("#mainContent").attr("src", "/zncrm/page/caiwu/ticheng.html");
 }
 
 var TableEditable = function() {
@@ -13,19 +13,11 @@ var TableEditable = function() {
 			var param = {};
             for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
             	oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
-            	if(jqInputs[i].name=='is_hot'){
-            		if(jqInputs[i].checked){
-            			param[jqInputs[i].name]='1';
-            		}else{
-            			param[jqInputs[i].name]='-1';
-            		}
-            	}else{
-            		param[jqInputs[i].name]=jqInputs[i].value;
-            	}
+            	param[jqInputs[i].name]=jqInputs[i].value;
             }
 
 			AjaxHelper.call({
-				url : "/zncrm/rest/yingshou",
+				url : "/zncrm/rest/ticheng",
 				data : JSON.stringify(param),
 				async : false,
 				cache : false,
@@ -53,32 +45,22 @@ var TableEditable = function() {
 			jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="'
 					+ aData.project_name + '" name="project_name">';
 			jqTds[4].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.total_loan + '" name="total_loan">';
+				+ aData.transaction_price + '" name="transaction_price">';
 			jqTds[5].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.down_payment + '" name="down_payment">';
+				+ aData.jiesuan + '" name="jiesuan">';
 			jqTds[6].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.down_payment_time + '" name="down_payment_time">';
+				+ aData.yingfu + '" name="yingfu">';
 			jqTds[7].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.two_payment + '" name="two_payment">';
+				+ aData.down_payment + '" name="down_payment">';
 			jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.two_payment_time + '" name="two_payment_time">';
+				+ aData.down_payment_time + '" name="down_payment_time">';
 			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.final_payment + '" name="final_payment">';
+				+ aData.two_payment + '" name="two_payment">';
 			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.final_payment_time + '" name="final_payment_time">';
+				+ aData.two_payment_time + '" name="two_payment_time">';
 			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.non_payment + '" name="non_payment">';
-			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
 				+ aData.note + '" name="note">';
-			if(aData.is_hot=='1'){
-				jqTds[13].innerHTML = '<input type="checkbox" class="checkboxes" value="'
-					+ aData.is_hot + '" name="is_hot" checked="true">';
-			}
-			else{
-				jqTds[13].innerHTML = '<input type="checkbox" class="checkboxes" value="'
-					+ aData.is_hot + '" name="is_hot">';
-			}
-			jqTds[14].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
+			jqTds[12].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
 		}
 
 		var table = $('#sample_editable_1');
@@ -140,7 +122,7 @@ var TableEditable = function() {
             	var param = {};
             	param.id = jqInputs[0].innerText;
             	AjaxHelper.call({
-    				url : "/zncrm/rest/yingshou",
+    				url : "/zncrm/rest/ticheng",
     				data : JSON.stringify(param),
     				async : false,
     				cache : false,
@@ -161,7 +143,7 @@ var TableEditable = function() {
 				.dataTable({
 
 					"bServerSide" : true,// 这个用来指明是通过服务端来取数据
-					"sAjaxSource" : "/zncrm/rest/yingshou",// 这个是请求的地址
+					"sAjaxSource" : "/zncrm/rest/ticheng",// 这个是请求的地址
 					"fnServerData" : retrieveData,
 					"sAjaxDataProp" : "result",
 					"searching" : false,
@@ -190,7 +172,11 @@ var TableEditable = function() {
 					}, {
 						data : "project_name"
 					}, {
-						data : "total_loan"
+						data : "transaction_price"
+					}, {
+						data : "jiesuan"
+					}, {
+						data : "yingfu"
 					}, {
 						data : "down_payment"
 					}, {
@@ -200,22 +186,7 @@ var TableEditable = function() {
 					}, {
 						data : "two_payment_time"
 					}, {
-						data : "final_payment"
-					}, {
-						data : "final_payment_time"
-					}, {
-						data : "non_payment"
-					}, {
 						data : "note"
-					}, {
-						data : "is_hot",
-						render: function (data, type, row, meta) {
-							if(data=='1'){
-								return '<span class="label label-sm label-danger">优先</span>';
-							}else{
-								return '<span class="label label-sm label-success">不优先</span>';
-							}
-	                    }
 					}, {
 						data : null,
 						defaultContent : ""
@@ -225,7 +196,7 @@ var TableEditable = function() {
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(14).append($btnEdit).append($btnDel);
+						$('td', row).eq(12).append($btnEdit).append($btnDel);
 					}
 				});
 
@@ -253,18 +224,10 @@ $('#save_button').click(function (e) {
     var jqInputs = $('input', body);
     var param = {};
     for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
-    	if(jqInputs[i].name=="is_hot"){
-    		if(jqInputs[i].value=='on'){
-    			param[jqInputs[i].name]='1';
-    		}else{
-    			param[jqInputs[i].name]='-1';
-    		}
-    	}else{
-    		param[jqInputs[i].name]=jqInputs[i].value;
-    	}
+    	param[jqInputs[i].name]=jqInputs[i].value;
     }
     AjaxHelper.call({
-		url : "/zncrm/rest/yingshou/add",
+		url : "/zncrm/rest/ticheng/add",
 		data : JSON.stringify(param),
 		async : false,
 		cache : false,
@@ -273,11 +236,7 @@ $('#save_button').click(function (e) {
 		dataType : "html",
 		success : function(result) {
 			for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
-				if(jqInputs[i].name=="is_hot"){
-					
-				}else{
-					jqInputs[i].value="";
-				}
+		    	jqInputs[i].value="";
 		    }
 			$('#responsive').modal('hide');
 			alert("创建成功");

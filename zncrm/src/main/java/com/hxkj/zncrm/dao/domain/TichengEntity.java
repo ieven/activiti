@@ -1,33 +1,25 @@
 package com.hxkj.zncrm.dao.domain;
 
-public class ReceiveEntity {
+public class TichengEntity {
 
     private String id;
     private String cus_name;
     private String cus_add;
     private String project_name;
-    private String total_loan;
+    private String baojia;
+    private String discount;
+    private String transaction_price;
+    private String jiesuan;
+    private String yingfu;
     private String down_payment;
     private String down_payment_time;
     private String two_payment;
     private String two_payment_time;
-    private String final_payment;
-    private String final_payment_time;
-    private String non_payment;
+    private String is_done;
     private String note;
-    private String is_hot;
+    private String status;
     private String create_time;
     private String last_modify;
-
-    public String getIs_hot() {
-
-        return is_hot;
-    }
-
-    public void setIs_hot(String is_hot) {
-
-        this.is_hot = is_hot;
-    }
 
     public String getId() {
 
@@ -69,14 +61,54 @@ public class ReceiveEntity {
         this.project_name = project_name;
     }
 
-    public String getTotal_loan() {
+    public String getBaojia() {
 
-        return total_loan;
+        return baojia;
     }
 
-    public void setTotal_loan(String total_loan) {
+    public void setBaojia(String baojia) {
 
-        this.total_loan = total_loan;
+        this.baojia = baojia;
+    }
+
+    public String getDiscount() {
+
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+
+        this.discount = discount;
+    }
+
+    public String getTransaction_price() {
+
+        return transaction_price;
+    }
+
+    public void setTransaction_price(String transaction_price) {
+
+        this.transaction_price = transaction_price;
+    }
+
+    public String getJiesuan() {
+
+        return jiesuan;
+    }
+
+    public void setJiesuan(String jiesuan) {
+
+        this.jiesuan = jiesuan;
+    }
+
+    public String getYingfu() {
+
+        return yingfu;
+    }
+
+    public void setYingfu(String yingfu) {
+
+        this.yingfu = yingfu;
     }
 
     public String getDown_payment() {
@@ -119,34 +151,14 @@ public class ReceiveEntity {
         this.two_payment_time = two_payment_time;
     }
 
-    public String getFinal_payment() {
+    public String getIs_done() {
 
-        return final_payment;
+        return is_done;
     }
 
-    public void setFinal_payment(String final_payment) {
+    public void setIs_done(String is_done) {
 
-        this.final_payment = final_payment;
-    }
-
-    public String getFinal_payment_time() {
-
-        return final_payment_time;
-    }
-
-    public void setFinal_payment_time(String final_payment_time) {
-
-        this.final_payment_time = final_payment_time;
-    }
-
-    public String getNon_payment() {
-
-        return non_payment;
-    }
-
-    public void setNon_payment(String non_payment) {
-
-        this.non_payment = non_payment;
+        this.is_done = is_done;
     }
 
     public String getNote() {
@@ -157,6 +169,16 @@ public class ReceiveEntity {
     public void setNote(String note) {
 
         this.note = note;
+    }
+
+    public String getStatus() {
+
+        return status;
+    }
+
+    public void setStatus(String status) {
+
+        this.status = status;
     }
 
     public String getCreate_time() {

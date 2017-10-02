@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hxkj.zncrm.dao.mapper.YingshouMapper">
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.TichengMapper">
 
-	<update id="delReceive">
-		UPDATE receive set status='-1' where id=#{id}
+	<update id="delTicheng">
+		UPDATE ticheng set status='-1' where id=#{id}
 	</update>
 
-	<update id="updateReceive">
-		UPDATE receive
+	<update id="updateTicheng">
+		UPDATE ticheng
 		<set>
 			<if test="cus_name != null">cus_name=#{cus_name},</if>
 			<if test="cus_add != null">cus_add=#{cus_add},</if>
 			<if test="project_name != null">project_name=#{project_name},</if>
-			<if test="total_loan != null">total_loan=#{total_loan},</if>
+			<if test="baojia != null">baojia=#{baojia},</if>
+			<if test="discount != null">discount=#{discount},</if>
+			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
+			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
+			<if test="yingfu != null">yingfu=#{yingfu},</if>
 			<if test="down_payment != null">down_payment=#{down_payment},</if>
 			<if test="down_payment_time != null">down_payment_time=#{down_payment_time},</if>
 			<if test="two_payment != null">two_payment=#{two_payment},</if>
 			<if test="two_payment_time != null">two_payment_time=#{two_payment_time},</if>
-			<if test="final_payment != null">final_payment=#{final_payment},</if>
-			<if test="final_payment_time != null">final_payment_time=#{final_payment_time},</if>
-			<if test="non_payment != null">non_payment=#{non_payment},</if>
+			<if test="is_done != null">is_done=#{is_done},</if>
 			<if test="note != null">note=#{note},</if>
-			<if test="is_hot != null">is_hot=#{is_hot},</if>
 		</set>
 		where id=#{id}
 	</update>
 
-	<insert id="addReceive">
-		insert receive
+	<insert id="addTicheng">
+		insert ticheng
 		<set>
 			<if test="cus_name != null">cus_name=#{cus_name},</if>
 			<if test="cus_add != null">cus_add=#{cus_add},</if>
 			<if test="project_name != null">project_name=#{project_name},</if>
-			<if test="total_loan != null">total_loan=#{total_loan},</if>
+			<if test="baojia != null">baojia=#{baojia},</if>
+			<if test="discount != null">discount=#{discount},</if>
+			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
+			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
+			<if test="yingfu != null">yingfu=#{yingfu},</if>
 			<if test="down_payment != null">down_payment=#{down_payment},</if>
 			<if test="down_payment_time != null">down_payment_time=#{down_payment_time},</if>
 			<if test="two_payment != null">two_payment=#{two_payment},</if>
 			<if test="two_payment_time != null">two_payment_time=#{two_payment_time},</if>
-			<if test="final_payment != null">final_payment=#{final_payment},</if>
-			<if test="final_payment_time != null">final_payment_time=#{final_payment_time},</if>
-			<if test="non_payment != null">non_payment=#{non_payment},</if>
+			<if test="is_done != null">is_done=#{is_done},</if>
 			<if test="note != null">note=#{note},</if>
-			<if test="is_hot != null">is_hot=#{is_hot},</if>
 		</set>
 
 		<selectKey keyProperty="id" resultType="long">
@@ -50,9 +52,9 @@
 		</selectKey>
 	</insert>
 
-	<select id="getReceiveList" parameterType="Map"
-		resultType="com.hxkj.zncrm.dao.domain.ReceiveEntity">
-		SELECT * FROM receive
+	<select id="getTichengList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.TichengEntity">
+		SELECT * FROM ticheng
 		<where>
 			<if test="search_key != null">
 				(
@@ -66,7 +68,19 @@
 					or project_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or total_loan like '%${search_key}%'
+					or baojia like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or discount like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or transaction_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or yingfu like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or down_payment like '%${search_key}%'
@@ -79,15 +93,6 @@
 				</if>
 				<if test="search_key != null">
 					or two_payment_time like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or final_payment like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or final_payment_time like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or non_payment like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or note like '%${search_key}%'
@@ -96,11 +101,11 @@
 			</if>
 			and status='1'
 		</where>
-		order by is_hot DESC LIMIT #{start_index}, #{page_size};
+		LIMIT #{start_index}, #{page_size};
 	</select>
 
-	<select id="getReceiveCount" parameterType="Map" resultType="String">
-		SELECT count(*) FROM receive
+	<select id="getTichengCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM ticheng
 		<where>
 			<if test="search_key != null">
 				(
@@ -114,7 +119,19 @@
 					or project_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or total_loan like '%${search_key}%'
+					or baojia like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or discount like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or transaction_price like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or jiesuan like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or yingfu like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or down_payment like '%${search_key}%'
@@ -127,15 +144,6 @@
 				</if>
 				<if test="search_key != null">
 					or two_payment_time like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or final_payment like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or final_payment_time like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or non_payment like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or note like '%${search_key}%'

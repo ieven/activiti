@@ -121,7 +121,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
 			<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
 			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<ul id="page-sidebar-menu" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
 				<li class="sidebar-toggler-wrapper">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -150,7 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<li class="start active open">
 					<a href="javascript:;">
 					<i class="icon-home"></i>
-					<span class="title">首页</span>
+					<span class="title">客户信息管理</span>
 					<span class="selected"></span>
 					<span class="arrow open"></span>
 					</a>
@@ -159,25 +159,6 @@ License: You must have a valid license purchased only from themeforest(the above
 							<a href="index.html">
 							<i class="icon-bar-chart"></i>
 							工作流</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;">
-					<i class="icon-basket"></i>
-					<span class="title">客户和项目</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="#" onclick="load_pro_library()">
-							<i class="icon-basket"></i>
-							客户</a>
-						</li>
-						<li>
-							<a href="#" onclick="load_pro_library()">
-							<i class="icon-basket"></i>
-							项目</a>
 						</li>
 					</ul>
 				</li>
@@ -204,7 +185,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#" onclick="load_company_management()">
+							<a href="#" onclick="load_2017docs()">
 							<i class="icon-basket"></i>
 							2017年文档</a>
 						</li>
@@ -212,50 +193,50 @@ License: You must have a valid license purchased only from themeforest(the above
 							<a href="#" onclick="load_pro_library()">
 							<i class="icon-basket"></i>
 							工作流程</a>
-						</li>
+						</li> -->
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_tables()">
 							<i class="icon-basket"></i>
 							各种表格</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_caigou()">
 							<i class="icon-basket"></i>
 							本市定点采购</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_gangweizhize()">
 							<i class="icon-basket"></i>
 							岗位职责</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_guanlizhidu()">
 							<i class="icon-basket"></i>
 							管理制度</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_shigong()">
 							<i class="icon-basket"></i>
 							施工安装规范</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_wangzhan()">
 							<i class="icon-basket"></i>
 							网站维护规范</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_pingtai()">
 							<i class="icon-basket"></i>
 							平台修改意见</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_jiangfa()">
 							<i class="icon-basket"></i>
 							奖罚登记</a>
-						</li> -->
+						</li>
 					</ul>
 				</li>
-				<!-- <li>
+				<li>
 					<a href="javascript:;">
 					<i class="icon-basket"></i>
 					<span class="title">财务专栏</span>
@@ -263,17 +244,17 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_yingshou()">
 							<i class="icon-basket"></i>
 							应收金额</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_yingfu()">
 							<i class="icon-basket"></i>
 							应付金额</a>
 						</li>
 						<li>
-							<a href="#" onclick="load_pro_library()">
+							<a href="#" onclick="load_ticheng()">
 							<i class="icon-basket"></i>
 							销售提成</a>
 						</li>
@@ -343,7 +324,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							合同样本</a>
 						</li>
 					</ul>
-				</li> -->
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -389,7 +370,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-		 2017 &copy; just for fun!
+		 2017 &copy; 石家庄火线科技
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
@@ -434,31 +415,23 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="./assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <script src="./assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 <script type="text/javascript" src="./js/common/jquerysession.js"></script>
+<script type="text/javascript" src="./js/common/string.js"></script>
+<script type="text/javascript" src="./js/common/helper.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
 <script type="text/javascript" src="./page/bus_cus/js/bus_cus.js"></script>
 <script type="text/javascript" src="./page/pro_library/js/pro_library.js"></script>
-<script type="text/javascript" src="./page/company_management/js/company_management.js"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-jQuery(document).ready(function() {    
-   Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   Index.init();   
-   Index.initDashboardDaterange();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initMiniCharts();
-   Tasks.initDashboardWidget();
-   $("#mainContent").attr("src","/activiti-webapp-explorer2/zncrmlogin="+$.session.get('username'));
-   var picAddress = "/zncrm/rest/get_pic/"+$.session.get('picId');
-   $("#picId").attr("src",picAddress);
-   $("#username").html($.session.get('username'));
-});
-
-function logout() {
-	$("#mainContent").attr("src","/activiti-webapp-explorer2/zncrmlogout");
-	window.location.href = "/zncrm/";
-}
-</script>
-<!-- END JAVASCRIPTS -->
+<script type="text/javascript" src="./page/company_management/js/2017docs.js"></script>
+<script type="text/javascript" src="./page/company_management/js/tables.js"></script>
+<script type="text/javascript" src="./page/company_management/js/caigou.js"></script>
+<script type="text/javascript" src="./page/company_management/js/gangweizhize.js"></script>
+<script type="text/javascript" src="./page/company_management/js/guanlizhidu.js"></script>
+<script type="text/javascript" src="./page/company_management/js/shigong.js"></script>
+<script type="text/javascript" src="./page/company_management/js/wangzhan.js"></script>
+<script type="text/javascript" src="./page/company_management/js/pingtai.js"></script>
+<script type="text/javascript" src="./page/company_management/js/jiangfa.js"></script>
+<script type="text/javascript" src="./page/caiwu/js/yingshou.js"></script>
+<script type="text/javascript" src="./page/caiwu/js/yingfu.js"></script>
+<script type="text/javascript" src="./page/caiwu/js/ticheng.js"></script>
 </body>
 <!-- END BODY -->
 </html>

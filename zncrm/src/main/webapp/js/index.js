@@ -73,12 +73,12 @@ function load_menu(username){
 
 function installMenu(result){
 	var sb=new StringBuffer();
-	if(result.childList.length==0){
+	if(result.children.length==0){
 		sb.append(
 				'<li>'+
 				'<a href="#" onclick="load_page(\''+result.menu_url+'\')">'+
 				'<i class="icon-basket"></i>'+
-				result.menu_name+'</a>'+
+				result.text+'</a>'+
 				'</li>');
 		return sb;
 	}else{
@@ -86,12 +86,12 @@ function installMenu(result){
 				'<li>'+
 				'<a href="javascript:;">'+
 				'<i class="icon-basket"></i>'+
-				'<span class="title">'+result.menu_name+'</span>'+
+				'<span class="title">'+result.text+'</span>'+
 				'<span class="arrow "></span>'+
 				'</a>');
 		sb.append('<ul class="sub-menu">');
-		for(id in result.childList){
-			sb.append(installMenu(result.childList[id]));
+		for(id in result.children){
+			sb.append(installMenu(result.children[id]));
 		}
 		sb.append('</ul>');
 		sb.append('</li>')

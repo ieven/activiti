@@ -5,42 +5,32 @@ import java.util.List;
 
 public class Menu {
 
-    private String menu_id;
+    private String id;
 
-    private String menu_name;
+    private String text;
     private String parent_id;
     private String menu_level;
     private String menu_url;
-    private List<Menu> childList = new ArrayList<>();
+    private List<Menu> children = new ArrayList<>();
 
-    public List<Menu> getChildList() {
+    public String getId() {
 
-        return childList;
+        return id;
     }
 
-    public void setChildList(List<Menu> childList) {
+    public void setId(String id) {
 
-        this.childList = childList;
+        this.id = id;
     }
 
-    public String getMenu_id() {
+    public String getText() {
 
-        return menu_id;
+        return text;
     }
 
-    public void setMenu_id(String menu_id) {
+    public void setText(String text) {
 
-        this.menu_id = menu_id;
-    }
-
-    public String getMenu_name() {
-
-        return menu_name;
-    }
-
-    public void setMenu_name(String menu_name) {
-
-        this.menu_name = menu_name;
+        this.text = text;
     }
 
     public String getParent_id() {
@@ -71,6 +61,16 @@ public class Menu {
     public void setMenu_url(String menu_url) {
 
         this.menu_url = menu_url;
+    }
+
+    public List<Menu> getChildren() {
+
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+
+        this.children = children;
     }
 
 }

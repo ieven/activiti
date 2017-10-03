@@ -1,6 +1,5 @@
 package com.hxkj.zncrm.controler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,24 +11,33 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.hxkj.zncrm.dao.domain.ProjectEntity;
+import com.hxkj.zncrm.service.BusCusService;
+import com.hxkj.zncrm.util.JSONHelper;
 
 @Component
 @Path("/bus_cus")
 public class BusCusControler extends AbstractControler {
 
+    @Autowired
+    private BusCusService service;
+
     @POST
-    @Path("/test")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Response test() {
+    public Response getProjectList(String json) {
 
-        List list = new ArrayList<>();
-        Map map = new HashMap<>();
-        map.put("ok", "success");
-        map.put("ok1", "success1");
-        list.add(map);
-        list.add(map);
-        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", list)).build();
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        List<ProjectEntity> list = service.getProjectList(input);
+        String records = service.getProjectCount(input);
+        Map result = new HashMap<>();
+        result.put("iTotalRecords", records);
+        result.put("iTotalDisplayRecords", records);
+        result.put("result", list);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
+        // return null;
     }
 }

@@ -1,7 +1,3 @@
-function load_guanlizhidu() {
-	$("#mainContent").attr("src", "/zncrm/page/company_management/guanlizhidu.html");
-}
-
 var TableEditable = function() {
 	
 	var handleTable = function() {
@@ -116,7 +112,7 @@ var TableEditable = function() {
 		var oTable = table
 				.dataTable({
 					"bServerSide" : true,// 这个用来指明是通过服务端来取数据
-					"sAjaxSource" : "/zncrm/rest/file/"+menu.id,// 这个是请求的地址
+					"sAjaxSource" : "/zncrm/rest/file/"+$.session.get('menu_id'),// 这个是请求的地址
 					"fnServerData" : retrieveData,
 					"sAjaxDataProp" : "result",
 					"searching" : false,
@@ -208,7 +204,7 @@ $('#save_button').click(function (e) {
 function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
-	$("#fileupload").attr("action","/zncrm/rest/file/add?username="+$.session.get('username')+"&menu_id="+menu.id);
+	$("#fileupload").attr("action","/zncrm/rest/file/add?username="+$.session.get('username')+"&menu_id="+$.session.get('menu_id'));
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),
@@ -233,10 +229,6 @@ function retrieveData(source, data, callback) {
 		}
 	});
 }
-
-var menu = {
-		id:"5"
-};
 
 var manager = {
 	fuzzySearch : false,

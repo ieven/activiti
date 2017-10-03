@@ -13,8 +13,10 @@ jQuery(document).ready(function() {
    $("#username").html($.session.get('username'));
 });
 
-function load_page(url) {
+function load_page(url,node) {
+	$.session.set('menu_id', node.id);
 	$("#mainContent").attr("src", url);
+	
 }
 
 function logout() {
@@ -76,7 +78,7 @@ function installMenu(result){
 	if(result.children.length==0){
 		sb.append(
 				'<li>'+
-				'<a href="#" onclick="load_page(\''+result.menu_url+'\')">'+
+				'<a href="#" id="'+result.id+'" onclick="load_page(\''+result.menu_url+'\',this)">'+
 				'<i class="icon-basket"></i>'+
 				result.text+'</a>'+
 				'</li>');

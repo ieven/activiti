@@ -47,4 +47,34 @@ public class MenuServiceImpl implements MenuService {
         return temp;
     }
 
+    @Override
+    public List<Menu> getMeunByParentId(Map<String, String> input) {
+
+        return mapper.getMeunByParentId(input);
+    }
+
+    @Override
+    public String getMenuCount(Map<String, String> input) {
+
+        return mapper.getMenuCount(input);
+    }
+
+    @Override
+    public long addMenu(Map<String, String> input) {
+
+        return mapper.addMenu(input);
+    }
+
+    @Override
+    public int delMenu(Map<String, String> input) {
+
+        return mapper.delMenu(input);
+    }
+
+    @Override
+    public int updateMenu(Map<String, String> input) {
+
+        return mapper.updateMenu(input);
+    }
+
 }

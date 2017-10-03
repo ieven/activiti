@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.Stock_listMapper">
+
+	<update id="delStock" >
+		UPDATE stock_list set status='-1' where id=#{id}
+	</update>
+
+	<update id="updateStock" parameterType="Map">
+		UPDATE stock_list
+		<set>
+			<if test="productName != null">productName=#{productName},</if>
+			<if test="model != null">model=#{model},</if>
+			<if test="unit != null">unit=#{unit},</if>
+			<if test="storeNumber != null">storeNumber=#{storeNumber},</if>
+			<if test="purchasingPrice != null">purchasingPrice=#{purchasingPrice},</if>
+			<if test="owner != null">owner=#{owner},</if>
+			<if test="taskTime != null">taskTime=#{taskTime},</if>
+			<if test="remark != null">remark=#{remark},</if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<insert id="addStock" >
+		insert stock_list
+		<set>
+			<if test="productName != null">productName=#{productName},</if>
+			<if test="model != null">model=#{model},</if>
+			<if test="unit != null">unit=#{unit},</if>
+			<if test="storeNumber != null">storeNumber=#{storeNumber},</if>
+			<if test="purchasingPrice != null">purchasingPrice=#{purchasingPrice},</if>
+			<if test="owner != null">owner=#{owner},</if>
+			<if test="taskTime != null">taskTime=#{taskTime},</if>
+			<if test="remark != null">remark=#{remark},</if>
+		</set>
+
+		<selectKey keyProperty="id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<select id="getStockList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.Stock_listEntity">
+		SELECT * FROM stock_list
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					productName like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or model like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or unit like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or storeNumber like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or  purchasingPrice like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or owner like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or taskTime like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or remark like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and status='1'
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+
+	<select id="getStockCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM stock_list
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					productName like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or model like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or unit like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or storeNumber like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or  purchasingPrice like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or owner like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or taskTime like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or remark like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and status='1'
+		</where>
+	</select>
+
+</mapper>

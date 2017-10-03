@@ -29,7 +29,7 @@ public class MenuServiceImpl implements MenuService {
         Map<String, Menu> temp = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getParent_id().equals("0")) {
-                temp.put(list.get(i).getMenu_id(), list.get(i));
+                temp.put(list.get(i).getId(), list.get(i));
                 list.remove(i);
                 i--;
             }
@@ -38,13 +38,43 @@ public class MenuServiceImpl implements MenuService {
             for (int i = 0; i < list.size(); i++) {
                 Menu menu = list.get(i);
                 if (temp.containsKey(menu.getParent_id())) {
-                    temp.get(menu.getParent_id()).getChildList().add(menu);
+                    temp.get(menu.getParent_id()).getChildren().add(menu);
                     list.remove(i);
                     i--;
                 }
             }
         }
         return temp;
+    }
+
+    @Override
+    public List<Menu> getMeunByParentId(Map<String, String> input) {
+
+        return mapper.getMeunByParentId(input);
+    }
+
+    @Override
+    public String getMenuCount(Map<String, String> input) {
+
+        return mapper.getMenuCount(input);
+    }
+
+    @Override
+    public long addMenu(Map<String, String> input) {
+
+        return mapper.addMenu(input);
+    }
+
+    @Override
+    public int delMenu(Map<String, String> input) {
+
+        return mapper.delMenu(input);
+    }
+
+    @Override
+    public int updateMenu(Map<String, String> input) {
+
+        return mapper.updateMenu(input);
     }
 
 }

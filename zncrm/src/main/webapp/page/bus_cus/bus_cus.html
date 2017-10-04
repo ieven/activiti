@@ -94,102 +94,6 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN CONTENT -->
 	<div class="innerContent">
 		<div class="page-content">
-			<!-- <div class="row">
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat blue-madison">
-						<div class="visual">
-							<i class="fa fa-comments"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 MK - MK
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat red-intense">
-						<div class="visual">
-							<i class="fa fa-bar-chart-o"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 美国胜赏
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat green-haze">
-						<div class="visual">
-							<i class="fa fa-shopping-cart"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 开博尔
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 E-JOIN机柜
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 泊声
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
-					<div class="dashboard-stat purple-plum">
-						<div class="visual">
-							<i class="fa fa-globe"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 海美迪
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<div class="modal fade" id="portlet-config" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true"></button>
-							<h4 class="modal-title">Modal title</h4>
-						</div>
-						<div class="modal-body">Widget settings form goes here</div>
-						<div class="modal-footer">
-							<button type="button" class="btn blue">Save changes</button>
-							<button type="button" class="btn default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
 				<div class="col-md-12">
@@ -197,7 +101,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="portlet box blue" id="table_container">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-edit"></i>产品库
+								<i class="fa fa-edit"></i>客户及项目
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -205,12 +109,9 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="row">
 									<div class="col-md-6">
 										<div class="btn-group">
-											<a class="btn green" data-toggle="modal" href="#responsive">
+											<a class="btn green" id="new_project" href="new_project.html">
 												添加 <i class="fa fa-plus"></i>
 											</a>
-											<!-- <button id="sample_editable_1_new" class="btn green">
-												添加 <i class="fa fa-plus"></i>
-											</button> -->
 										</div>
 									</div>
 									<div class="col-md-2"></div>
@@ -254,243 +155,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		</div>
 	</div>
 	<!-- END CONTENT -->
-
-	<!-- 添加弹框 -->
-	<div id="responsive" class="modal fade" tabindex="-1" data-width="760">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true"></button>
-			<h4 class="modal-title">商品属性</h4>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-6">
-					<h5>商品名称</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_name">
-					</p>
-					<h5>商品系列</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_series">
-					</p>
-					<h5>厂家商品型号</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_out_name">
-					</p>
-					<h5>内部商品型号</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_in_name">
-					</p>
-					<h5>单位</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_unit">
-					</p>
-					<h5>说明</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_intro">
-					</p>
-					<h5>进价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_pur_price">
-					</p>
-				</div>
-				<div class="col-md-6">
-					<h5>辅助单价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_assist_price">
-					</p>
-					<h5>售价</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_selling_price">
-					</p>
-					<h5>联系人</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman">
-					</p>
-					<h5>联系电话</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman_phone">
-					</p>
-					<h5>QQ</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_linkman_qq">
-					</p>
-					<h5>来源</h5>
-					<p>
-						<input class="form-control" type="text" name="pro_source">
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-			<button type="button" class="btn blue" id="save_button">Save
-				changes</button>
-		</div>
-	</div>
-
-	<!-- 添加弹框 -->
-	<div id="more_responsive" class="modal fade" tabindex="-1"
-		data-width="760">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true"></button>
-			<h4 class="modal-title">商品属性</h4>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-4 blog-img blog-tag-data">
-					<img id="pro_pic" src="" alt="图片未上传"
-						class="img-responsive">
-				</div>
-				<div class="col-md-8 blog-article">
-					<h3>联系人</h3>
-					<p id="pro_linkman"></p>
-					<h3>联系电话</h3>
-					<p id="pro_linkman_phone"></p>
-					<h3>QQ</h3>
-					<p id="pro_linkman_qq"></p>
-					<h3>来源</h3>
-					<p id="pro_source"></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<form id="fileupload" action="" method="POST" enctype="multipart/form-data">
-						<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-						<div class="row fileupload-buttonbar">
-							<div class="col-lg-7">
-								<!-- The fileinput-button span is used to style the file input field as button -->
-								<span class="btn green fileinput-button">
-								<i class="fa fa-plus"></i>
-								<span>
-								上传产品图片 </span>
-								<input type="file" name="files[]" multiple="">
-								</span>
-								<!-- The global file processing state -->
-								<span class="fileupload-process">
-								</span>
-							</div>
-							<!-- The global progress information -->
-							<div class="col-lg-5 fileupload-progress fade">
-								<!-- The global progress bar -->
-								<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-									<div class="progress-bar progress-bar-success" style="width:0%;">
-									</div>
-								</div>
-								<!-- The extended global progress information -->
-								<div class="progress-extended">
-									 &nbsp;
-								</div>
-							</div>
-						</div>
-						<!-- The table listing the files available for upload/download -->
-						<table role="presentation" class="table table-striped clearfix">
-						<tbody class="files">
-						</tbody>
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-		</div>
-	</div>
-
-	<!-- The blueimp Gallery widget -->
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
-	<div class="slides">
-	</div>
-	<h3 class="title"></h3>
-	<a class="prev">
-	‹ </a>
-	<a class="next">
-	› </a>
-	<a class="close white">
-	</a>
-	<a class="play-pause">
-	</a>
-	<ol class="indicator">
-	</ol>
-</div>
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<script id="template-upload" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
-        <td>
-            <span class="preview"></span>
-        </td>
-        <td>
-            <p class="name">{%=file.name%}</p>
-            <strong class="error text-danger label label-danger"></strong>
-        </td>
-        <td>
-            <p class="size">Processing...</p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-            </div>
-        </td>
-        <td>
-            {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn blue start" disabled>
-                    <i class="fa fa-upload"></i>
-                    <span>Start</span>
-                </button>
-            {% } %}
-            {% if (!i) { %}
-                <button class="btn red cancel">
-                    <i class="fa fa-ban"></i>
-                    <span>Cancel</span>
-                </button>
-            {% } %}
-        </td>
-    </tr>
-{% } %}
-</script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-        {% for (var i=0, file; file=o.files[i]; i++) { %}
-            <tr class="template-download fade">
-                <td>
-                    <span class="preview">
-                        {% if (file.thumbnailUrl) { %}
-                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                        {% } %}
-                    </span>
-                </td>
-                <td>
-                    <p class="name">
-                        {% if (file.url) { %}
-                            <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                        {% } else { %}
-                            <span>{%=file.name%}</span>
-                        {% } %}
-                    </p>
-                    {% if (file.error) { %}
-                        <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-                    {% } %}
-                </td>
-                <td>
-                    <span class="size">{%=o.formatFileSize(file.size)%}</span>
-                </td>
-                <td>
-                    {% if (file.deleteUrl) { %}
-                        <button class="btn red delete btn-sm" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                            <i class="fa fa-trash-o"></i>
-                            <span>Delete</span>
-                        </button>
-                        <input type="checkbox" name="delete" value="1" class="toggle">
-                    {% } else { %}
-                        <button class="btn yellow cancel btn-sm">
-                            <i class="fa fa-ban"></i>
-                            <span>Cancel</span>
-                        </button>
-                    {% } %}
-                </td>
-            </tr>
-        {% } %}
-    </script>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
@@ -585,7 +249,6 @@ License: You must have a valid license purchased only from themeforest(the above
 			Layout.init(); // init current layout
 			UIExtendedModals.init();
 			TableEditable.init();
-			FormFileUpload.init();
 		});
 	</script>
 </body>

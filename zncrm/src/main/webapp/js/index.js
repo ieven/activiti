@@ -13,8 +13,9 @@ jQuery(document).ready(function() {
    $("#username").html($.session.get('username'));
 });
 
-function load_page(url,node) {
+function load_page(url,node,menu_name) {
 	$.session.set('menu_id', node.id);
+	$.session.set('menu_name', menu_name);
 	$("#mainContent").attr("src", url);
 	
 }
@@ -78,7 +79,7 @@ function installMenu(result){
 	if(result.children.length==0){
 		sb.append(
 				'<li>'+
-				'<a href="#" id="'+result.id+'" onclick="load_page(\''+result.menu_url+'\',this)">'+
+				'<a href="#" id="'+result.id+'" onclick="load_page(\''+result.menu_url+'\',this,\''+result.text+'\')">'+
 				'<i class="icon-basket"></i>'+
 				result.text+'</a>'+
 				'</li>');

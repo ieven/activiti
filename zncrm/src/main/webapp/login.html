@@ -170,6 +170,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			    	if(result.CODE == "1"){
 			    		$.session.set('username', result.DATA.username);
 			    		$.session.set('picId', result.DATA.picId);
+			    		$.session.set('real_name', result.DATA.real_name);
 			    		window.location.href = "/zncrm/index.html";
 		            }else{
 		            	alert(result.MSG);

@@ -44,68 +44,15 @@ var TableEditable = function() {
         });
 		
 		table.on('click', '.btn-more', function (e) {
-			var nRow = $(this).parents('tr')[0];
+			e.preventDefault();
+            var nRow = $(this).parents('tr')[0];
 			var aData = oTable.fnGetData(nRow);
-			var param = {};
-			param.pro_id = aData.pro_id;
-		    AjaxHelper.call({
-				url : "/zncrm/rest/pro_lib/"+aData.pro_id,
-				data : JSON.stringify(param),
-				async : false,
-				cache : false,
-				type : "GET",
-				contentType : 'application/json; charset=UTF-8',
-				dataType : "html",
-				success : function(result) {
-					result = eval("(" + result + ")");
-					result = result.DATA;
-					$("#pro_linkman").text(result.pro_linkman);
-					$("#pro_linkman_phone").text(result.pro_linkman_phone);
-					$("#pro_linkman_qq").text(result.pro_linkman_qq);
-					$("#pro_source").text(result.pro_source);
-				},
-				error : function(result) {
-					alert("服务器异常");
-				}
-			});
-		    var picAddress = "/zncrm/rest/pro_lib/get_pic/"+aData.pro_id;
-		    $("#pro_pic").attr("src",picAddress);
-		    $("#fileupload").attr("action","/zncrm/rest/pro_lib/add_pic/"+aData.pro_id);
+            var host = window.location.host;
+            $.session.set('project_id', aData.id);
+            window.open("http://"+host+"/zncrm/page/bus_cus/project_detail.html");
 			
         });
 		
-		table.on('click', '.btn-cancel', function (e) {
-            e.preventDefault();
-            oTable.fnDraw();
-        });
-		
-		table.on('click', '.btn-del', function (e) {
-            e.preventDefault();
-            if(confirm("确定删除？")){
-            	var nRow = $(this).parents('tr')[0];
-            	var jqInputs = $('td', nRow);
-            	var param = {};
-            	
-            	var length = jqInputs.length-1;
-            	param.pro_id = jqInputs[length].innerText;
-            	AjaxHelper.call({
-    				url : "/zncrm/rest/pro_lib",
-    				data : JSON.stringify(param),
-    				async : false,
-    				cache : false,
-    				type : "DELETE",
-    				contentType : 'application/json; charset=UTF-8',
-    				dataType : "html",
-    				success : function(result) {
-    					oTable.fnDraw();
-    				},
-    				error : function(result) {
-    					alert("服务器异常");
-    				}
-    			});
-            }
-        });
-
 		var oTable = table
 				.dataTable({
 
@@ -154,7 +101,7 @@ var TableEditable = function() {
 					"createdRow" : function(row, data, index) {
 						// 行渲染回调,在这里可以对该行dom元素进行任何操作
 						// 不使用render，改用jquery文档操作呈现单元格
-						var $btnMore = $('<button type="button" class="btn btn-small btn-warning btn-more" data-toggle="modal" href="#more_responsive">详细</button>');
+						var $btnMore = $('<button type="button" class="btn btn-small btn-warning btn-more">详细</button>');
 						$('td', row).eq(7).append($btnMore);
 					}
 				});
@@ -210,6 +157,7 @@ function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
 	param.menu_id = $.session.get('menu_id');
+	var host = window.location.host;
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),

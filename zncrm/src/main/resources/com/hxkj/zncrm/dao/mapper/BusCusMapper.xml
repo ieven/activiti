@@ -1,41 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.BusCusMapper">
 
-	<update id="delPayment">
-		UPDATE payment set status='-1' where id=#{id}
-	</update>
+	<select id="getProject" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
+		SELECT
+		note,introducer,cus_qq,con_add,service_info,owner_designer_phone,owner_designer,family_info,receptionist,decoration,project.menu_id,others,intro_workplace,cur_status,service_time,recorder,reception_time,engineer,contract_time,cus_name,cus_phone,intro_phone,cus_email,cus_require,record_time,meun.menu_name
+		FROM project,meun WHERE id = #{id} AND project.menu_id=meun.menu_id
+	</select>
 
-	<update id="updatePayment">
-		UPDATE payment
+	<select id="getProjectLog" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProjectRecordEntity">
+		SELECT * from project_record WHERE project_id=#{project_id} and status='1'
+		ORDER BY record_time DESC
+		LIMIT #{start_index}, #{page_size};
+	</select>
+
+	<select id="getProjectLogCount" parameterType="Map" resultType="String">
+		SELECT count(*) from project_record WHERE project_id=#{project_id} and status='1';
+	</select>
+	
+	<update id="delProjectLog">
+		UPDATE project_record set status='-1' where id=#{id}
+	</update>
+	
+	<update id="updateProject">
+		UPDATE project
 		<set>
-			<if test="cus_name != null">cus_name=#{cus_name},</if>
-			<if test="cus_add != null">cus_add=#{cus_add},</if>
-			<if test="project_name != null">project_name=#{project_name},</if>
-			<if test="project_price != null">project_price=#{project_price},</if>
-			<if test="project_discount != null">project_discount=#{project_discount},</if>
-			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
-			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
-			<if test="jiesuan_price != null">jiesuan_price=#{jiesuan_price},</if>
-			<if test="jiesuan_time != null">jiesuan_time=#{jiesuan_time},</if>
-			<if test="note != null">note=#{note},</if>
+			<if test=" note!= null">note=#{note},</if>
+			<if test=" introducer!= null">introducer=#{introducer},</if>
+			<if test=" cus_qq!= null">cus_qq=#{cus_qq},</if>
+			<if test=" con_add!= null">con_add=#{con_add},</if>
+			<if test=" service_info!= null">service_info=#{service_info},</if>
+			<if test=" owner_designer_phone!= null">owner_designer_phone=#{owner_designer_phone},</if>
+			<if test=" owner_designer!= null">owner_designer=#{owner_designer},</if>
+			<if test=" family_info!= null">family_info=#{family_info},</if>
+			<if test=" receptionist!= null">receptionist=#{receptionist},</if>
+			<if test=" decoration!= null">decoration=#{decoration},</if>
+			<if test=" menu_id!= null">menu_id=#{menu_id},</if>
+			<if test=" others!= null">others=#{others},</if>
+			<if test=" intro_workplace!= null">intro_workplace=#{intro_workplace},</if>
+			<if test=" cur_status!= null">cur_status=#{cur_status},</if>
+			<if test=" service_time!= null">service_time=#{service_time},</if>
+			<if test=" recorder!= null">recorder=#{recorder},</if>
+			<if test=" reception_time!= null">reception_time=#{reception_time},</if>
+			<if test=" engineer!= null">engineer=#{engineer},</if>
+			<if test=" contract_time!= null">contract_time=#{contract_time},</if>
+			<if test=" cus_name!= null">cus_name=#{cus_name},</if>
+			<if test=" cus_phone!= null">cus_phone=#{cus_phone},</if>
+			<if test=" intro_phone!= null">intro_phone=#{intro_phone},</if>
+			<if test=" cus_email!= null">cus_email=#{cus_email},</if>
+			<if test=" cus_require!= null">cus_require=#{cus_require},</if>
+			<if test=" record_time!= null">record_time=#{record_time},</if>
 		</set>
 		where id=#{id}
 	</update>
 
-	<insert id="addPayment">
-		insert payment
+	<insert id="addProject">
+		insert project
 		<set>
-			<if test="cus_name != null">cus_name=#{cus_name},</if>
-			<if test="cus_add != null">cus_add=#{cus_add},</if>
-			<if test="project_name != null">project_name=#{project_name},</if>
-			<if test="project_price != null">project_price=#{project_price},</if>
-			<if test="project_discount != null">project_discount=#{project_discount},</if>
-			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
-			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
-			<if test="jiesuan_price != null">jiesuan_price=#{jiesuan_price},</if>
-			<if test="jiesuan_time != null">jiesuan_time=#{jiesuan_time},</if>
-			<if test="note != null">note=#{note},</if>
+			<if test=" note!= null">note=#{note},</if>
+			<if test=" introducer!= null">introducer=#{introducer},</if>
+			<if test=" cus_qq!= null">cus_qq=#{cus_qq},</if>
+			<if test=" con_add!= null">con_add=#{con_add},</if>
+			<if test=" service_info!= null">service_info=#{service_info},</if>
+			<if test=" owner_designer_phone!= null">owner_designer_phone=#{owner_designer_phone},</if>
+			<if test=" owner_designer!= null">owner_designer=#{owner_designer},</if>
+			<if test=" family_info!= null">family_info=#{family_info},</if>
+			<if test=" receptionist!= null">receptionist=#{receptionist},</if>
+			<if test=" decoration!= null">decoration=#{decoration},</if>
+			<if test=" menu_id!= null">menu_id=#{menu_id},</if>
+			<if test=" others!= null">others=#{others},</if>
+			<if test=" intro_workplace!= null">intro_workplace=#{intro_workplace},</if>
+			<if test=" cur_status!= null">cur_status=#{cur_status},</if>
+			<if test=" service_time!= null">service_time=#{service_time},</if>
+			<if test=" recorder!= null">recorder=#{recorder},</if>
+			<if test=" reception_time!= null">reception_time=#{reception_time},</if>
+			<if test=" engineer!= null">engineer=#{engineer},</if>
+			<if test=" contract_time!= null">contract_time=#{contract_time},</if>
+			<if test=" cus_name!= null">cus_name=#{cus_name},</if>
+			<if test=" cus_phone!= null">cus_phone=#{cus_phone},</if>
+			<if test=" intro_phone!= null">intro_phone=#{intro_phone},</if>
+			<if test=" cus_email!= null">cus_email=#{cus_email},</if>
+			<if test=" cus_require!= null">cus_require=#{cus_require},</if>
+			<if test=" record_time!= null">record_time=#{record_time},</if>
+		</set>
+
+		<selectKey keyProperty="id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="addProjectLog">
+		insert project_record
+		<set>
+			<if test="id!= null">id=#{id},</if>
+			<if test="project_id!= null">project_id=#{project_id},</if>
+			<if test="info!= null">info=#{info},</if>
+			<if test="recorder!= null">recorder=#{recorder},</if>
+			<if test="record_time!= null">record_time=#{record_time},</if>
+			
 		</set>
 
 		<selectKey keyProperty="id" resultType="long">
@@ -48,7 +113,7 @@
 		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
 		SELECT
 		id,meun.menu_name,cus_name,cur_status,cus_phone,con_add,receptionist,reception_time
-		FROM project,meun 
+		FROM project,meun
 		<where>
 			<if test="search_key != null">
 				(
@@ -80,7 +145,7 @@
 	<select id="getProjectCount" parameterType="Map" resultType="String">
 		SELECT
 		count(*)
-		FROM project,meun 
+		FROM project,meun
 		<where>
 			<if test="search_key != null">
 				(

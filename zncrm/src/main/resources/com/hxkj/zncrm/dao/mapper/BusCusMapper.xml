@@ -23,19 +23,34 @@
 		where id=#{id}
 	</update>
 
-	<insert id="addPayment">
-		insert payment
+	<insert id="addProject">
+		insert project
 		<set>
-			<if test="cus_name != null">cus_name=#{cus_name},</if>
-			<if test="cus_add != null">cus_add=#{cus_add},</if>
-			<if test="project_name != null">project_name=#{project_name},</if>
-			<if test="project_price != null">project_price=#{project_price},</if>
-			<if test="project_discount != null">project_discount=#{project_discount},</if>
-			<if test="transaction_price != null">transaction_price=#{transaction_price},</if>
-			<if test="jiesuan != null">jiesuan=#{jiesuan},</if>
-			<if test="jiesuan_price != null">jiesuan_price=#{jiesuan_price},</if>
-			<if test="jiesuan_time != null">jiesuan_time=#{jiesuan_time},</if>
-			<if test="note != null">note=#{note},</if>
+			<if test=" note!= null">note=#{note},</if>
+			<if test=" introducer!= null">introducer=#{introducer},</if>
+			<if test=" cus_qq!= null">cus_qq=#{cus_qq},</if>
+			<if test=" con_add!= null">con_add=#{con_add},</if>
+			<if test=" service_info!= null">service_info=#{service_info},</if>
+			<if test=" owner_designer_phone!= null">owner_designer_phone=#{owner_designer_phone},</if>
+			<if test=" owner_designer!= null">owner_designer=#{owner_designer},</if>
+			<if test=" family_info!= null">family_info=#{family_info},</if>
+			<if test=" receptionist!= null">receptionist=#{receptionist},</if>
+			<if test=" decoration!= null">decoration=#{decoration},</if>
+			<if test=" menu_id!= null">menu_id=#{menu_id},</if>
+			<if test=" others!= null">others=#{others},</if>
+			<if test=" intro_workplace!= null">intro_workplace=#{intro_workplace},</if>
+			<if test=" cur_status!= null">cur_status=#{cur_status},</if>
+			<if test=" service_time!= null">service_time=#{service_time},</if>
+			<if test=" recorder!= null">recorder=#{recorder},</if>
+			<if test=" reception_time!= null">reception_time=#{reception_time},</if>
+			<if test=" engineer!= null">engineer=#{engineer},</if>
+			<if test=" contract_time!= null">contract_time=#{contract_time},</if>
+			<if test=" cus_name!= null">cus_name=#{cus_name},</if>
+			<if test=" cus_phone!= null">cus_phone=#{cus_phone},</if>
+			<if test=" intro_phone!= null">intro_phone=#{intro_phone},</if>
+			<if test=" cus_email!= null">cus_email=#{cus_email},</if>
+			<if test=" cus_require!= null">cus_require=#{cus_require},</if>
+			<if test=" record_time!= null">record_time=#{record_time},</if>
 		</set>
 
 		<selectKey keyProperty="id" resultType="long">

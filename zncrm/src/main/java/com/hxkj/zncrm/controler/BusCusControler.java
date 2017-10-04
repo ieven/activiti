@@ -38,6 +38,16 @@ public class BusCusControler extends AbstractControler {
         result.put("iTotalDisplayRecords", records);
         result.put("result", list);
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
-        // return null;
+    }
+
+    @POST
+    @Path("/add")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response addProject(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        service.addProject(input);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
     }
 }

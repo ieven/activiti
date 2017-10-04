@@ -9,7 +9,7 @@
 	</insert>
 
 	<select id="login" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
-		SELECT ID_ as username,PWD_ as password,PICTURE_ID_ as picId from act_id_user WHERE
+		SELECT ID_ as username,PWD_ as password,PICTURE_ID_ as picId,LAST_ as real_name from act_id_user WHERE
 		ID_ = #{username} and PWD_ = #{password}
 	</select>
 </mapper>

@@ -10,4 +10,6 @@ public interface BusCusMapper {
     public List<ProjectEntity> getProjectList(Map<String, String> input);
 
     public String getProjectCount(Map<String, String> input);
+
+    public long addProject(Map<String, String> input);
 }

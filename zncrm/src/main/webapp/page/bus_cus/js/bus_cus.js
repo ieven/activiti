@@ -48,34 +48,8 @@ var TableEditable = function() {
             var nRow = $(this).parents('tr')[0];
 			var aData = oTable.fnGetData(nRow);
             var host = window.location.host;
-            window.open("http://"+host+"/zncrm/rest/file/"+aData.file_id);
-//			var nRow = $(this).parents('tr')[0];
-//			var aData = oTable.fnGetData(nRow);
-//			var param = {};
-//			param.pro_id = aData.pro_id;
-//		    AjaxHelper.call({
-//				url : "/zncrm/rest/pro_lib/"+aData.pro_id,
-//				data : JSON.stringify(param),
-//				async : false,
-//				cache : false,
-//				type : "GET",
-//				contentType : 'application/json; charset=UTF-8',
-//				dataType : "html",
-//				success : function(result) {
-//					result = eval("(" + result + ")");
-//					result = result.DATA;
-//					$("#pro_linkman").text(result.pro_linkman);
-//					$("#pro_linkman_phone").text(result.pro_linkman_phone);
-//					$("#pro_linkman_qq").text(result.pro_linkman_qq);
-//					$("#pro_source").text(result.pro_source);
-//				},
-//				error : function(result) {
-//					alert("服务器异常");
-//				}
-//			});
-//		    var picAddress = "/zncrm/rest/pro_lib/get_pic/"+aData.pro_id;
-//		    $("#pro_pic").attr("src",picAddress);
-//		    $("#fileupload").attr("action","/zncrm/rest/pro_lib/add_pic/"+aData.pro_id);
+            $.session.set('project_id', aData.id);
+            window.open("http://"+host+"/zncrm/page/bus_cus/project_detail.html");
 			
         });
 		

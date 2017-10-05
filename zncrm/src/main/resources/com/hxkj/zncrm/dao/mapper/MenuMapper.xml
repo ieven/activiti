@@ -4,7 +4,7 @@
 	<select id="getMeunByUsername" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.Menu">
 		SELECT menu_id as id,menu_name as
-		text,parent_id,menu_level,menu_url FROM meun WHERE menu_id NOT in
+		text,parent_id,menu_level,menu_url FROM meun WHERE status='1' and menu_id NOT in
 		(SELECT menu_id FROM group_menu WHERE group_id in (SELECT GROUP_ID_ as
 		group_id FROM act_id_membership WHERE USER_ID_ = #{username}));
 	</select>

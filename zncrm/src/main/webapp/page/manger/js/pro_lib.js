@@ -10,12 +10,12 @@ var TableEditable = function() {
             	oTable.fnUpdate(jqInputs[i].value, nRow, i, false);
             	param[jqInputs[i].name]=jqInputs[i].value;
             }
-            param.parent_id='5';
+            param.parent_id='2';
 
 			AjaxHelper.call({
 				url : "/zncrm/rest/menu",
 				data : JSON.stringify(param),
-				async : false, 
+				async : false,
 				cache : false,
 				type : "PUT",
 				contentType : 'application/json; charset=UTF-8',
@@ -182,8 +182,8 @@ $('#save_button').click(function (e) {
     for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
     	param[jqInputs[i].name]=jqInputs[i].value;
     }
-    param.parent_id='5';
-    param.menu_url="/zncrm/page/company_management/manage.html";
+    param.parent_id='2';
+    param.menu_url="/zncrm/page/pro_library/pro_library.html";
     AjaxHelper.call({
 		url : "/zncrm/rest/menu/add",
 		data : JSON.stringify(param),
@@ -208,7 +208,7 @@ $('#save_button').click(function (e) {
 function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
-	param.parent_id="5";
+	param.parent_id="2";
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),

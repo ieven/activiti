@@ -1,12 +1,23 @@
 var TableEditable = function() {
 
+	var zeroize = function (value, length)
+    {
+        if (!length) length = 2;
+        value = String(value);
+        for (var i = 0, zeros = ''; i < (length - value.length); i++)
+        {
+            zeros += '0';
+        }
+        return zeros + value;
+    };
+	
 	var handleTable = function() {
 
 		$("#recorder").attr("value", $.session.get('real_name'));
 		var mydate = new Date();
 		var str = "" + mydate.getFullYear() + "/";
-		str += (mydate.getMonth() + 1) + "/";
-		str += mydate.getDate();
+		str += (zeroize(mydate.getMonth() + 1)) + "/";
+		str += zeroize(mydate.getDate());
 		$("#record_time").attr("value", str);
 		$("#menu_name").attr("value", $.session.get('menu_name'));
 

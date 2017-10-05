@@ -1,7 +1,3 @@
-function load_yingshou() {
-	$("#mainContent").attr("src", "/zncrm/page/caiwu/yingshou.html");
-}
-
 var TableEditable = function() {
 	
 	var handleTable = function() {
@@ -9,7 +5,6 @@ var TableEditable = function() {
 		function restoreRow(oTable, nRow) {
 			
 			var jqInputs = $('input', nRow);
-			console.log(jqInputs);
 			var param = {};
             for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
             	oTable.fnUpdate(jqInputs[i].value, nRow, i, false);

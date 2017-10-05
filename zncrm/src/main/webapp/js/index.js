@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
    load_menu($.session.get('username'));
-   //$("#mainContent").attr("src","/activiti-webapp-explorer2/zncrmlogin="+$.session.get('username'));
    $("#mainContent").attr("src","/zncrm/page/home/home.html");
    var picAddress = "/zncrm/rest/get_pic/"+$.session.get('picId');
    $("#picId").attr("src",picAddress);

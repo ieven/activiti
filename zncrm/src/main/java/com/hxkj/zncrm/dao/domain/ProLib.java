@@ -4,9 +4,7 @@ public class ProLib {
 
     private String pro_id;
 
-    private String pro_name;
-
-    private String pro_series;
+    private String pro_name_id;
 
     private String pro_out_name;
 
@@ -22,37 +20,21 @@ public class ProLib {
 
     private String pro_selling_price;
 
-    private String pro_linkman;
-
-    private String pro_linkman_phone;
-
-    private String pro_linkman_qq;
-
-    private String pro_source;
-
     private String status;
 
+    private String is_hot;
+
+    public String getIs_hot() {
+
+        return is_hot;
+    }
+
+    public void setIs_hot(String is_hot) {
+
+        this.is_hot = is_hot;
+    }
+
     private String last_modify;
-
-    public String getLast_modify() {
-
-        return last_modify;
-    }
-
-    public void setLast_modify(String last_modify) {
-
-        this.last_modify = last_modify;
-    }
-
-    public String getStatus() {
-
-        return status;
-    }
-
-    public void setStatus(String status) {
-
-        this.status = status;
-    }
 
     public String getPro_id() {
 
@@ -64,24 +46,14 @@ public class ProLib {
         this.pro_id = pro_id;
     }
 
-    public String getPro_name() {
+    public String getPro_name_id() {
 
-        return pro_name;
+        return pro_name_id;
     }
 
-    public void setPro_name(String pro_name) {
+    public void setPro_name_id(String pro_name_id) {
 
-        this.pro_name = pro_name;
-    }
-
-    public String getPro_series() {
-
-        return pro_series;
-    }
-
-    public void setPro_series(String pro_series) {
-
-        this.pro_series = pro_series;
+        this.pro_name_id = pro_name_id;
     }
 
     public String getPro_out_name() {
@@ -154,44 +126,24 @@ public class ProLib {
         this.pro_selling_price = pro_selling_price;
     }
 
-    public String getPro_linkman() {
+    public String getStatus() {
 
-        return pro_linkman;
+        return status;
     }
 
-    public void setPro_linkman(String pro_linkman) {
+    public void setStatus(String status) {
 
-        this.pro_linkman = pro_linkman;
+        this.status = status;
     }
 
-    public String getPro_linkman_phone() {
+    public String getLast_modify() {
 
-        return pro_linkman_phone;
+        return last_modify;
     }
 
-    public void setPro_linkman_phone(String pro_linkman_phone) {
+    public void setLast_modify(String last_modify) {
 
-        this.pro_linkman_phone = pro_linkman_phone;
-    }
-
-    public String getPro_linkman_qq() {
-
-        return pro_linkman_qq;
-    }
-
-    public void setPro_linkman_qq(String pro_linkman_qq) {
-
-        this.pro_linkman_qq = pro_linkman_qq;
-    }
-
-    public String getPro_source() {
-
-        return pro_source;
-    }
-
-    public void setPro_source(String pro_source) {
-
-        this.pro_source = pro_source;
+        this.last_modify = last_modify;
     }
 
 }

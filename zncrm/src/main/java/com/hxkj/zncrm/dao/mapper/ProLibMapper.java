@@ -3,6 +3,7 @@ package com.hxkj.zncrm.dao.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.hxkj.zncrm.dao.domain.LinkManEntity;
 import com.hxkj.zncrm.dao.domain.ProLib;
 
 public interface ProLibMapper {
@@ -58,4 +59,15 @@ public interface ProLibMapper {
     public int addProLibPic(Map input);
 
     public ProLib getProLibById(String id);
+
+    public List<LinkManEntity> getLinkMan(Map<String, String> param);
+
+    public String getLinkManCount(Map<String, String> param);
+
+    public long addLinkMan(Map<String, String> input);
+
+    public int delLinkMan(Map<String, String> input);
+
+    public int updateLinkMan(Map<String, String> input);
+
 }

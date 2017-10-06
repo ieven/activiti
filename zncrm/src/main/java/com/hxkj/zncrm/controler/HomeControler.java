@@ -27,7 +27,7 @@ public class HomeControler extends AbstractControler {
     @POST
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-    public Response getProjectList(String json) {
+    public Response getChartEntityList(String json) {
 
         Map<String, String> input = JSONHelper.toObject(json, Map.class);
         List<ChartEntity> list = service.getChartEntityList(input);

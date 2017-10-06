@@ -6,8 +6,13 @@
 		resultType="com.hxkj.zncrm.po.ChartEntity">
 		SELECT recorder,COUNT(*) as num FROM project WHERE
 		cur_status=#{cur_status}
-		AND TO_DAYS(NOW()) - TO_DAYS(record_time) &lt;= #{days} GROUP BY recorder
+		AND TO_DAYS(NOW()) - TO_DAYS(record_time)
+		&lt;= #{days} GROUP BY recorder
 		HAVING COUNT(*);
+	</select>
+
+	<select id="getNameList" resultType="String">
+		SELECT LAST_ FROM act_id_user WHERE job='销售部' or job='业务部';
 	</select>
 
 </mapper>

@@ -9,4 +9,6 @@ public interface HomeMapper {
 
     public List<ChartEntity> getChartEntityList(Map<String, String> input);
 
+    public List<String> getNameList();
+
 }

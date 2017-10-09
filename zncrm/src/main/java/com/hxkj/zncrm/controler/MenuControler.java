@@ -33,8 +33,8 @@ public class MenuControler extends AbstractControler {
     public Response getMeunByUsername(String json) {
 
         Map<String, String> input = JSONHelper.toObject(json, Map.class);
-        Map<String, Menu> map = service.getMeunByUsername(input);
-        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", map)).build();
+        List<Menu> list = service.getMeunByUsername(input);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", list)).build();
     }
 
     @POST

@@ -88,7 +88,11 @@
 				</if>
 				)
 			</if>
-			and status='1' and pro_name_id = #{pro_name_id} ORDER BY is_hot DESC
+			and status='1' 
+			<if test="pro_name_id != null">
+				and pro_name_id = #{pro_name_id} 
+			</if>
+			ORDER BY is_hot DESC
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
@@ -118,7 +122,10 @@
 				</if>
 				)
 			</if>
-			and status='1' and pro_name_id = #{pro_name_id}
+			and status='1' 
+			<if test="pro_name_id != null">
+				and pro_name_id = #{pro_name_id} 
+			</if>
 		</where>
 	</select>
 	

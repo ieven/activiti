@@ -208,7 +208,7 @@ var TableEditable = function() {
 							if(data=='1'){
 								return '<span class="label label-sm label-danger">优先</span>';
 							}else{
-								return '<span class="label label-sm label-success">不优先</span>';
+								return '<span></span>';
 							}
 	                    }
 					}, {

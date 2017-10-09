@@ -18,4 +18,6 @@ public interface MenuMapper {
     public int delMenu(Map<String, String> input);
 
     public int updateMenu(Map<String, String> input);
+
+    public int updateMenuOrder(Map<String, String> input);
 }

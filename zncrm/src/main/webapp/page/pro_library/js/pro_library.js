@@ -170,7 +170,7 @@ var TableEditable = function() {
 							if(data=='1'){
 								return '<span class="label label-sm label-danger">主推</span>';
 							}else{
-								return '<span class="label label-sm label-success">不主推</span>';
+								return '<span></span>';
 							}
 	                    }
 					}, {
@@ -278,7 +278,10 @@ $('#save_button').click(function (e) {
 function retrieveData(source, data, callback) {
 
 	var param = manager.getQueryCondition(data);
-	param.pro_name_id = $.session.get('menu_id');
+	if(!manager.fuzzySearch){
+		param.pro_name_id = $.session.get('menu_id');
+	}
+	console.log(param);
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),              
@@ -321,7 +324,12 @@ var manager = {
 			}
 		}
 		if (manager.fuzzySearch) {
-			param.search_key = $("#search_key").val();
+			if($("#search_key").val()!=""){
+				param.search_key = $("#search_key").val();
+			}
+			else{
+				manager.fuzzySearch = false;
+			}
 		}
 
 		return param;

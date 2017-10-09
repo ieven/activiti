@@ -6,7 +6,7 @@
 		SELECT menu_id as id,menu_name as
 		text,parent_id,menu_level,menu_url FROM meun WHERE status='1' and menu_id NOT in
 		(SELECT menu_id FROM group_menu WHERE group_id in (SELECT GROUP_ID_ as
-		group_id FROM act_id_membership WHERE USER_ID_ = #{username}));
+		group_id FROM act_id_membership WHERE USER_ID_ = #{username})) ORDER BY menu_order DESC;
 	</select>
 	
 	<select id="getMeunByParentId" parameterType="Map"
@@ -33,6 +33,10 @@
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
+	<update id="updateMenuOrder">
+		UPDATE meun set menu_order=#{menu_id} where menu_id=#{menu_id};
+	</update>
 	
 	<update id="delMenu">
 		UPDATE meun set status='-1' where menu_id=#{id};

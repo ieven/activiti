@@ -7,7 +7,7 @@ import com.hxkj.zncrm.dao.domain.Menu;
 
 public interface MenuService {
 
-    public Map<String, Menu> getMeunByUsername(Map<String, String> input);
+    public List<Menu> getMeunByUsername(Map<String, String> input);
 
     public List<Menu> getMeunByParentId(Map<String, String> input);
 

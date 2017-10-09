@@ -2,17 +2,18 @@ package org.activiti;
 
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.ExecutionListener;
+import org.activiti.engine.impl.el.FixedValue;
 
 public class TestListener implements ExecutionListener {
 
-    private String msg;
+    private FixedValue msg;
 
-    public String getMsg() {
+    public FixedValue getMsg() {
 
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(FixedValue msg) {
 
         this.msg = msg;
     }

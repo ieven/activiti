@@ -24,7 +24,7 @@
 			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -52,6 +52,15 @@
 
 	<dependencies>
 
+		<!-- 推送依赖 begin -->
+
+		<dependency>
+			<groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+
+		<!-- 推送依赖 end -->
 		<!-- slf4j依赖 begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

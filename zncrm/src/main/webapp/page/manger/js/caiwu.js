@@ -220,7 +220,6 @@ function retrieveData(source, data, callback) {
 		success : function(result) {
 			result = eval("(" + result + ")");
 			result = result.DATA;
-			console.log(result);
 			//封装返回数据
             var returnData = {};
             returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回

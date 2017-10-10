@@ -1,6 +1,8 @@
 package com.hxkj.zncrm.service.impl;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,15 +20,15 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper mapper;
 
     @Override
-    public Map<String, Menu> getMeunByUsername(Map<String, String> input) {
+    public List<Menu> getMeunByUsername(Map<String, String> input) {
 
         List<Menu> list = mapper.getMeunByUsername(input);
         return sortMenuList(list);
     }
 
-    private Map<String, Menu> sortMenuList(List<Menu> list) {
+    private List<Menu> sortMenuList(List<Menu> list) {
 
-        Map<String, Menu> temp = new HashMap<>();
+        Map<String, Menu> temp = new LinkedHashMap();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getParent_id().equals("0")) {
                 temp.put(list.get(i).getId(), list.get(i));
@@ -44,7 +46,9 @@ public class MenuServiceImpl implements MenuService {
                 }
             }
         }
-        return temp;
+        List<Menu> result = new LinkedList<>();
+        result.addAll(temp.values());
+        return result;
     }
 
     @Override
@@ -62,7 +66,10 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public long addMenu(Map<String, String> input) {
 
-        return mapper.addMenu(input);
+        Map<String, Long> map = new HashMap<>(1);
+        long id = mapper.addMenu(input);
+        mapper.updateMenuOrder(input);
+        return id;
     }
 
     @Override

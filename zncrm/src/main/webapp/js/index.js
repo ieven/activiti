@@ -7,7 +7,6 @@ jQuery(document).ready(function() {
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
    load_menu($.session.get('username'));
-   //$("#mainContent").attr("src","/activiti-webapp-explorer2/zncrmlogin="+$.session.get('username'));
    $("#mainContent").attr("src","/zncrm/page/home/home.html");
    var picAddress = "/zncrm/rest/get_pic/"+$.session.get('picId');
    $("#picId").attr("src",picAddress);
@@ -17,7 +16,7 @@ jQuery(document).ready(function() {
 function load_page(url,node,menu_name) {
 	$.session.set('menu_id', node.id);
 	$.session.set('menu_name', menu_name);
-	if(menu_name=='工作流'){
+	if(menu_name=='工作流程'){
 		url = "/activiti-webapp-explorer2/zncrmlogin="+$.session.get('username');
 	}
 	$("#mainContent").attr("src", url);

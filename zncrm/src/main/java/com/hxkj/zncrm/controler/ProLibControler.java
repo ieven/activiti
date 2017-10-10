@@ -180,8 +180,85 @@ public class ProLibControler extends AbstractControler {
         while (iter.hasNext()) {
             FileItem item = (FileItem) iter.next();
             byte[] bs = item.get();
-            System.out.println(service.addProLibPic(id, bs));
+            service.addProLibPic(id, bs);
         }
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+    }
+
+    @POST
+    @Path("/link_man")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response getLinkMan(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            if (input.isEmpty()) {
+                return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, "缺少查询条件")).build();
+            }
+            List libs = service.getLinkMan(input);
+            String records = service.getLinkManCount(input);
+            Map result = new HashMap<>();
+            result.put("iTotalRecords", records);
+            result.put("iTotalDisplayRecords", records);
+            result.put("result", libs);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
+    }
+
+    @POST
+    @Path("/link_man/add")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response addLinkMan(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            String proId = service.addLinkMan(input) + "";
+            input.put("link_man_id", proId);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", input)).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
+    }
+
+    @DELETE
+    @Path("/link_man")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response delLinkMan(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            service.delLinkMan(input);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
+    }
+
+    @PUT
+    @Path("/link_man")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response updateLinkMan(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            service.updateLinkMan(input);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
     }
 }

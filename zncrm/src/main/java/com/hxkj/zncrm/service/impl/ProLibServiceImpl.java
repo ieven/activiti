@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hxkj.zncrm.dao.domain.LinkManEntity;
 import com.hxkj.zncrm.dao.domain.ProLib;
 import com.hxkj.zncrm.dao.mapper.ProLibMapper;
 import com.hxkj.zncrm.service.ProLibService;
@@ -71,6 +72,36 @@ public class ProLibServiceImpl implements ProLibService {
     public ProLib getProLibById(String proId) {
 
         return mapper.getProLibById(proId);
+    }
+
+    @Override
+    public List<LinkManEntity> getLinkMan(Map<String, String> param) {
+
+        return mapper.getLinkMan(param);
+    }
+
+    @Override
+    public String getLinkManCount(Map<String, String> param) {
+
+        return mapper.getLinkManCount(param);
+    }
+
+    @Override
+    public long addLinkMan(Map<String, String> input) {
+
+        return mapper.addLinkMan(input);
+    }
+
+    @Override
+    public int delLinkMan(Map<String, String> input) {
+
+        return mapper.delLinkMan(input);
+    }
+
+    @Override
+    public int updateLinkMan(Map<String, String> input) {
+
+        return mapper.updateLinkMan(input);
     }
 
 }

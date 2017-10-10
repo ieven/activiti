@@ -24,8 +24,8 @@
 	<insert id="addProLib">
 		insert pro_library
 		<set>
-			<if test="pro_name != null">pro_name=#{pro_name},</if>
-			<if test="pro_series != null">pro_series=#{pro_series},</if>
+			<if test="is_hot != null">is_hot=#{is_hot},</if>
+			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
 			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>
 			<if test="pro_in_name != null">pro_in_name=#{pro_in_name},</if>
 			<if test="pro_unit != null">pro_unit=#{pro_unit},</if>
@@ -33,10 +33,6 @@
 			<if test="pro_pur_price != null">pro_pur_price=#{pro_pur_price},</if>
 			<if test="pro_assist_price != null">pro_assist_price=#{pro_assist_price},</if>
 			<if test="pro_selling_price != null">pro_selling_price=#{pro_selling_price},</if>
-			<if test="pro_linkman != null">pro_linkman=#{pro_linkman},</if>
-			<if test="pro_linkman_phone != null">pro_linkman_phone=#{pro_linkman_phone},</if>
-			<if test="pro_linkman_qq != null">pro_linkman_qq=#{pro_linkman_qq},</if>
-			<if test="pro_source != null">pro_source=#{pro_source}</if>
 		</set>
 
 		<selectKey keyProperty="pro_id" resultType="long">
@@ -53,8 +49,8 @@
 	<update id="updateProLib">
 		UPDATE pro_library
 		<set>
-			<if test="pro_name != null">pro_name=#{pro_name},</if>
-			<if test="pro_series != null">pro_series=#{pro_series},</if>
+			<if test="is_hot != null">is_hot=#{is_hot},</if>
+			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
 			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>
 			<if test="pro_in_name != null">pro_in_name=#{pro_in_name},</if>
 			<if test="pro_unit != null">pro_unit=#{pro_unit},</if>
@@ -62,10 +58,6 @@
 			<if test="pro_pur_price != null">pro_pur_price=#{pro_pur_price},</if>
 			<if test="pro_assist_price != null">pro_assist_price=#{pro_assist_price},</if>
 			<if test="pro_selling_price != null">pro_selling_price=#{pro_selling_price},</if>
-			<if test="pro_linkman != null">pro_linkman=#{pro_linkman},</if>
-			<if test="pro_linkman_phone != null">pro_linkman_phone=#{pro_linkman_phone},</if>
-			<if test="pro_linkman_qq != null">pro_linkman_qq=#{pro_linkman_qq},</if>
-			<if test="pro_source != null">pro_source=#{pro_source}</if>
 		</set>
 		where pro_id=#{pro_id}
 	</update>
@@ -77,13 +69,10 @@
 			<if test="search_key != null">
 				(
 				<if test="search_key != null">
-					pro_name like '%${search_key}%'
+					pro_out_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or pro_series like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_out_name like '%${search_key}%'
+					or pro_intro like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or pro_in_name like '%${search_key}%'
@@ -97,21 +86,13 @@
 				<if test="search_key != null">
 					or pro_selling_price like '%${search_key}%'
 				</if>
-				<if test="search_key != null">
-					or pro_linkman like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_linkman_phone like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_linkman_qq like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_source like '%${search_key}%'
-				</if>
 				)
 			</if>
-			and status='1'
+			and status='1' 
+			<if test="pro_name_id != null">
+				and pro_name_id = #{pro_name_id} 
+			</if>
+			ORDER BY is_hot DESC
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
@@ -122,13 +103,10 @@
 			<if test="search_key != null">
 				(
 				<if test="search_key != null">
-					pro_name like '%${search_key}%'
+					pro_out_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or pro_series like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_out_name like '%${search_key}%'
+					or pro_intro like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or pro_in_name like '%${search_key}%'
@@ -142,21 +120,59 @@
 				<if test="search_key != null">
 					or pro_selling_price like '%${search_key}%'
 				</if>
-				<if test="search_key != null">
-					or pro_linkman like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_linkman_phone like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_linkman_qq like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or pro_source like '%${search_key}%'
-				</if>
 				)
 			</if>
-			and status='1'
+			and status='1' 
+			<if test="pro_name_id != null">
+				and pro_name_id = #{pro_name_id} 
+			</if>
 		</where>
 	</select>
+	
+	<select id="getLinkMan" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.LinkManEntity">
+		SELECT * FROM link_man
+		where status='1' and pro_name_id = #{pro_name_id}
+		LIMIT #{start_index}, #{page_size};
+	</select>
+	
+	<select id="getLinkManCount" parameterType="Map" resultType="String">
+		SELECT count(*) FROM link_man
+			where status='1' and pro_name_id = #{pro_name_id};
+	</select>
+	
+	<insert id="addLinkMan">
+		insert link_man
+		<set>
+			<if test="link_man_name != null">link_man_name=#{link_man_name},</if>
+			<if test="link_man_phone != null">link_man_phone=#{link_man_phone},</if>
+			<if test="link_man_qq != null">link_man_qq=#{link_man_qq},</if>
+			<if test="link_man_source != null">link_man_source=#{link_man_source},</if>
+			<if test="link_man_note != null">link_man_note=#{link_man_note},</if>
+			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
+		</set>
+
+		<selectKey keyProperty="link_man_id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="delLinkMan">
+		UPDATE link_man set status='-1' where
+		link_man_id=#{link_man_id}
+	</update>
+	
+	<update id="updateLinkMan">
+		UPDATE link_man
+		<set>
+			<if test="link_man_name != null">link_man_name=#{link_man_name},</if>
+			<if test="link_man_phone != null">link_man_phone=#{link_man_phone},</if>
+			<if test="link_man_qq != null">link_man_qq=#{link_man_qq},</if>
+			<if test="link_man_source != null">link_man_source=#{link_man_source},</if>
+			<if test="link_man_note != null">link_man_note=#{link_man_note},</if>
+			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
+		</set>
+		where link_man_id=#{link_man_id}
+	</update>
 </mapper>

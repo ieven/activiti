@@ -20,4 +20,6 @@ public interface MenuMapper {
     public int updateMenu(Map<String, String> input);
 
     public int updateMenuOrder(Map<String, String> input);
+
+    public List<String> getMeunListByRole(Map<String, String> input);
 }

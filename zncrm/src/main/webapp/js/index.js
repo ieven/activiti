@@ -52,7 +52,7 @@ function load_menu(username){
 	AjaxHelper.call({
 		
 		url: "rest/menu",
-	    data: JSON.stringify({"username":username}),
+	    data: JSON.stringify({"username":username,"group_id":$.session.get('role_id')}),
 	    async:false,
 	    cache:false,
 	    type: "POST",
@@ -65,6 +65,29 @@ function load_menu(username){
 	    		for(var key in result){
 	    			sb.append(installMenu(result[key]).toString());
 	    		}
+            }else{
+            	alert(result.MSG);
+            }
+	    },
+	    error:function(result){
+	    	alert("服务器异常");
+	    }
+	});
+	
+	AjaxHelper.call({
+		
+		url: "/zncrm/rest/role_oper_auth",
+	    data: JSON.stringify({"group_id":$.session.get('role_id')}),
+	    async:false,
+	    cache:false,
+	    type: "POST",
+	    contentType:'application/json; charset=UTF-8',
+	    dataType: "html",
+	    success: function (result) {
+	    	result = eval("(" + result + ")");
+	    	if(result.CODE == "1"){
+	    		result = result.DATA;
+	    		$.session.set('authorities', result);
             }else{
             	alert(result.MSG);
             }

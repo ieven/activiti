@@ -298,3 +298,23 @@ var ComponentsEditors = function () {
 
 }();
 
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities');
+		//添加权限
+		if($.inArray("5", authArray)==-1){
+			$("#update_bus_cus").hide();
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
+
+}();

@@ -23,10 +23,11 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getMeunByUsername(Map<String, String> input) {
 
         List<Menu> list = mapper.getMeunByUsername(input);
-        return sortMenuList(list);
+        List<String> menuList = mapper.getMeunListByRole(input);
+        return sortMenuList(list, menuList);
     }
 
-    private List<Menu> sortMenuList(List<Menu> list) {
+    private List<Menu> sortMenuList(List<Menu> list, List<String> menuList) {
 
         Map<String, Menu> temp = new LinkedHashMap();
         for (int i = 0; i < list.size(); i++) {
@@ -46,8 +47,11 @@ public class MenuServiceImpl implements MenuService {
                 }
             }
         }
+        // 移除没有权限的菜单
         List<Menu> result = new LinkedList<>();
-        result.addAll(temp.values());
+        for (String str : menuList) {
+            result.add(temp.get(str));
+        }
         return result;
     }
 
@@ -82,6 +86,12 @@ public class MenuServiceImpl implements MenuService {
     public int updateMenu(Map<String, String> input) {
 
         return mapper.updateMenu(input);
+    }
+
+    @Override
+    public List<String> getMeunListByRole(Map<String, String> input) {
+
+        return mapper.getMeunListByRole(input);
     }
 
 }

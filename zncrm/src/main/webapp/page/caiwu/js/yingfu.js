@@ -36,6 +36,7 @@ var TableEditable = function() {
 		function editRow(oTable, nRow) {
 			var aData = oTable.fnGetData(nRow);
 			var jqTds = $('>td', nRow);
+			console.log(aData);
 			jqTds[0].innerHTML = '<input readonly="readonly" type="text" class="form-control input-small" value="'
 					+ aData.id + '" name="id" >';
 			jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="'
@@ -45,24 +46,16 @@ var TableEditable = function() {
 			jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="'
 					+ aData.project_name + '" name="project_name">';
 			jqTds[4].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.total_loan + '" name="total_loan">';
+				+ aData.project_price + '" name="project_price">';
 			jqTds[5].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.down_payment + '" name="down_payment">';
+				+ aData.project_discount + '" name="project_discount">';
 			jqTds[6].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.down_payment_time + '" name="down_payment_time">';
+				+ aData.jiesuan_price + '" name="jiesuan_price">';
 			jqTds[7].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.two_payment + '" name="two_payment">';
+				+ aData.jiesuan_time + '" name="jiesuan_time">';
 			jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.two_payment_time + '" name="two_payment_time">';
-			jqTds[9].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.final_payment + '" name="final_payment">';
-			jqTds[10].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.final_payment_time + '" name="final_payment_time">';
-			jqTds[11].innerHTML = '<input type="text" class="form-control input-small" value="'
-				+ aData.non_payment + '" name="non_payment">';
-			jqTds[12].innerHTML = '<input type="text" class="form-control input-small" value="'
 				+ aData.note + '" name="note">';
-			jqTds[13].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
+			jqTds[9].innerHTML='<button type="button" class="btn btn-small btn-primary btn-edit">保存</button>'+'<a class="btn btn-small btn-danger btn-cancel" href="">取消</a>';
 		}
 
 		var table = $('#sample_editable_1');
@@ -192,7 +185,12 @@ var TableEditable = function() {
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(9).append($btnEdit).append($btnDel);
+						if(manager.showUpdate){
+							$('td', row).eq(9).append($btnEdit);
+						}
+						if(manager.showDel){
+							$('td', row).eq(9).append($btnDel);
+						}
 					}
 				});
 
@@ -263,6 +261,7 @@ function retrieveData(source, data, callback) {
             returnData.recordsTotal = result.iTotalRecords;
             returnData.recordsFiltered = result.iTotalRecords;//后台不实现过滤功能，每次查询均视作全部结果
             returnData.result = result.result;
+            AuthInit.init();
 			callback(returnData);
 		},
 		error : function(result) {
@@ -276,6 +275,8 @@ var table_row = {
 };
 
 var manager = {
+	showUpdate : false,
+	showDel : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -351,5 +352,36 @@ var FormFileUpload = function () {
         }
 
     };
+
+}();
+
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities').split(",");
+		//添加权限
+		if($.inArray("18", authArray)==-1){
+			$("#add_yingfu").hide();
+		}else{
+			$("#add_yingfu").show();
+		}
+		//修改权限
+		if($.inArray("19", authArray)!=-1){
+			manager.showUpdate = true;
+		}
+		//删除权限
+		if($.inArray("20", authArray)!=-1){
+			manager.showDel = true;
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
 
 }();

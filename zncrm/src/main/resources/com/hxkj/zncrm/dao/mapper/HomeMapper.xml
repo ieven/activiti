@@ -12,7 +12,7 @@
 	</select>
 
 	<select id="getNameList" resultType="String">
-		SELECT LAST_ FROM act_id_user WHERE job='销售部' or job='业务部';
+		SELECT LAST_ FROM act_id_user WHERE job='销售部' or job='业务部' and status!='-1';
 	</select>
 
 </mapper>

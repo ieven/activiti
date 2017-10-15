@@ -168,9 +168,11 @@ License: You must have a valid license purchased only from themeforest(the above
 			    success: function (result) {
 			    	result = eval("(" + result + ")");
 			    	if(result.CODE == "1"){
+			    		console.log(result.DATA);
 			    		$.session.set('username', result.DATA.username);
 			    		$.session.set('picId', result.DATA.picId);
 			    		$.session.set('real_name', result.DATA.real_name);
+			    		$.session.set('role_id', result.DATA.role_id);
 			    		window.location.href = "/zncrm/index.html";
 		            }else{
 		            	alert(result.MSG);

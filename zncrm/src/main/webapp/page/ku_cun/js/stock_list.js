@@ -184,7 +184,12 @@ var TableEditable = function() {
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(9).append($btnEdit).append($btnDel);
+						if(manager.showUpdate){
+							$('td', row).eq(9).append($btnEdit);
+						}
+						if(manager.showDel){
+							$('td', row).eq(9).append($btnDel);
+						}
 					}
 				});
 
@@ -255,6 +260,7 @@ function retrieveData(source, data, callback) {
             returnData.recordsTotal = result.iTotalRecords;
             returnData.recordsFiltered = result.iTotalRecords;//后台不实现过滤功能，每次查询均视作全部结果
             returnData.result = result.result;
+            AuthInit.init();
 			callback(returnData);
 		},
 		error : function(result) {
@@ -263,11 +269,45 @@ function retrieveData(source, data, callback) {
 	});
 }
 
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities').split(",");
+		
+		//添加权限
+		if($.inArray("11", authArray)!=-1){
+			$("#add_stock_list").show();
+		}else{
+			$("#add_stock_list").hide();
+		}
+		//修改权限
+		if($.inArray("12", authArray)!=-1){
+			manager.showUpdate = true;
+		}
+		//删除权限
+		if($.inArray("13", authArray)!=-1){
+			manager.showDel = true;
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
+
+}();
+
 var table_row = {
 		id:""
 };
 
 var manager = {
+	showUpdate : false,
+	showDel : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -345,3 +385,4 @@ var FormFileUpload = function () {
     };
 
 }();
+

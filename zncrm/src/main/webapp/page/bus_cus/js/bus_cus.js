@@ -206,3 +206,24 @@ var manager = {
 		return param;
 	}
 };
+
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities');
+		//添加权限
+		if($.inArray("4", authArray)==-1){
+			$("#add_bus_cus").hide();
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
+
+}();

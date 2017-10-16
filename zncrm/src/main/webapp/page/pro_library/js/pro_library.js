@@ -185,7 +185,12 @@ var TableEditable = function() {
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit" data-toggle="modal" href="#edit_responsive">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(9).append($btnEdit).append($btnDel);
+						if(manager.showUpdate){
+							$('td', row).eq(9).append($btnEdit);
+						}
+						if(manager.showDel){
+							$('td', row).eq(9).append($btnDel);
+						}
 					}
 				});
 
@@ -253,7 +258,6 @@ $('#save_button').click(function (e) {
     	param[jqInputs[i].name]=jqInputs[i].value;
     }
     param.pro_name_id = $.session.get('menu_id');
-    console.log(param);
     AjaxHelper.call({
 		url : "/zncrm/rest/pro_lib/add",
 		data : JSON.stringify(param),
@@ -281,7 +285,6 @@ function retrieveData(source, data, callback) {
 	if(!manager.fuzzySearch){
 		param.pro_name_id = $.session.get('menu_id');
 	}
-	console.log(param);
 	AjaxHelper.call({
 		url : source,
 		data : JSON.stringify(param),              
@@ -299,6 +302,7 @@ function retrieveData(source, data, callback) {
             returnData.recordsTotal = result.iTotalRecords;
             returnData.recordsFiltered = result.iTotalRecords;//后台不实现过滤功能，每次查询均视作全部结果
             returnData.result = result.result;
+            AuthInit.init();
 			callback(returnData);
 		},
 		error : function(result) {
@@ -312,6 +316,8 @@ var table_row = {
 };
 
 var manager = {
+	showUpdate : false,
+	showDel : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -588,7 +594,12 @@ var TableEditable2 = function() {
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(4).append($btnEdit).append($btnDel);
+						if(manager.showUpdate){
+							$('td', row).eq(4).append($btnEdit);
+						}
+						if(manager.showDel){
+							$('td', row).eq(4).append($btnDel);
+						}
 					}
 				});
 
@@ -661,6 +672,7 @@ function retrieveData2(source, data, callback) {
             returnData.recordsTotal = result.iTotalRecords;
             returnData.recordsFiltered = result.iTotalRecords;//后台不实现过滤功能，每次查询均视作全部结果
             returnData.result = result.result;
+            AuthInit.init();
 			callback(returnData);
 		},
 		error : function(result) {
@@ -668,3 +680,37 @@ function retrieveData2(source, data, callback) {
 		}
 	});
 }
+
+
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities').split(",");
+		//添加权限
+		if($.inArray("7", authArray)==-1){
+			$("#add_pro_library").hide();
+			$("#add_pro_linkman").hide();
+		}else{
+			$("#add_pro_library").show();
+			$("#add_pro_linkman").show();
+		}
+		//修改权限
+		if($.inArray("8", authArray)!=-1){
+			manager.showUpdate = true;
+		}
+		//删除权限
+		if($.inArray("9", authArray)!=-1){
+			manager.showDel = true;
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
+
+}();

@@ -12,6 +12,54 @@ public class User {
 
     private String real_name;
 
+    private String phone;
+
+    private String job;
+
+    private String role_id;
+
+    private String status;
+
+    public String getStatus() {
+
+        return status;
+    }
+
+    public void setStatus(String status) {
+
+        this.status = status;
+    }
+
+    public String getRole_id() {
+
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+
+        this.role_id = role_id;
+    }
+
+    public String getPhone() {
+
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+
+        this.phone = phone;
+    }
+
+    public String getJob() {
+
+        return job;
+    }
+
+    public void setJob(String job) {
+
+        this.job = job;
+    }
+
     public String getReal_name() {
 
         return real_name;

@@ -150,7 +150,10 @@ var TableEditable = function() {
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-download">下载</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
 						var $btnMore = $('<button type="button" class="btn btn-small btn-danger btn-more">预览</button>');
-						$('td', row).eq(4).append($btnEdit).append($btnDel).append($btnMore);
+						$('td', row).eq(4).append($btnEdit).append($btnMore);
+						if(manager.showDel){
+							$('td', row).eq(4).append($btnDel);
+						}
 					}
 				});
 
@@ -222,6 +225,7 @@ function retrieveData(source, data, callback) {
             returnData.recordsTotal = result.iTotalRecords;
             returnData.recordsFiltered = result.iTotalRecords;//后台不实现过滤功能，每次查询均视作全部结果
             returnData.result = result.result;
+            AuthInit.init();
 			callback(returnData);
 		},
 		error : function(result) {
@@ -231,6 +235,8 @@ function retrieveData(source, data, callback) {
 }
 
 var manager = {
+	showUpdate : false,
+	showDel : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -306,5 +312,32 @@ var FormFileUpload = function () {
         }
 
     };
+
+}();
+
+var AuthInit = function() {
+	
+	var handleAuth = function() {
+		var authArray = $.session.get('authorities').split(",");
+		//添加权限
+		if($.inArray("15", authArray)==-1){
+			$("#add_com_man").hide();
+		}else{
+			$("#add_com_man").show();
+		}
+		//删除权限
+		if($.inArray("16", authArray)!=-1){
+			manager.showDel = true;
+		}
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleAuth();
+		}
+
+	};
 
 }();

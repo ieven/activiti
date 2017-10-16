@@ -99,7 +99,6 @@ public class MainMenuBar extends HorizontalLayout {
         // i18nManager.getMessage(Messages.MAIN_MENU_REPORTS), Images.MAIN_MENU_REPORTS, false, 80);
         // reportingButton.addListener(new ShowReportsClickListener());
         // menuItemButtons.put(ViewManager.MAIN_NAVIGATION_REPORT, reportingButton);
-
         if (ExplorerApp.get().getLoggedInUser().isAdmin()) {
             Button manageButton = addMenuButton(ViewManager.MAIN_NAVIGATION_MANAGE,
                     i18nManager.getMessage(Messages.MAIN_MENU_MANAGEMENT), Images.MAIN_MENU_MANAGE, false, 90);

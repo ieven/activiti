@@ -54,8 +54,8 @@ public class ManagementMenuBar extends ToolBar {
         addActiveProcessDefinitionsEntry();
         addSuspendedProcessDefinitionsEntry();
         addJobsToolbarEntry();
-        addUsersToolbarEntry();
-        addGroupToolbarEntry();
+        // addUsersToolbarEntry();
+        // addGroupToolbarEntry();
         addAdministrationToolbarEntry();
         // addCrystalBallToolbarEntry();
     }

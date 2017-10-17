@@ -43,7 +43,7 @@ function load_menu(username){
 				'<div class="input-group">'+
 					'<input type="text" class="form-control" placeholder="Search...">'+
 					'<span class="input-group-btn">'+
-					'<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>'+
+					'<a href="javascript:;" class="btn submit"><i class="fa fa-file-video-o"></i></a>'+
 					'</span>'+
 				'</div>'+
 			'</form>'+
@@ -106,7 +106,7 @@ function installMenu(result){
 		sb.append(
 				'<li>'+
 				'<a href="#" id="'+result.id+'" onclick="load_page(\''+result.menu_url+'\',this,\''+result.text+'\')">'+
-				'<i class="icon-basket"></i>'+
+				'<i class="fa fa-file-video-o"></i>'+
 				result.text+'</a>'+
 				'</li>');
 		return sb;
@@ -114,7 +114,7 @@ function installMenu(result){
 		sb.append(
 				'<li>'+
 				'<a href="javascript:;">'+
-				'<i class="icon-basket"></i>'+
+				'<i class="fa fa-file-video-o"></i>'+
 				'<span class="title">'+result.text+'</span>'+
 				'<span class="arrow "></span>'+
 				'</a>');

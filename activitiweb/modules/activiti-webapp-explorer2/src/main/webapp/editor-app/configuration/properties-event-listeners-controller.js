@@ -68,6 +68,7 @@ var KisBpmEventListenersPopupCtrl = [ '$scope', '$q', '$translate', function($sc
     var namePromise = $translate('PROPERTY.EXECUTIONLISTENERS.FIELDS.NAME');
     
     $q.all([eventPromise, implementationPromise, namePromise]).then(function(results) { 
+    	console.log(results);
         $scope.labels.eventLabel = results[0];
         $scope.labels.implementationLabel = results[1];
         $scope.labels.nameLabel = results[2];

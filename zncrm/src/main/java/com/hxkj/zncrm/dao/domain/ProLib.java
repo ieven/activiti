@@ -24,6 +24,30 @@ public class ProLib {
 
     private String is_hot;
 
+    private String pro_name_2;
+
+    private String pro_place;
+
+    public String getPro_name_2() {
+
+        return pro_name_2;
+    }
+
+    public void setPro_name_2(String pro_name_2) {
+
+        this.pro_name_2 = pro_name_2;
+    }
+
+    public String getPro_place() {
+
+        return pro_place;
+    }
+
+    public void setPro_place(String pro_place) {
+
+        this.pro_place = pro_place;
+    }
+
     public String getIs_hot() {
 
         return is_hot;

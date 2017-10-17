@@ -30,6 +30,8 @@ var TableEditable = function() {
 
 		function editRow(oTable, nRow) {
 			var aData = oTable.fnGetData(nRow);
+			$("#pro_name_2").val(aData.pro_name_2);
+			$("#pro_place").val(aData.pro_place);
 			$("#pro_out_name").val(aData.pro_out_name);
 			$("#pro_in_name").val(aData.pro_in_name);			
 			$("#pro_unit").val(aData.pro_unit);
@@ -145,9 +147,13 @@ var TableEditable = function() {
 					"pagingType" : "bootstrap_full_number",
 					"columns" : [ 
 		               {
-						data : "pro_out_name"
+						data : "pro_name_2"
 					}, {
 						data : "pro_in_name"
+					}, {
+						data : "pro_in_name"
+					}, {
+						data : "pro_place"
 					}, {
 						data : "pro_unit"
 					}, {
@@ -186,10 +192,10 @@ var TableEditable = function() {
 						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit" data-toggle="modal" href="#edit_responsive">修改</button>');
 						var $btnDel = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
 						if(manager.showUpdate){
-							$('td', row).eq(9).append($btnEdit);
+							$('td', row).eq(11).append($btnEdit);
 						}
 						if(manager.showDel){
-							$('td', row).eq(9).append($btnDel);
+							$('td', row).eq(11).append($btnDel);
 						}
 					}
 				});

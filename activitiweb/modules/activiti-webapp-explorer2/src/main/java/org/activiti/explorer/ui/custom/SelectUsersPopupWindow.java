@@ -144,7 +144,6 @@ public class SelectUsersPopupWindow extends PopupWindow {
             @Override
             public void textChange(TextChangeEvent event) {
 
-                System.out.println(event.getText());
                 searchPeople(event.getText());
             }
         });

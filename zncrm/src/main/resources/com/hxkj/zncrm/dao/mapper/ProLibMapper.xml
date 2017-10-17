@@ -24,6 +24,8 @@
 	<insert id="addProLib">
 		insert pro_library
 		<set>
+			<if test="pro_name_2 != null">pro_name_2=#{pro_name_2},</if>
+			<if test="pro_place != null">pro_place=#{pro_place},</if>
 			<if test="is_hot != null">is_hot=#{is_hot},</if>
 			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
 			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>
@@ -49,6 +51,8 @@
 	<update id="updateProLib">
 		UPDATE pro_library
 		<set>
+			<if test="pro_name_2 != null">pro_name_2=#{pro_name_2},</if>
+			<if test="pro_place != null">pro_place=#{pro_place},</if>
 			<if test="is_hot != null">is_hot=#{is_hot},</if>
 			<if test="pro_name_id != null">pro_name_id=#{pro_name_id},</if>
 			<if test="pro_out_name != null">pro_out_name=#{pro_out_name},</if>

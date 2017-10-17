@@ -56,7 +56,7 @@ var KisBpmExecutionListenersPopupCtrl = [ '$scope', '$q', '$translate', function
             var executionListener = $scope.executionListeners[i];
             if (executionListener.className !== undefined && executionListener.className !== '')
             {
-                executionListener.implementation = executionListener.className;
+                executionListener.implementation = "IOS推送";
             }
             else if (executionListener.expression !== undefined && executionListener.expression !== '')
             {
@@ -83,7 +83,7 @@ var KisBpmExecutionListenersPopupCtrl = [ '$scope', '$q', '$translate', function
     var namePromise = $translate('PROPERTY.EXECUTIONLISTENERS.FIELDS.NAME');
     
     $q.all([eventPromise, implementationPromise, namePromise]).then(function(results) { 
-        $scope.labels.eventLabel = results[0];
+    	$scope.labels.eventLabel = results[0];
         $scope.labels.implementationLabel = results[1];
         $scope.labels.nameLabel = results[2];
         $scope.translationsRetrieved = true;

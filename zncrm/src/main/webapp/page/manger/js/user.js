@@ -268,6 +268,7 @@ var manager = {
 
 function setManager(){
 	manager.updateUser=false;
+	
 }
 
 var FormFileUpload = function () {
@@ -334,7 +335,7 @@ var SelectContent = function() {
 	
 	var handleSelect = function() {
 		AjaxHelper.call({
-			url : "/zncrm/rest/job",
+			url : "/zncrm/rest/user/job",
 			data : null,
 			async : false,
 			cache : false,

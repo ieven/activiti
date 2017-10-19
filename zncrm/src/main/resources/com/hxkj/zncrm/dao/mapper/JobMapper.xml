@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.JobMapper">
+
+	<select id="getJobList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.JobEntity">
+		SELECT
+		id,job_name
+		FROM job
+		where status!='-1' 
+		LIMIT #{start_index}, #{page_size};
+	</select>
+
+	<select id="getJobCount" parameterType="Map" resultType="String">
+		SELECT
+		count(*)
+		FROM job
+		where status!='-1';
+	</select>
+	
+	<insert id="addJob">
+		insert job
+		<set>
+			<if test="job_name!= null">job_name=#{job_name},</if>
+		</set>
+
+		<selectKey keyProperty="id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="delJob">
+		UPDATE job set status='-1' where id=#{id};
+	</update>
+	
+	<update id="updateJob">
+		UPDATE job set job_name=#{job_name} where id=#{id};
+	</update>
+
+</mapper>

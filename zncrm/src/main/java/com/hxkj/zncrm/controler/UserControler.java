@@ -212,7 +212,7 @@ public class UserControler extends AbstractControler {
     }
 
     @GET
-    @Path("/job")
+    @Path("/user/job")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response getJobList() {

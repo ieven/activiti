@@ -175,6 +175,7 @@ $('#save_button').click(
 			var authoritiesParam = {};
 			var sb=new StringBuffer();
 			for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
+				console.log(jqInputs[i]);
 				if (jqInputs[i].checked) {
 					if (jqInputs[i].id == 'home_s' || jqInputs[i].id == 'gzl_o'
 							|| jqInputs[i].id == 'bus_cus_s'
@@ -202,6 +203,7 @@ $('#save_button').click(
 			param.role_id = $("#role_id").val();
 			param.menu_param = menuParam;
 			param.authorities = sb.toString();
+			console.log(param);
 			 if (!manager.updateUser) {
 						AjaxHelper
 								.call({
@@ -316,4 +318,13 @@ var manager = {
 
 function setManager(){
 	manager.updateUser=false;
+	$("#role_id").val("");
+	$("#role_id").attr("readonly",false);
+	var checkboxs = $(":checkbox");
+	console.log(checkboxs);
+	for(var key in checkboxs){
+		$("#uniform-"+checkboxs[key].id).children("span").removeClass("checked");
+		$("#"+checkboxs[key].id).attr("checked", false);
+	}
+	
 }

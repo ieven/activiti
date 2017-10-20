@@ -137,7 +137,7 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id}
+			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id} ORDER BY TO_DAYS(record_time) 
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>

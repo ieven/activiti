@@ -2,6 +2,11 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dt    d/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.ProLibMapper">
 
+	<select id="getProNames" parameterType="Map"
+		resultType="com.hxkj.zncrm.po.ProNameEntity">
+		SELECT menu_id AS pro_name_id,menu_name as pro_name FROM meun WHERE parent_id = '2' AND status ='1';
+	</select>
+
 	<select id="getProLibById" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProLib">
 		SELECT * FROM pro_library where pro_id = #{id};

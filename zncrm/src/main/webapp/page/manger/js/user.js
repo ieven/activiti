@@ -268,7 +268,11 @@ var manager = {
 
 function setManager(){
 	manager.updateUser=false;
-	
+	var body = $("#responsive");
+	var jqInputs = $('input', body);
+	for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
+    	jqInputs[i].value="";
+    }
 }
 
 var FormFileUpload = function () {

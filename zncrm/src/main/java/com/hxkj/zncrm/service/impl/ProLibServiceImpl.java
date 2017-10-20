@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.hxkj.zncrm.dao.domain.LinkManEntity;
 import com.hxkj.zncrm.dao.domain.ProLib;
 import com.hxkj.zncrm.dao.mapper.ProLibMapper;
+import com.hxkj.zncrm.po.ProNameEntity;
 import com.hxkj.zncrm.service.ProLibService;
 
 @Service
@@ -102,6 +103,12 @@ public class ProLibServiceImpl implements ProLibService {
     public int updateLinkMan(Map<String, String> input) {
 
         return mapper.updateLinkMan(input);
+    }
+
+    @Override
+    public List<ProNameEntity> getProNames(Map<String, String> input) {
+
+        return mapper.getProNames(input);
     }
 
 }

@@ -24,10 +24,14 @@ public class HomeServiceImpl implements HomeService {
         // 获取销售部和业务部的名单
         List<String> nameList = mapper.getNameList();
         List<ChartEntity> entityList = mapper.getChartEntityList(input);
+        // 离职名单
+        List<String> quitList = mapper.getQuitList();
         // 创建一个临时的map，用来作为记录指针
         Map<String, ChartEntity> temp = new HashMap<String, ChartEntity>();
         for (ChartEntity entity : entityList) {
-            temp.put(entity.getRecorder(), entity);
+            if (!quitList.contains(entity.getRecorder())) {
+                temp.put(entity.getRecorder(), entity);
+            }
         }
         // 检查人员是否都在，不在的则添加
         for (String name : nameList) {

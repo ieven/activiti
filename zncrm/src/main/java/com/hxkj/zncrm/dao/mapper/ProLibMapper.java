@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.hxkj.zncrm.dao.domain.LinkManEntity;
 import com.hxkj.zncrm.dao.domain.ProLib;
+import com.hxkj.zncrm.po.ProNameEntity;
 
 public interface ProLibMapper {
 
@@ -69,5 +70,7 @@ public interface ProLibMapper {
     public int delLinkMan(Map<String, String> input);
 
     public int updateLinkMan(Map<String, String> input);
+
+    public List<ProNameEntity> getProNames(Map<String, String> input);
 
 }

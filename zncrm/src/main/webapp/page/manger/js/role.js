@@ -175,7 +175,6 @@ $('#save_button').click(
 			var authoritiesParam = {};
 			var sb=new StringBuffer();
 			for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
-				console.log(jqInputs[i]);
 				if (jqInputs[i].checked) {
 					if (jqInputs[i].id == 'home_s' || jqInputs[i].id == 'gzl_o'
 							|| jqInputs[i].id == 'bus_cus_s'
@@ -199,6 +198,7 @@ $('#save_button').click(
 					}
 				}
 			}
+			
 			var param = {};
 			param.role_id = $("#role_id").val();
 			param.menu_param = menuParam;
@@ -246,9 +246,6 @@ $('#save_button').click(
 										if (result == '-2') {
 											alert("更新失败");
 										} else {
-											for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
-												jqInputs[i].value = "";
-											}
 											$('#responsive').modal('hide');
 											alert("更新成功");
 										}

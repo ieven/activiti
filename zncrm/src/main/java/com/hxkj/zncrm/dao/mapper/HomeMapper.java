@@ -11,4 +11,5 @@ public interface HomeMapper {
 
     public List<String> getNameList();
 
+    public List<String> getQuitList();
 }

@@ -108,6 +108,17 @@
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
+	<update id="updateProjectLog">
+		UPDATE project_record
+		<set>
+			<if test="project_id!= null">project_id=#{project_id},</if>
+			<if test="info!= null">info=#{info},</if>
+			<if test="recorder!= null">recorder=#{recorder},</if>
+			<!-- <if test="record_time!= null">record_time=#{record_time},</if> -->
+		</set>
+		where id=#{id}
+	</update>
 
 	<select id="getProjectList" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
@@ -137,7 +148,7 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id} ORDER BY TO_DAYS(record_time) 
+			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id} ORDER BY TO_DAYS(record_time) DESC
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>

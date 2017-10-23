@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -109,6 +110,17 @@ public class BusCusControler extends AbstractControler {
 
         Map<String, String> input = JSONHelper.toObject(json, Map.class);
         service.addProjectLog(input);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+    }
+
+    @PUT
+    @Path("/add_log")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response updateProjectLog(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        service.updateProjectLog(input);
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
     }
 }

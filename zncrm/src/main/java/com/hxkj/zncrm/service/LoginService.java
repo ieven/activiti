@@ -39,4 +39,6 @@ public interface LoginService {
     public String updateUserMenu(Map<String, String> input);
 
     public List<String> getRoleOperAuth(Map<String, String> input);
+
+    public int delRole(Map<String, String> input);
 }

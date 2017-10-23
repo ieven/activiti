@@ -32,14 +32,11 @@ var TableEditable = function() {
 
 		table.on('click', '.btn-edit', function(e) {
 			e.preventDefault();
-
-			if (this.innerHTML == "修改") {
-				var nRow = $(this).parents('tr')[0];
-				editRow(oTable, nRow);
-			} else if (this.innerHTML == "保存") {
-				var nRow = $(this).parents('tr')[0];
-				restoreRow(oTable, nRow);
-			}
+			manager.update = true;
+			var nRow = $(this).parents('tr')[0];
+			var aData = oTable.fnGetData(nRow);
+			manager.id = aData.id;
+			$('#summernote_1').summernote('code',aData.info);
 
 		});
 
@@ -109,7 +106,11 @@ var TableEditable = function() {
 						// 行渲染回调,在这里可以对该行dom元素进行任何操作
 						// 不使用render，改用jquery文档操作呈现单元格
 						var $btnMore = $('<button type="button" class="btn btn-small btn-danger btn-del">删除</button>');
-						$('td', row).eq(3).append($btnMore);
+						var $btnEdit = $('<button type="button" class="btn btn-small btn-primary btn-edit">修改</button>');
+						//添加admin的隐性权限
+						if($.session.get('role_id')=='admin'){
+							$('td', row).eq(3).append($btnEdit).append($btnMore);
+						}
 					}
 				});
 
@@ -120,40 +121,66 @@ var TableEditable = function() {
 		});
 		
 		$('#submit_btn').click(function(e) {
-			var sHTML = $('#summernote_1').code();
-			var param = {};
-			param.project_id = $.session.get('project_id');
-			param.info = sHTML;
-			var myDate = new Date();
-			//获取当前年
-			var year=myDate.getFullYear();
-			//获取当前月
-			var month=myDate.getMonth()+1;
-			//获取当前日
-			var date=myDate.getDate(); 
-			var h=myDate.getHours();       //获取当前小时数(0-23)
-			var m=myDate.getMinutes();     //获取当前分钟数(0-59)
-			var s=myDate.getSeconds();
-			var time = year+"-"+month+"-"+date+" "+h+":"+m+":"+s;
-			param.record_time=time;
-			param.recorder=$.session.get('real_name');
-			AjaxHelper.call({
-				url : "/zncrm/rest/bus_cus/add_log",
-				data : JSON.stringify(param),
-				async : false,
-				cache : false,
-				type : "POST",
-				contentType : 'application/json; charset=UTF-8',
-				dataType : "html",
-				success : function(result) {
-					oTable.fnDraw();
-					$('#summernote_1').summernote("");
-					alert("添加成功");
-				},
-				error : function(result) {
-					alert("服务器异常");
-				}
-			});
+			if(manager.update){
+				var sHTML = $('#summernote_1').summernote('code');
+				var param = {};
+				param.info = sHTML;
+				param.id = manager.id;
+				AjaxHelper.call({
+					url : "/zncrm/rest/bus_cus/add_log",
+					data : JSON.stringify(param),
+					async : false,
+					cache : false,
+					type : "PUT",
+					contentType : 'application/json; charset=UTF-8',
+					dataType : "html",
+					success : function(result) {
+						oTable.fnDraw();
+						manager.update = false;
+						$('#summernote_1').summernote('code',"")
+						alert("修改成功");
+					},
+					error : function(result) {
+						alert("服务器异常");
+					}
+				});
+			}
+			else{
+				var sHTML = $('#summernote_1').summernote('code');
+				var param = {};
+				param.project_id = $.session.get('project_id');
+				param.info = sHTML;
+				var myDate = new Date();
+				//获取当前年
+				var year=myDate.getFullYear();
+				//获取当前月
+				var month=myDate.getMonth()+1;
+				//获取当前日
+				var date=myDate.getDate(); 
+				var h=myDate.getHours();       //获取当前小时数(0-23)
+				var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+				var s=myDate.getSeconds();
+				var time = year+"-"+month+"-"+date+" "+h+":"+m+":"+s;
+				param.record_time=time;
+				param.recorder=$.session.get('real_name');
+				AjaxHelper.call({
+					url : "/zncrm/rest/bus_cus/add_log",
+					data : JSON.stringify(param),
+					async : false,
+					cache : false,
+					type : "POST",
+					contentType : 'application/json; charset=UTF-8',
+					dataType : "html",
+					success : function(result) {
+						oTable.fnDraw();
+						$('#summernote_1').summernote('code',"")
+						alert("添加成功");
+					},
+					error : function(result) {
+						alert("服务器异常");
+					}
+				});
+			}
 		});
 
 	}
@@ -188,6 +215,14 @@ var Project = function() {
 				result = result.DATA;
 				for ( var key in result) {
 					$("#" + key).text(result[key]);
+				}
+				var recorder = result.recorder;
+				var role_id = $.session.get('role_id');
+				var real_name = $.session.get('real_name');
+				if(recorder==real_name||role_id=='admin'){
+					$("#update_bus_cus").show();
+				}else{
+					$("#update_bus_cus").hide();
 				}
 			},
 			error : function(result) {
@@ -247,6 +282,7 @@ var table_row = {
 };
 
 var manager = {
+	update : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -280,18 +316,18 @@ var ComponentsEditors = function () {
             });
         }
     }
-
+    
     var handleSummernote = function () {
-        $('#summernote_1').summernote({height: 300});
+        $('#summernote_1').summernote({height:300,lang:'zh-CN'});
         //API:
         //var sHTML = $('#summernote_1').code(); // get code
         //$('#summernote_1').destroy(); // destroy
     }
-
+    
     return {
         //main function to initiate the module
         init: function () {
-            handleWysihtml5();
+//            handleWysihtml5();
             handleSummernote();
         }
     };
@@ -303,9 +339,7 @@ var AuthInit = function() {
 	var handleAuth = function() {
 		var authArray = $.session.get('authorities');
 		//添加权限
-		if($.inArray("5", authArray)==-1){
-			$("#update_bus_cus").hide();
-		}
+		
 	}
 
 	return {
@@ -316,5 +350,39 @@ var AuthInit = function() {
 		}
 
 	};
+
+}();
+
+var FormFileUpload = function () {
+
+    return {
+        //main function to initiate the module
+        init: function () {
+        $('#fileupload').fileupload({
+        	dataType: 'json',
+            add: function (e, data) {
+                data.context = $('#status').text('Uploading...').appendTo(document.body);
+                data.submit();
+            },
+            done: function (e, data) {
+            	var fileName = data.result.DATA.file_name;
+            	var title = data.result.DATA.title;
+            	var url = "http://"+window.location.host+"/zncrm/rest/file/"+fileName;
+            	var aItem = '<a href='+url+' target="_blank">'+title+'</a>';
+            	var str = $('#summernote_1').summernote('code')+aItem;
+            	$('#summernote_1').summernote('code',str);
+            	$('#responsive').modal('hide');
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }
+        });
+        }
+
+    };
 
 }();

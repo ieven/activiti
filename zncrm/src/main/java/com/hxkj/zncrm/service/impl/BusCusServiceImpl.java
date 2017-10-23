@@ -77,4 +77,10 @@ public class BusCusServiceImpl implements BusCusService {
         return mapper.addProjectLog(input);
     }
 
+    @Override
+    public int updateProjectLog(Map<String, String> input) {
+
+        return mapper.updateProjectLog(input);
+    }
+
 }

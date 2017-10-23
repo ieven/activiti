@@ -1,10 +1,9 @@
 var Charts = function() {
 	
-	var handleChart = function() {
+	var handleChart = function(days) {
 		// 基于准备好的dom，初始化echarts实例
         var myChart1 = echarts.init(document.getElementById('main1'));
         var myChart2 = echarts.init(document.getElementById('main2'));
-        var myChart3 = echarts.init(document.getElementById('main3'));
 
         // 指定图表的配置项和数据
         var option1 = {
@@ -33,7 +32,7 @@ var Charts = function() {
         };
         var param1 = {};
         param1.cur_status = '潜在';
-        param1.days = 60;
+        param1.days = days;
         AjaxHelper.call({
     		url : "/zncrm/rest/home",
     		data : JSON.stringify(param1),
@@ -61,7 +60,8 @@ var Charts = function() {
     	});
         
         // 使用刚指定的配置项和数据显示图表。
-        myChart1.setOption(option1);
+//        myChart1.setOption(option1);
+        myChart1.setOption(option1, true);
         
         var option2 = {
                 title: {
@@ -90,7 +90,7 @@ var Charts = function() {
         
         var param2 = {};
         param2.cur_status = '成交';
-        param2.days = 60;
+        param2.days = days;
         AjaxHelper.call({
     		url : "/zncrm/rest/home",
     		data : JSON.stringify(param2),
@@ -125,7 +125,12 @@ var Charts = function() {
 
 		// main function to initiate the module
 		init : function() {
-			handleChart();
+			handleChart(30);
+		},
+		
+		change_days : function(){
+			var days = $("#days").find("option:selected").val();
+			handleChart(days);
 		}
 
 	};

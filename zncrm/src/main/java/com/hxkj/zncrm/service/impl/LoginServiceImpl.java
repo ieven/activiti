@@ -191,4 +191,10 @@ public class LoginServiceImpl implements LoginService {
         return authList;
     }
 
+    @Override
+    public int delRole(Map<String, String> input) {
+
+        return userMapper.delRole(input);
+    }
+
 }

@@ -15,6 +15,10 @@
 
 	</insert>
 	
+	<delete id="delRole">
+		DELETE FROM act_id_group WHERE ID_=#{role_id};
+	</delete>
+	
 	<insert id="addUser">
 		insert act_id_user
 		<set>

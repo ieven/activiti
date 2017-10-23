@@ -243,6 +243,23 @@ public class UserControler extends AbstractControler {
         }
     }
 
+    @DELETE
+    @Path("/role")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response delRole(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            int result = loginService.delRole(input);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
+    }
+
     @POST
     @Path("/role_list")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

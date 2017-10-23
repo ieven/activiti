@@ -87,9 +87,9 @@ var TableEditable = function() {
 				var nRow = $(this).parents('tr')[0];
 				var jqInputs = $('td', nRow);
 				var param = {};
-				param.username = jqInputs[0].innerText;
+				param.role_id = jqInputs[0].innerText;
 				AjaxHelper.call({
-					url : "/zncrm/rest/user",
+					url : "/zncrm/rest/role",
 					data : JSON.stringify(param),
 					async : false,
 					cache : false,
@@ -203,7 +203,6 @@ $('#save_button').click(
 			param.role_id = $("#role_id").val();
 			param.menu_param = menuParam;
 			param.authorities = sb.toString();
-			console.log(param);
 			 if (!manager.updateUser) {
 						AjaxHelper
 								.call({
@@ -318,7 +317,6 @@ function setManager(){
 	$("#role_id").val("");
 	$("#role_id").attr("readonly",false);
 	var checkboxs = $(":checkbox");
-	console.log(checkboxs);
 	for(var key in checkboxs){
 		$("#uniform-"+checkboxs[key].id).children("span").removeClass("checked");
 		$("#"+checkboxs[key].id).attr("checked", false);

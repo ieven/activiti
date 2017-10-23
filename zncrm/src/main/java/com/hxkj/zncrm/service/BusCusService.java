@@ -25,4 +25,6 @@ public interface BusCusService {
     public int updateProject(Map<String, String> input);
 
     public long addProjectLog(Map<String, String> input);
+
+    public int updateProjectLog(Map<String, String> input);
 }

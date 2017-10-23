@@ -123,6 +123,64 @@ public class FileControler extends AbstractControler {
         return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, "")).build();
     }
 
+    @POST
+    @Path("/project")
+    public Response addProjectFlie(@Context HttpServletRequest request, @Context HttpServletResponse response)
+            throws IOException {
+
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        List items = null;
+        try {
+            items = upload.parseRequest(request);
+        }
+        catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+        Iterator iter = items.iterator();
+        while (iter.hasNext()) {
+            FileItem item = (FileItem) iter.next();
+            if (item.isFormField()) {
+                String fieldName = item.getFieldName();
+                String value = item.getString();
+                request.setAttribute(fieldName, value);
+            }
+            else {
+                String fileName = item.getName();
+                int index = fileName.lastIndexOf("\\");
+                fileName = fileName.substring(index + 1);
+                FileEntity entity = new FileEntity();
+                entity.setAuthor("");
+                entity.setMenu_id("");
+                entity.setTitle(fileName);
+                service.addFile(entity);
+                String[] fileSuffix = fileName.split("\\.");
+                String fileId = entity.getFile_id() + "." + fileSuffix[fileSuffix.length - 1];
+                entity.setFile_name(fileId);
+                request.setAttribute("realFileName", fileId);
+                String basePath = BASEPATH;
+                File dir = new File(basePath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File file = new File(basePath, fileId);
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                try {
+                    item.write(file);
+                    service.setFileName(entity);
+                    return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", entity)).build();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+        return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, "")).build();
+    }
+
     @DELETE
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

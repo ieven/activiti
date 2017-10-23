@@ -166,6 +166,7 @@
                     template,
                     deferred;
                 if (data.context) {
+                	console.log(data);
                     data.context.each(function (index) {
                         var file = files[index] ||
                                 {error: '上传成功'};

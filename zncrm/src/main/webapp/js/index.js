@@ -16,6 +16,8 @@ jQuery(document).ready(function() {
 function load_page(url,node,menu_name) {
 	$.session.set('menu_id', node.id);
 	$.session.set('menu_name', menu_name);
+	$("li").removeClass("active");
+	$(node).parents('li').addClass('active');
 	if(menu_name=='工作流程'){
 		url = "/activiti-webapp-explorer2/zncrmlogin="+$.session.get('username');
 	}

@@ -49,7 +49,7 @@ var Layout = function () {
     // Handle sidebar menu links
     var handleSidebarMenuActiveLink = function(mode, el) {
         var url = location.hash.toLowerCase();    
-
+        
         var menu = $('.page-sidebar-menu');
 
         if (mode === 'click' || mode === 'set') {

@@ -45,4 +45,6 @@ public interface UserMapper {
     public void addRole(Map<String, String> input);
 
     public String getAuthById(Map<String, String> input);
+
+    public int delRole(Map<String, String> input);
 }

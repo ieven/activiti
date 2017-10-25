@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.activiti.Pusher;
 import org.activiti.crystalball.simulator.SimulationDebugger;
 import org.activiti.crystalball.simulator.SimulationEvent;
 import org.activiti.engine.ActivitiException;
@@ -73,6 +74,19 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
     protected String crystalBallCurrentInstanceId = null;
     protected List<SimulationEvent> crystalBallSimulationEvents = null;
     protected transient SimulationDebugger crystalBallSimulationDebugger = null;
+
+    // 添加推送
+    protected Pusher mPusher;
+
+    public Pusher getmPusher() {
+
+        return mPusher;
+    }
+
+    public void setmPusher(Pusher mPusher) {
+
+        this.mPusher = mPusher;
+    }
 
     @Override
     public void init() {

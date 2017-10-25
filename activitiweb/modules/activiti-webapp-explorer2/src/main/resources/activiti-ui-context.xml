@@ -84,6 +84,13 @@
     <property name="workflowDefinitionConversionFactory" ref="workflowDefinitionConversionFactory" />
     <property name="loginHandler" ref="activitiLoginHandler" />
     <property name="simpleWorkflowJsonConverter" ref="simpleWorkflowJsonConverter" />
+    
+    <property name="mPusher" ref="mPusher" />
+  </bean>
+  
+  <bean name="mPusher" class="org.activiti.Pusher" scope="session">
+  	<constructor-arg name="appKey" value="0520041b34fefe45a504640f"></constructor-arg>
+  	<constructor-arg name="masterSecret" value="aaafb275e9451dd0f12fdefd"></constructor-arg>
   </bean>
   
   <bean id="simpleWorkflowJsonConverter" class="org.activiti.workflow.simple.converter.json.SimpleWorkflowJsonConverter" />

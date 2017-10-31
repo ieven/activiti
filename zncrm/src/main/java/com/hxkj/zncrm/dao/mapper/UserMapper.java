@@ -47,4 +47,12 @@ public interface UserMapper {
     public String getAuthById(Map<String, String> input);
 
     public int delRole(Map<String, String> input);
+
+    public List<User> getUserListByDepartment(Map<String, String> input);
+
+    public String getUserDepartmentCount(Map<String, String> input);
+
+    public List<User> getUserListByStatus(Map<String, String> input);
+
+    public String getUserStatusCount(Map<String, String> input);
 }

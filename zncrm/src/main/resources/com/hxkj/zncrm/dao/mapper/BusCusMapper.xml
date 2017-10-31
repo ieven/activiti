@@ -2,6 +2,75 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.BusCusMapper">
 
+	<select id="getBusCusMenuList" parameterType="Map"
+		resultType="com.hxkj.zncrm.po.BusCusMenuListEntity">
+		SELECT menu_id,menu_name FROM meun WHERE status!='-1' AND parent_id = '18';
+	</select>
+	
+	<select id="searchProjectList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
+		SELECT
+		id,meun.menu_name,cus_name,cur_status,cus_phone,con_add,receptionist,reception_time
+		FROM project,meun
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cur_status like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or con_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and project.menu_id=meun.menu_id ORDER BY TO_DAYS(record_time) DESC
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+	
+	<select id="searchProjectListCount" parameterType="Map" resultType="String">
+		SELECT
+		count(*)
+		FROM project,meun
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cur_status like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or con_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and project.menu_id=meun.menu_id
+		</where>
+	</select>
+
 	<select id="getProject" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
 		SELECT
@@ -132,19 +201,19 @@
 					cus_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or receptionist like '%${search_key}%'
+					or cur_status like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or introducer like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or engineer like '%${search_key}%'
+					or cus_phone like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or con_add like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or cus_phone like '%${search_key}%'
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
 				</if>
 				)
 			</if>
@@ -164,19 +233,19 @@
 					cus_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or receptionist like '%${search_key}%'
+					or cur_status like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or introducer like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
-					or engineer like '%${search_key}%'
+					or cus_phone like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or con_add like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or cus_phone like '%${search_key}%'
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
 				</if>
 				)
 			</if>

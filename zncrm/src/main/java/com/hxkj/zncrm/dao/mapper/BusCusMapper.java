@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.hxkj.zncrm.dao.domain.ProjectEntity;
 import com.hxkj.zncrm.dao.domain.ProjectRecordEntity;
+import com.hxkj.zncrm.po.BusCusMenuListEntity;
 
 public interface BusCusMapper {
 
@@ -27,4 +28,10 @@ public interface BusCusMapper {
     public long addProjectLog(Map<String, String> input);
 
     public int updateProjectLog(Map<String, String> input);
+
+    public List<BusCusMenuListEntity> getBusCusMenuList(Map<String, String> input);
+
+    public List<ProjectEntity> searchProjectList(Map<String, String> input);
+
+    public String searchProjectListCount(Map<String, String> input);
 }

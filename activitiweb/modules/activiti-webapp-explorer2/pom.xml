@@ -52,6 +52,12 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.6</version>
+		</dependency>
+		
 		<!-- 推送依赖 begin -->
 
 		<dependency>

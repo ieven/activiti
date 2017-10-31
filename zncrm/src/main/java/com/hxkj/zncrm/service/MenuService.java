@@ -20,4 +20,5 @@ public interface MenuService {
     public int updateMenu(Map<String, String> input);
 
     public List<String> getMeunListByRole(Map<String, String> input);
+
 }

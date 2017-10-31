@@ -197,4 +197,28 @@ public class LoginServiceImpl implements LoginService {
         return userMapper.delRole(input);
     }
 
+    @Override
+    public List<User> getUserListByDepartment(Map<String, String> input) {
+
+        return userMapper.getUserListByDepartment(input);
+    }
+
+    @Override
+    public String getUserDepartmentCount(Map<String, String> input) {
+
+        return userMapper.getUserDepartmentCount(input);
+    }
+
+    @Override
+    public List<User> getUserListByStatus(Map<String, String> input) {
+
+        return userMapper.getUserListByStatus(input);
+    }
+
+    @Override
+    public String getUserStatusCount(Map<String, String> input) {
+
+        return userMapper.getUserStatusCount(input);
+    }
+
 }

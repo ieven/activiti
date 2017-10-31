@@ -18,7 +18,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/zncrm?characterEncoding=UTF-8" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/zncrm?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<!--连接池启动时的初始值 -->
@@ -65,5 +66,10 @@
 			<ref bean="dataSource" />
 		</property>
 	</bean>
-	
+
+	<bean name="mPusher" class="com.hxkj.zncrm.util.Pusher">
+		<constructor-arg name="appKey" value="0520041b34fefe45a504640f"></constructor-arg>
+		<constructor-arg name="masterSecret" value="aaafb275e9451dd0f12fdefd"></constructor-arg>
+	</bean>
+
 </beans>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hxkj.zncrm.dao.domain.ProjectEntity;
 import com.hxkj.zncrm.dao.domain.ProjectRecordEntity;
 import com.hxkj.zncrm.dao.mapper.BusCusMapper;
+import com.hxkj.zncrm.po.BusCusMenuListEntity;
 import com.hxkj.zncrm.service.BusCusService;
 import com.hxkj.zncrm.util.StringHelper;
 
@@ -81,6 +82,24 @@ public class BusCusServiceImpl implements BusCusService {
     public int updateProjectLog(Map<String, String> input) {
 
         return mapper.updateProjectLog(input);
+    }
+
+    @Override
+    public List<BusCusMenuListEntity> getBusCusMenuList(Map<String, String> input) {
+
+        return mapper.getBusCusMenuList(input);
+    }
+
+    @Override
+    public List<ProjectEntity> searchProjectList(Map<String, String> input) {
+
+        return mapper.searchProjectList(input);
+    }
+
+    @Override
+    public String searchProjectListCount(Map<String, String> input) {
+
+        return mapper.searchProjectListCount(input);
     }
 
 }

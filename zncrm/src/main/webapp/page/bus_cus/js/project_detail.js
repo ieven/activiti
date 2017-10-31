@@ -367,7 +367,7 @@ var FormFileUpload = function () {
             done: function (e, data) {
             	var fileName = data.result.DATA.file_name;
             	var title = data.result.DATA.title;
-            	var url = "http://"+window.location.host+"/zncrm/rest/file/"+fileName;
+            	var url = "/zncrm/rest/file/"+fileName;
             	var aItem = '<a href='+url+' target="_blank">'+title+'</a>';
             	var str = $('#summernote_1').summernote('code')+aItem;
             	$('#summernote_1').summernote('code',str);

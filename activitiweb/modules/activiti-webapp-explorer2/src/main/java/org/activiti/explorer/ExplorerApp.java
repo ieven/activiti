@@ -10,6 +10,8 @@
  */
 package org.activiti.explorer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -30,6 +32,7 @@ import org.activiti.explorer.ui.content.AttachmentRendererManager;
 import org.activiti.explorer.ui.form.FormPropertyRendererManager;
 import org.activiti.explorer.ui.login.LoginHandler;
 import org.activiti.explorer.ui.variable.VariableRendererManager;
+import org.activiti.util.JSONHelper;
 import org.activiti.util.PropertiesHelper;
 import org.activiti.util.StringHelper;
 import org.activiti.workflow.simple.converter.WorkflowDefinitionConversionFactory;
@@ -219,7 +222,24 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
         // Set current application object as thread-local to make it easy accessible
         current.set(this);
         String username = "";
-        if (request.getRequestURI().indexOf("zncrmlogout") > -1) {
+        if (request.getRequestURI().indexOf("zncrmpush") > -1) {
+            try {
+                BufferedReader br = request.getReader();
+                String str, wholeStr = "";
+                while ((str = br.readLine()) != null) {
+                    wholeStr += str;
+                }
+                Map<String, String> input = JSONHelper.toObject(wholeStr, Map.class);
+                System.out.println(input);
+            }
+            catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            return;
+        }
+        else if (request.getRequestURI().indexOf("zncrmlogout") > -1) {
             ExplorerApp.get().close();
             return;
         }

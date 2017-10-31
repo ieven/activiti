@@ -20,15 +20,17 @@
 	</properties>
 
 	<dependencies>
-	
-		<!-- 推送依赖begin -->
+
+		<!-- 推送依赖 begin -->
+
 		<dependency>
-			<groupId>com.github.fernandospr</groupId>
-			<artifactId>javapns-jdk16</artifactId>
-			<version>2.3.1</version>
+			<groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>3.3.2</version>
 		</dependency>
-		<!-- 推送依赖end -->
-		
+
+		<!-- 推送依赖 end -->
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>

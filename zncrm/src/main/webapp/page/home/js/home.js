@@ -11,9 +11,6 @@ var Charts = function() {
                 text: '潜在客户统计'
             },
             tooltip: {},
-            legend: {
-                data:['销量']
-            },
             grid: {
             	y2: 140
             },
@@ -68,9 +65,9 @@ var Charts = function() {
                     text: '成交客户统计'
                 },
                 tooltip: {},
-                legend: {
-                    data:['销量']
-                },
+//                legend: {
+//                    data:['销量']
+//                },
                 grid: {
                 	y2: 140
                 },

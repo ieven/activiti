@@ -3,6 +3,22 @@
 <mapper namespace="com.hxkj.zncrm.dao.mapper.UserMapper">
 	<!-- Create a new User -->
 	
+	<select id="getManagerUsers" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
+		SELECT
+		ID_ as username,PWD_ as password,LAST_ AS
+		real_name,phone,role_id,job,PICTURE_ID_ AS picId,status
+		FROM
+		act_id_user where role_id LIKE '%经理%' and status!='-1' ORDER
+		BY `status` DESC LIMIT #{start_index},
+		#{page_size};
+	</select>
+
+	<select id="getManagerUsersCount" parameterType="Map" resultType="String">
+		SELECT
+		count(*)
+		FROM act_id_user where role_id LIKE '%经理%' and status!='-1' ORDER BY `status` DESC
+	</select>
+	
 	<select id="getUserListByDepartment" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
 		SELECT
 		ID_ as username,PWD_ as password,LAST_ AS

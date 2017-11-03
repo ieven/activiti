@@ -149,7 +149,14 @@ var TableEditable = function() {
 		               {
 						data : "pro_name_2"
 					}, {
-						data : "pro_in_name"
+						data : "pro_out_name",
+						render: function (data, type, row, meta) {
+							if(manager.showPrice){
+								return '<span>'+data+'</span>';
+							}else{
+								return '<span></span>';
+							}
+	                    }
 					}, {
 						data : "pro_in_name"
 					}, {
@@ -159,9 +166,23 @@ var TableEditable = function() {
 					}, {
 						data : "pro_intro"
 					}, {
-						data : "pro_pur_price"
+						data : "pro_pur_price",
+						render: function (data, type, row, meta) {
+							if(manager.showPrice){
+								return '<span>'+data+'</span>';
+							}else{
+								return '<span></span>';
+							}
+	                    }
 					}, {
-						data : "pro_assist_price"
+						data : "pro_assist_price",
+						render: function (data, type, row, meta) {
+							if(manager.showPrice){
+								return '<span>'+data+'</span>';
+							}else{
+								return '<span></span>';
+							}
+	                    }
 					}, {
 						data : "pro_selling_price"
 					}, {
@@ -302,6 +323,7 @@ function retrieveData(source, data, callback) {
 		success : function(result) {
 			result = eval("(" + result + ")");
 			result = result.DATA;
+			console.log(result);
 			//封装返回数据
             var returnData = {};
             returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
@@ -322,6 +344,7 @@ var table_row = {
 };
 
 var manager = {
+	showPrice : false,
 	showUpdate : false,
 	showDel : false,
 	fuzzySearch : false,
@@ -707,6 +730,9 @@ var AuthInit = function() {
 		//删除权限
 		if($.inArray("9", authArray)!=-1){
 			manager.showDel = true;
+		}
+		if($.session.get('role_id')=='admin'||$.session.get('role_id')=='财务'){
+			manager.showPrice = true;
 		}
 	}
 

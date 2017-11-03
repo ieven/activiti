@@ -49,4 +49,8 @@ public interface LoginService {
     public List<User> getUserListByStatus(Map<String, String> input);
 
     public String getUserStatusCount(Map<String, String> input);
+
+    public List<User> getManagerUsers(Map<String, String> input);
+
+    public String getManagerUsersCount(Map<String, String> input);
 }

@@ -217,7 +217,10 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id} ORDER BY TO_DAYS(record_time) DESC
+			<if test="search_key == null">
+				and project.menu_id=#{menu_id}
+			</if>
+			and project.menu_id=meun.menu_id ORDER BY TO_DAYS(record_time) DESC
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
@@ -249,7 +252,10 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id AND project.menu_id=#{menu_id}
+			<if test="search_key == null">
+				and project.menu_id=#{menu_id}
+			</if>
+			and project.menu_id=meun.menu_id
 		</where>
 	</select>
 

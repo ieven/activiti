@@ -97,4 +97,31 @@ public class MBusCusControler extends AbstractControler {
         service.updateProject(input);
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
     }
+
+    @POST
+    @Path("/log")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response getProjectLog(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        List libs = service.getProjectLog(input);
+        String records = service.getProjectLogCount(input);
+        Map result = new HashMap<>();
+        result.put("iTotalRecords", records);
+        result.put("iTotalDisplayRecords", records);
+        result.put("result", libs);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
+    }
+
+    @POST
+    @Path("/add_log")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response addProjectLog(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        service.addProjectLog(input);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+    }
 }

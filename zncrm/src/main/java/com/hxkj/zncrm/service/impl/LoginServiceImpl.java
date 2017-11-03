@@ -221,4 +221,16 @@ public class LoginServiceImpl implements LoginService {
         return userMapper.getUserStatusCount(input);
     }
 
+    @Override
+    public List<User> getManagerUsers(Map<String, String> input) {
+
+        return userMapper.getManagerUsers(input);
+    }
+
+    @Override
+    public String getManagerUsersCount(Map<String, String> input) {
+
+        return userMapper.getManagerUsersCount(input);
+    }
+
 }

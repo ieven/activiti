@@ -98,7 +98,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<label class="checkbox"> <input type="checkbox"
 				name="remember" value="1" /> Remember me
 			</label>
-			<button onclick="login()" class="btn green-haze pull-right">
+			<button id="login_button" onclick="login()" class="btn green-haze pull-right">
 				登陆 <i class="m-icon-swapright m-icon-white"></i>
 			</button>
 		</div>
@@ -151,6 +151,12 @@ License: You must have a valid license purchased only from themeforest(the above
 			Layout.init(); // init current layout
 			Login.init();
 		});
+		
+		$(document).keyup(function(event){
+			  if(event.keyCode ==13){
+			    $("#login_button").trigger("click");
+			  }
+			});
 
 		function login() {
 			var username = $('#username').val();

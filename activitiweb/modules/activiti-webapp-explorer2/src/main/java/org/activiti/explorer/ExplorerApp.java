@@ -23,7 +23,10 @@ import org.activiti.Pusher;
 import org.activiti.crystalball.simulator.SimulationDebugger;
 import org.activiti.crystalball.simulator.SimulationEvent;
 import org.activiti.engine.ActivitiException;
+import org.activiti.engine.FormService;
+import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.impl.identity.Authentication;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.explorer.identity.LoggedInUser;
 import org.activiti.explorer.navigation.UriFragment;
 import org.activiti.explorer.ui.ComponentFactory;
@@ -40,6 +43,7 @@ import org.activiti.workflow.simple.converter.json.SimpleWorkflowJsonConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONObject;
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 
@@ -222,7 +226,11 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
         // Set current application object as thread-local to make it easy accessible
         current.set(this);
         String username = "";
-        if (request.getRequestURI().indexOf("zncrmpush") > -1) {
+        if (request.getRequestURI().indexOf("zncrm_work_flow") > -1) {
+            startWorkflow(request, response);
+            return;
+        }
+        else if (request.getRequestURI().indexOf("zncrmpush") > -1) {
             try {
                 BufferedReader br = request.getReader();
                 String str, wholeStr = "";
@@ -230,7 +238,6 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
                     wholeStr += str;
                 }
                 Map<String, String> input = JSONHelper.toObject(wholeStr, Map.class);
-                System.out.println(input);
             }
             catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -291,6 +298,43 @@ public class ExplorerApp extends Application implements HttpServletRequestListen
 
         // Callback to the login handler
         loginHandler.onRequestStart(request, response);
+    }
+
+    private void startWorkflow(HttpServletRequest request, HttpServletResponse response) {
+
+        String json = null;
+        try {
+            // 获取上送参数
+            BufferedReader br = request.getReader();
+            String str, wholeStr = "";
+            while ((str = br.readLine()) != null) {
+                wholeStr += str;
+            }
+            json = wholeStr;
+            Map input = JSONHelper.toObject(json, Map.class);
+            JSONObject formData = (JSONObject) input.get("form_data");
+            Map<String, String> map = JSONHelper.toObject(formData.toJSONString(), Map.class);
+            // 获取已经部署流程列表
+            List<ProcessDefinition> list = ProcessEngines.getDefaultProcessEngine().getRepositoryService()// 与流程定义和部署对象相关的Service
+                    .createProcessDefinitionQuery().list();
+            // 遍历所有已经部署的流程查找出符合条件的
+            String processDefinitionId = "";
+            for (ProcessDefinition definition : list) {
+                String temp = definition.getId().split(":")[0];
+                if (temp.equals(input.get("workflow_name"))) {
+                    processDefinitionId = definition.getId();
+                    break;
+                }
+            }
+            FormService formService = ProcessEngines.getDefaultProcessEngine().getFormService();
+            ProcessEngines.getDefaultProcessEngine().getIdentityService().setAuthenticatedUserId("admin");
+            formService.submitStartFormData(processDefinitionId, map);
+
+        }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override

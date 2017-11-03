@@ -73,4 +73,28 @@ public class MUserControler extends AbstractControler {
             return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.getMessage())).build();
         }
     }
+
+    @POST
+    @Path("/get_manager_users")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response get_manager_users(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            if (input.isEmpty()) {
+                return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, "缺少查询条件")).build();
+            }
+            List libs = loginService.getManagerUsers(input);
+            String records = loginService.getManagerUsersCount(input);
+            Map result = new HashMap<>();
+            result.put("iTotalRecords", records);
+            result.put("iTotalDisplayRecords", records);
+            result.put("result", libs);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
+        }
+        catch (Exception e) {
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.getMessage())).build();
+        }
+    }
 }

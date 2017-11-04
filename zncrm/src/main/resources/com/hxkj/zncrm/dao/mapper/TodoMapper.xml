@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxkj.zncrm.dao.mapper.TodoMapper">
+
+	<select id="getTodoList" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.TodoEntity">
+		SELECT
+		*
+		FROM todo
+		where status!='-1' and executor = #{executor}
+		LIMIT #{start_index}, #{page_size};
+	</select>
+
+	<select id="getTodoCount" parameterType="Map" resultType="String">
+		SELECT
+		count(*)
+		FROM todo
+		where status!='-1' and executor = #{executor};
+	</select>
+	
+	<insert id="addTodo">
+		insert todo
+		<set>
+			<if test="initiator!= null">initiator=#{initiator},</if>
+			<if test="executor!= null">executor=#{executor},</if>
+			<if test="job_content!= null">job_content=#{job_content},</if>
+			<if test="cur_status!= null">cur_status=#{cur_status},</if>
+		</set>
+
+		<selectKey keyProperty="id" resultType="long">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="getTodoById" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.TodoEntity">
+		SELECT * FROM todo WHERE id=#{id} and status!='-1';
+	</select>
+	
+	<update id="updateTodoById">
+		UPDATE todo 
+		<set>
+			<if test="initiator!= null">initiator=#{initiator},</if>
+			<if test="executor!= null">executor=#{executor},</if>
+			<if test="job_content!= null">job_content=#{job_content},</if>
+			<if test="cur_status!= null">cur_status=#{cur_status},</if>
+			<if test="note!= null">note=#{note},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<update id="delTodoById">
+		UPDATE todo set status = '-1' where id=#{id};
+	</update>
+
+</mapper>

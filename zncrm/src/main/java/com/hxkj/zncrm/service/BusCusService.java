@@ -34,4 +34,8 @@ public interface BusCusService {
     public List<ProjectEntity> searchProjectList(Map<String, String> input);
 
     public String searchProjectListCount(Map<String, String> input);
+
+    public List<ProjectEntity> searchWorking_list(Map<String, String> input);
+
+    public String searchWorking_listCount(Map<String, String> input);
 }

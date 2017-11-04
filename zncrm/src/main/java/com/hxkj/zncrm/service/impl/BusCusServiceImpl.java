@@ -102,4 +102,16 @@ public class BusCusServiceImpl implements BusCusService {
         return mapper.searchProjectListCount(input);
     }
 
+    @Override
+    public List<ProjectEntity> searchWorking_list(Map<String, String> input) {
+
+        return mapper.searchWorking_list(input);
+    }
+
+    @Override
+    public String searchWorking_listCount(Map<String, String> input) {
+
+        return mapper.searchWorking_listCount(input);
+    }
+
 }

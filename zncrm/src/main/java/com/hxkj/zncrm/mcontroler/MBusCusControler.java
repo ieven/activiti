@@ -77,6 +77,17 @@ public class MBusCusControler extends AbstractControler {
     }
 
     @POST
+    @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response getProject(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        ProjectEntity result = service.getProject(input);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
+    }
+
+    @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -123,5 +134,21 @@ public class MBusCusControler extends AbstractControler {
         Map<String, String> input = JSONHelper.toObject(json, Map.class);
         service.addProjectLog(input);
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
+    }
+
+    @POST
+    @Path("/working_list")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response getWorkingList(String json) {
+
+        Map<String, String> input = JSONHelper.toObject(json, Map.class);
+        List libs = service.searchWorking_list(input);
+        String records = service.searchWorking_listCount(input);
+        Map result = new HashMap<>();
+        result.put("iTotalRecords", records);
+        result.put("iTotalDisplayRecords", records);
+        result.put("result", libs);
+        return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", result)).build();
     }
 }

@@ -2,6 +2,70 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.BusCusMapper">
 
+	<select id="searchWorking_list" parameterType="Map"
+		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
+		SELECT
+		id,meun.menu_name,cus_name,cur_status,cus_phone,con_add,receptionist,reception_time
+		FROM project,meun
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cur_status like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or con_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR project.cur_status = '绘图' OR project.cur_status = '交底' OR project.cur_status = '基础施工' OR project.cur_status = '验收' OR project.cur_status = '安装' OR project.cur_status = '收尾款')  ORDER BY TO_DAYS(record_time) DESC
+		</where>
+		LIMIT #{start_index}, #{page_size};
+	</select>
+	
+	<select id="searchWorking_listCount" parameterType="Map" resultType="String">
+		SELECT
+		count(*)
+		FROM project,meun
+		<where>
+			<if test="search_key != null">
+				(
+				<if test="search_key != null">
+					cus_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cur_status like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or cus_phone like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or con_add like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or receptionist like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or reception_time like '%${search_key}%'
+				</if>
+				)
+			</if>
+			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR project.cur_status = '绘图' OR project.cur_status = '交底' OR project.cur_status = '基础施工' OR project.cur_status = '验收' OR project.cur_status = '安装' OR project.cur_status = '收尾款')
+		</where>
+	</select>
+
 	<select id="getBusCusMenuList" parameterType="Map"
 		resultType="com.hxkj.zncrm.po.BusCusMenuListEntity">
 		SELECT menu_id,menu_name FROM meun WHERE status!='-1' AND parent_id = '18';
@@ -169,7 +233,7 @@
 			<if test="info!= null">info=#{info},</if>
 			<if test="recorder!= null">recorder=#{recorder},</if>
 			<if test="record_time!= null">record_time=#{record_time},</if>
-			
+			<if test="project_status!= null">project_status=#{project_status},</if>
 		</set>
 
 		<selectKey keyProperty="id" resultType="long">
@@ -184,6 +248,7 @@
 			<if test="project_id!= null">project_id=#{project_id},</if>
 			<if test="info!= null">info=#{info},</if>
 			<if test="recorder!= null">recorder=#{recorder},</if>
+			<if test="project_status!= null">project_status=#{project_status},</if>
 			<!-- <if test="record_time!= null">record_time=#{record_time},</if> -->
 		</set>
 		where id=#{id}

@@ -107,6 +107,23 @@ public class UserControler extends AbstractControler {
     }
 
     @POST
+    @Path("/user/all")
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    public Response getUserAll(String json) {
+
+        try {
+            Map<String, String> input = JSONHelper.toObject(json, Map.class);
+            List libs = loginService.getUserAll(input);
+            return Response.ok().entity(createResponeJson(ResponseConstant.OK, "", libs)).build();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return Response.ok().entity(createResponeJson(ResponseConstant.EXCEPTION, e.toString())).build();
+        }
+    }
+
+    @POST
     @Path("/user/get")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")

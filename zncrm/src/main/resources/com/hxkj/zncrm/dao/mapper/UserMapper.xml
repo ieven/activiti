@@ -3,6 +3,14 @@
 <mapper namespace="com.hxkj.zncrm.dao.mapper.UserMapper">
 	<!-- Create a new User -->
 	
+	<select id="getUserAll" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
+		SELECT
+		ID_ as username,LAST_ AS
+		real_name
+		FROM
+		act_id_user where status!='-1';
+	</select>
+	
 	<select id="getManagerUsers" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
 		SELECT
 		ID_ as username,PWD_ as password,LAST_ AS
@@ -64,7 +72,7 @@
 	</insert>
 	
 	<delete id="delRole">
-		DELETE FROM act_id_group WHERE ID_=#{role_id};
+		DELETE FROM act_id_group WHERE ID_=#{role_id} and ID_!='admin';
 	</delete>
 	
 	<insert id="addUser">
@@ -94,7 +102,7 @@
 
 	<select id="login" parameterType="Map" resultType="com.hxkj.zncrm.po.User">
 		SELECT ID_ as
-		username,PWD_ as password,PICTURE_ID_ as picId,LAST_ as real_name,role_id from
+		username,PWD_ as password,PICTURE_ID_ as picId,LAST_ as real_name,role_id,job from
 		act_id_user WHERE
 		ID_ = #{username} and PWD_ = #{password} and status
 		!= '-1';
@@ -190,7 +198,7 @@
 			<if test="role_id != null">TYPE_='assignment',</if>
 			<if test="authorities != null">authorities=#{authorities},</if>
 		</set>
-		where ID_=#{role_id};
+		where ID_=#{role_id} and ID_!='admin';
 	</update>
 
 	<insert id="addRoleMenu" parameterType="com.hxkj.zncrm.dao.domain.GroupMenuEntity">

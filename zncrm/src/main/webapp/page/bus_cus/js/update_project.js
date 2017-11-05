@@ -81,7 +81,15 @@ var TableEditable = function() {
 						sb.append("<label class=\"checkbox-inline\"><div class=\"form-group\"><label class=\"control-label col-md-5\"> <input type=\"checkbox\" id=\"others\" value=\"其他\" checked>其他</label><div class=\"col-md-7\"><input type=\"text\" id=\"others_text\" class=\"form-control\" value=\""+result[key]+"\"></div></div></label>");
 						appended=true;
 					}
-					$("#" + key).val(result[key]);
+					if(key=='note'){
+						var role_id = $.session.get('role_id');
+						var real_name = $.session.get('real_name');
+						if(role_id=='admin'||real_name==result[recorder]){
+							$("#" + key).val(result[key]);
+						}
+					}else{
+						$("#" + key).val(result[key]);
+					}
 				}
 				if(!appended){
 					sb.append("<label class=\"checkbox-inline\"><div class=\"form-group\"><label class=\"control-label col-md-5\"> <input type=\"checkbox\" id=\"others\" value=\"其他\">其他</label><div class=\"col-md-7\"><input type=\"text\" id=\"others_text\" class=\"form-control\" ></div></div></label>");

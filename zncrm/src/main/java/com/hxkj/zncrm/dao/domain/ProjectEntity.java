@@ -70,6 +70,29 @@ public class ProjectEntity {
     private String service_time;
     private String menu_name;
 
+    private String linkman_phone2;
+    private String linkman_name2;
+
+    public String getLinkman_phone2() {
+
+        return linkman_phone2;
+    }
+
+    public void setLinkman_phone2(String linkman_phone2) {
+
+        this.linkman_phone2 = linkman_phone2;
+    }
+
+    public String getLinkman_name2() {
+
+        return linkman_name2;
+    }
+
+    public void setLinkman_name2(String linkman_name2) {
+
+        this.linkman_name2 = linkman_name2;
+    }
+
     public String getMenu_name() {
 
         return menu_name;

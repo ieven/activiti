@@ -84,9 +84,26 @@ var TableEditable = function() {
 					}, {
 						data : "cur_status"
 					}, {
-						data : "cus_phone"
+						data : "cus_phone",
+						render: function (data, type, row, meta) {
+							var role_id = $.session.get('role_id');
+							var real_name = $.session.get('real_name');
+							if(row.cur_status=='潜在'){
+								if(role_id=='admin'||real_name==row.recorder){
+									return '<span>'+data+'</span>';
+								}else{
+									var dh=data.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+									return '<span>'+dh+'</span>';
+								}
+							}else{
+								return '<span>'+data+'</span>';
+							}
+	                    }
 					}, {
-						data : "con_add"
+						data : "con_add",
+						render: function (data, type, row, meta) {
+							return '<span>'+data+row.family_info+'</span>';
+	                    }
 					}, {
 						data : "receptionist"
 					}, {

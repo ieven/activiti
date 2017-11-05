@@ -150,10 +150,17 @@ var TableEditable = function() {
 						data : "pro_name_2"
 					}, {
 						data : "pro_out_name",
+						createdCell: function (td, cellData, rowData, row, col) {
+							if(manager.showPrice){
+							}else{
+								$(td).css('display','none');
+							}
+						},
 						render: function (data, type, row, meta) {
 							if(manager.showPrice){
 								return '<span>'+data+'</span>';
 							}else{
+								$("#pro_out_name_title").css('display','none');
 								return '<span></span>';
 							}
 	                    }
@@ -167,20 +174,35 @@ var TableEditable = function() {
 						data : "pro_intro"
 					}, {
 						data : "pro_pur_price",
+						createdCell: function (td, cellData, rowData, row, col) {
+							if(manager.showPrice){
+							}else{
+								$(td).css('display','none');
+							}
+						},
 						render: function (data, type, row, meta) {
 							if(manager.showPrice){
 								return '<span>'+data+'</span>';
 							}else{
-								return '<span></span>';
+								$("#pro_pur_price_title").css('display','none');
+								$(".pro_pur_price_class").css('display','none');
+								return '<span style="display: none"></span>';
 							}
 	                    }
 					}, {
 						data : "pro_assist_price",
+						createdCell: function (td, cellData, rowData, row, col) {
+							if(manager.showPrice){
+							}else{
+								$(td).css('display','none');
+							}
+						},
 						render: function (data, type, row, meta) {
 							if(manager.showPrice){
 								return '<span>'+data+'</span>';
 							}else{
-								return '<span></span>';
+								$("#pro_assist_price_title").css('display','none');
+								return '<span style="display: none"></span>';
 							}
 	                    }
 					}, {
@@ -323,7 +345,6 @@ function retrieveData(source, data, callback) {
 		success : function(result) {
 			result = eval("(" + result + ")");
 			result = result.DATA;
-			console.log(result);
 			//封装返回数据
             var returnData = {};
             returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回

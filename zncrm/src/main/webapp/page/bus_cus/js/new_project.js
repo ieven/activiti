@@ -66,7 +66,13 @@ $('#save_btn').click(function(e) {
 	    	param[msg[j].id]=msg[j].value;
 	    }
     }
-	
+	//获取接待人员
+	var names = "";
+    $("#receptionist :checked").each(function(i,item){
+        names = names+$(item).attr("value")+";";
+    });
+    param.receptionist = names;
+    
 	AjaxHelper.call({
 		url : "/zncrm/rest/bus_cus/add",
 		data : JSON.stringify(param),
@@ -84,3 +90,43 @@ $('#save_btn').click(function(e) {
 		}
 	});
 });
+
+var SelectContent = function() {
+	
+	var handleSelect = function() {
+		var param = {};
+		AjaxHelper.call({
+			url : "/zncrm/rest/user/all",
+			data : JSON.stringify(param),
+			async : false,
+			cache : false,
+			type : "POST",
+			contentType : 'application/json; charset=UTF-8',
+			dataType : "html",
+			success : function(result) {
+				result = eval("(" + result + ")");
+				result = result.DATA;
+				//封装返回数据
+				var sb=new StringBuffer();
+				for(var key in result){
+	    			sb.append('<option value="'+result[key].real_name+'">'+result[key].real_name+'</option>');
+	    		}
+				$("#receptionist").html(sb.toString());
+			},
+			error : function(result) {
+				alert("服务器异常");
+			}
+		});
+		
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleSelect();
+		}
+
+	};
+
+}();

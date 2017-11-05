@@ -214,7 +214,24 @@ var Project = function() {
 				result = eval("(" + result + ")");
 				result = result.DATA;
 				for ( var key in result) {
-					$("#" + key).text(result[key]);
+					if(key=='cus_phone'){
+						var role_id = $.session.get('role_id');
+						var real_name = $.session.get('real_name');
+						if(role_id=='admin'||real_name==result['recorder']){
+							$("#" + key).text(result[key]);
+						}else{
+							var dh=result['cus_phone'].replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+							$("#" + key).text(dh);
+						}
+					}else if(key=='note'){
+						var role_id = $.session.get('role_id');
+						var real_name = $.session.get('real_name');
+						if(role_id=='admin'||real_name==result['recorder']){
+							$("#" + key).text(result[key]);
+						}
+					}else{
+						$("#" + key).text(result[key]);
+					}
 				}
 				var recorder = result.recorder;
 				var role_id = $.session.get('role_id');

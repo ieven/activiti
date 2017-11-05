@@ -233,4 +233,10 @@ public class LoginServiceImpl implements LoginService {
         return userMapper.getManagerUsersCount(input);
     }
 
+    @Override
+    public List<User> getUserAll(Map<String, String> input) {
+
+        return userMapper.getUserAll(input);
+    }
+
 }

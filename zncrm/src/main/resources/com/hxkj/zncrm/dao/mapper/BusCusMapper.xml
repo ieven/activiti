@@ -2,6 +2,18 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hxkj.zncrm.dao.mapper.BusCusMapper">
 
+	<select id="isExist" parameterType="Map" resultType="String">
+		SELECT COUNT(*) FROM project
+		<where>
+			<if test="cus_qq != null and cus_qq !=''">
+				cus_qq LIKE '%${cus_qq}%'
+			</if>
+			<if test="cus_phone != null and cus_phone !=''">
+				or cus_phone LIKE '%${cus_phone}%'
+			</if>
+		</where>
+	</select>
+
 	<select id="searchWorking_list" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
 		SELECT
@@ -30,12 +42,17 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR project.cur_status = '绘图' OR project.cur_status = '交底' OR project.cur_status = '基础施工' OR project.cur_status = '验收' OR project.cur_status = '安装' OR project.cur_status = '收尾款')  ORDER BY TO_DAYS(record_time) DESC
+			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR
+			project.cur_status = '绘图' OR project.cur_status = '交底' OR
+			project.cur_status = '基础施工' OR project.cur_status = '验收' OR
+			project.cur_status = '安装' OR project.cur_status = '收尾款') ORDER BY
+			TO_DAYS(record_time) DESC
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
-	
-	<select id="searchWorking_listCount" parameterType="Map" resultType="String">
+
+	<select id="searchWorking_listCount" parameterType="Map"
+		resultType="String">
 		SELECT
 		count(*)
 		FROM project,meun
@@ -62,15 +79,19 @@
 				</if>
 				)
 			</if>
-			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR project.cur_status = '绘图' OR project.cur_status = '交底' OR project.cur_status = '基础施工' OR project.cur_status = '验收' OR project.cur_status = '安装' OR project.cur_status = '收尾款')
+			and project.menu_id=meun.menu_id and (project.cur_status = '成交' OR
+			project.cur_status = '绘图' OR project.cur_status = '交底' OR
+			project.cur_status = '基础施工' OR project.cur_status = '验收' OR
+			project.cur_status = '安装' OR project.cur_status = '收尾款')
 		</where>
 	</select>
 
 	<select id="getBusCusMenuList" parameterType="Map"
 		resultType="com.hxkj.zncrm.po.BusCusMenuListEntity">
-		SELECT menu_id,menu_name FROM meun WHERE status!='-1' AND parent_id = '18';
+		SELECT menu_id,menu_name FROM meun WHERE status!='-1' AND
+		parent_id = '18';
 	</select>
-	
+
 	<select id="searchProjectList" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProjectEntity">
 		SELECT
@@ -103,8 +124,9 @@
 		</where>
 		LIMIT #{start_index}, #{page_size};
 	</select>
-	
-	<select id="searchProjectListCount" parameterType="Map" resultType="String">
+
+	<select id="searchProjectListCount" parameterType="Map"
+		resultType="String">
 		SELECT
 		count(*)
 		FROM project,meun
@@ -144,19 +166,22 @@
 
 	<select id="getProjectLog" parameterType="Map"
 		resultType="com.hxkj.zncrm.dao.domain.ProjectRecordEntity">
-		SELECT * from project_record WHERE project_id=#{project_id} and status='1'
+		SELECT * from project_record WHERE project_id=#{project_id}
+		and status='1'
 		ORDER BY record_time DESC
-		LIMIT #{start_index}, #{page_size};
+		LIMIT #{start_index},
+		#{page_size};
 	</select>
 
 	<select id="getProjectLogCount" parameterType="Map" resultType="String">
-		SELECT count(*) from project_record WHERE project_id=#{project_id} and status='1';
+		SELECT count(*) from project_record WHERE project_id=#{project_id} and
+		status='1';
 	</select>
-	
+
 	<update id="delProjectLog">
 		UPDATE project_record set status='-1' where id=#{id}
 	</update>
-	
+
 	<update id="updateProject">
 		UPDATE project
 		<set>
@@ -228,7 +253,7 @@
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<insert id="addProjectLog">
 		insert project_record
 		<set>
@@ -245,7 +270,7 @@
 			LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<update id="updateProjectLog">
 		UPDATE project_record
 		<set>

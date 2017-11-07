@@ -38,4 +38,6 @@ public interface BusCusMapper {
     public List<ProjectEntity> searchWorking_list(Map<String, String> input);
 
     public String searchWorking_listCount(Map<String, String> input);
+
+    public String isExist(Map<String, String> input);
 }

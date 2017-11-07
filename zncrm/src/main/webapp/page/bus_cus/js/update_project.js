@@ -88,6 +88,7 @@ var TableEditable = function() {
 							$("#" + key).val(result[key]);
 						}
 					}else{
+						
 						$("#" + key).val(result[key]);
 					}
 				}
@@ -95,6 +96,7 @@ var TableEditable = function() {
 					sb.append("<label class=\"checkbox-inline\"><div class=\"form-group\"><label class=\"control-label col-md-5\"> <input type=\"checkbox\" id=\"others\" value=\"其他\">其他</label><div class=\"col-md-7\"><input type=\"text\" id=\"others_text\" class=\"form-control\" ></div></div></label>");
 				}
 				$("#checkbox-list").html(sb.toString());
+				$("#menu_name").find("option:contains("+result[key]+")").attr("selected",true);
 			},
 			error : function(result) {
 				alert("服务器异常");
@@ -124,7 +126,7 @@ $('#save_btn').click(function(e) {
 	for (var i = 0, iLen = jiben.length; i < iLen; i++) {
     	param[jiben[i].id]=jiben[i].value;
     }
-	param.menu_id = $.session.get('menu_id');
+	
 	var status=$("#cur_status").find("option:selected").text();
 	param.cur_status = status;
 	//组装客户需求信息
@@ -147,6 +149,10 @@ $('#save_btn').click(function(e) {
 	    }
     }
 	param.id=$.session.get('project_id');
+	//组装次级菜单类别
+	param.menu_id = $("#menu_name").val();
+	param.menu_name = $("#menu_name").find("option:selected").text();
+	console.log(param);
 	AjaxHelper.call({
 		url : "/zncrm/rest/bus_cus/update",
 		data : JSON.stringify(param),
@@ -157,6 +163,9 @@ $('#save_btn').click(function(e) {
 		dataType : "html",
 		success : function(result) {
 			alert("更新成功");
+			window.opener=null;
+			window.open('','_self');
+			window.close();
 			location.reload();
 		},
 		error : function(result) {
@@ -164,3 +173,44 @@ $('#save_btn').click(function(e) {
 		}
 	});
 });
+
+
+var SelectContent = function() {
+	
+	var handleSelect = function() {
+		var param = {};
+		AjaxHelper.call({
+			url : "/zncrm/rest/m/bus_cus/menu_list",
+			data : JSON.stringify(param),
+			async : false,
+			cache : false,
+			type : "POST",
+			contentType : 'application/json; charset=UTF-8',
+			dataType : "html",
+			success : function(result) {
+				result = eval("(" + result + ")");
+				result = result.DATA;
+				//封装返回数据
+				var sb=new StringBuffer();
+				for(var key in result){
+	    			sb.append('<option value="'+result[key].menu_id+'">'+result[key].menu_name+'</option>');
+	    		}
+				$("#menu_name").html(sb.toString());
+			},
+			error : function(result) {
+				alert("服务器异常");
+			}
+		});
+		
+	}
+
+	return {
+
+		// main function to initiate the module
+		init : function() {
+			handleSelect();
+		}
+
+	};
+
+}();

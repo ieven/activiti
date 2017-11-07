@@ -49,7 +49,10 @@ public class BusCusControler extends AbstractControler {
     public Response addProject(String json) {
 
         Map<String, String> input = JSONHelper.toObject(json, Map.class);
-        service.addProject(input);
+        long num = service.addProject(input);
+        if (num == -1) {
+            return Response.ok().entity(createResponeJson(ResponseConstant.LOGIN_FAIL, "客户已经存在")).build();
+        }
         return Response.ok().entity(createResponeJson(ResponseConstant.OK, "")).build();
     }
 

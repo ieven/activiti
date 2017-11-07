@@ -215,14 +215,19 @@ var Project = function() {
 				result = result.DATA;
 				for ( var key in result) {
 					if(key=='cus_phone'){
-						var role_id = $.session.get('role_id');
-						var real_name = $.session.get('real_name');
-						if(role_id=='admin'||real_name==result['recorder']){
-							$("#" + key).text(result[key]);
+						if(result['cur_status']=='潜在'){
+							var role_id = $.session.get('role_id');
+							var real_name = $.session.get('real_name');
+							if(role_id=='admin'||real_name==result['recorder']){
+								$("#" + key).text(result[key]);
+							}else{
+								var dh=result['cus_phone'].replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+								$("#" + key).text(dh);
+							}
 						}else{
-							var dh=result['cus_phone'].replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-							$("#" + key).text(dh);
+							$("#" + key).text(result[key]);
 						}
+						
 					}else if(key=='note'){
 						var role_id = $.session.get('role_id');
 						var real_name = $.session.get('real_name');

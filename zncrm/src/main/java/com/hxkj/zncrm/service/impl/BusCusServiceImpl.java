@@ -34,6 +34,13 @@ public class BusCusServiceImpl implements BusCusService {
     @Override
     public long addProject(Map<String, String> input) {
 
+        // 首先判断客户是否存在
+        if (!StringHelper.isEmpty(input.get("cus_qq")) || !StringHelper.isEmpty(input.get("cus_phone"))) {
+            String num = mapper.isExist(input);
+            if (!num.equals("0")) {
+                return -1;
+            }
+        }
         // 特殊处理一下客户需求
         String xuqiu = input.get("cus_require");
         if (!StringHelper.isEmpty(xuqiu)) {

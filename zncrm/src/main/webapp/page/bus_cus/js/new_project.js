@@ -82,8 +82,13 @@ $('#save_btn').click(function(e) {
 		contentType : 'application/json; charset=UTF-8',
 		dataType : "html",
 		success : function(result) {
-			alert("创建成功");
-			location.reload();
+			result = eval("(" + result + ")");
+			if(result.CODE == "-1"){
+				alert(result.MSG);
+			}else{
+				alert("创建成功");
+				location.reload();
+			}
 		},
 		error : function(result) {
 			alert("服务器异常");

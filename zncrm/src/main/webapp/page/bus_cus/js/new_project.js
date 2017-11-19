@@ -87,7 +87,7 @@ $('#save_btn').click(function(e) {
 				alert(result.MSG);
 			}else{
 				alert("创建成功");
-				location.reload();
+				location.href = "/zncrm/page/bus_cus/bus_cus.html";
 			}
 		},
 		error : function(result) {

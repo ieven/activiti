@@ -306,6 +306,8 @@ $('#save_button').click(function (e) {
     for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
     	param[jqInputs[i].name]=jqInputs[i].value;
     }
+    //拼接那五个输入框
+    
     param.pro_name_id = $.session.get('menu_id');
     AjaxHelper.call({
 		url : "/zncrm/rest/pro_lib/add",

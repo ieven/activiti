@@ -78,7 +78,19 @@
 			<if test="search_key != null">
 				(
 				<if test="search_key != null">
-					pro_out_name like '%${search_key}%'
+					pro_name_2 like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_out_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_place like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_unit like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_pur_price like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or pro_intro like '%${search_key}%'
@@ -112,7 +124,19 @@
 			<if test="search_key != null">
 				(
 				<if test="search_key != null">
-					pro_out_name like '%${search_key}%'
+					pro_name_2 like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_out_name like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_place like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_unit like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or pro_pur_price like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
 					or pro_intro like '%${search_key}%'

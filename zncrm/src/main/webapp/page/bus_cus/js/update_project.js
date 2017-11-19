@@ -96,7 +96,7 @@ var TableEditable = function() {
 					sb.append("<label class=\"checkbox-inline\"><div class=\"form-group\"><label class=\"control-label col-md-5\"> <input type=\"checkbox\" id=\"others\" value=\"其他\">其他</label><div class=\"col-md-7\"><input type=\"text\" id=\"others_text\" class=\"form-control\" ></div></div></label>");
 				}
 				$("#checkbox-list").html(sb.toString());
-				$("#menu_name").find("option:contains("+result[key]+")").attr("selected",true);
+				$("#menu_name").find("option:contains("+result["menu_name"]+")").attr("selected",true);
 			},
 			error : function(result) {
 				alert("服务器异常");
@@ -152,7 +152,9 @@ $('#save_btn').click(function(e) {
 	//组装次级菜单类别
 	param.menu_id = $("#menu_name").val();
 	param.menu_name = $("#menu_name").find("option:selected").text();
-	console.log(param);
+	//备注信息
+	param.note = $("#note").val();
+	
 	AjaxHelper.call({
 		url : "/zncrm/rest/bus_cus/update",
 		data : JSON.stringify(param),

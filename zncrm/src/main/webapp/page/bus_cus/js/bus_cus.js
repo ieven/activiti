@@ -219,6 +219,7 @@ var manager = {
 		if (manager.fuzzySearch) {
 			param.search_key = $("#search_key").val();
 		}
+		param.cur_status = $("#cur_status").val();
 
 		return param;
 	}

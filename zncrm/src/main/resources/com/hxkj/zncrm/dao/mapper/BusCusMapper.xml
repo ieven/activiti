@@ -295,9 +295,6 @@
 					cus_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or cur_status like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
 					or cus_phone like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
@@ -309,7 +306,16 @@
 				<if test="search_key != null">
 					or reception_time like '%${search_key}%'
 				</if>
+				<if test="search_key != null">
+					or recorder like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or family_info like '%${search_key}%'
+				</if>
 				)
+			</if>
+			<if test="cur_status != null and cur_status !=''">
+				and cur_status=#{cur_status}
 			</if>
 			<if test="search_key == null">
 				and project.menu_id=#{menu_id}
@@ -330,9 +336,6 @@
 					cus_name like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
-					or cur_status like '%${search_key}%'
-				</if>
-				<if test="search_key != null">
 					or cus_phone like '%${search_key}%'
 				</if>
 				<if test="search_key != null">
@@ -344,7 +347,16 @@
 				<if test="search_key != null">
 					or reception_time like '%${search_key}%'
 				</if>
+				<if test="search_key != null">
+					or recorder like '%${search_key}%'
+				</if>
+				<if test="search_key != null">
+					or family_info like '%${search_key}%'
+				</if>
 				)
+			</if>
+			<if test="cur_status != null and cur_status !=''">
+				and cur_status=#{cur_status}
 			</if>
 			<if test="search_key == null">
 				and project.menu_id=#{menu_id}

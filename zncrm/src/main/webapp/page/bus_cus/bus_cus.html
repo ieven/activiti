@@ -107,15 +107,28 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="row">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<div class="btn-group" id="add_bus_cus">
 											<a class="btn green" id="new_project" href="new_project.html">
 												添加 <i class="fa fa-plus"></i>
 											</a>
 										</div>
 									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-4">
+									<div class="col-md-5">
+											<div class="form-group pull-right">
+												<label class="control-label col-md-4">目前状态</label>
+												<div class="col-md-8">
+													<select id="cur_status" class="form-control">
+														<option value=""></option>
+														<option value="潜在">潜在</option>
+														<option value="成交">成交</option>
+														<option value="完工">完工</option>
+														<option value="闲置">闲置</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									<div class="col-md-3">
 										<div class="table-group-actions pull-right">
 											<input type="text" placeholder="模糊查询" id="search_key"
 												class="form-control input-small input-inline">

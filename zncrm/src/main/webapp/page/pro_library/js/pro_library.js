@@ -49,6 +49,14 @@ var TableEditable = function() {
 						+ aData.is_hot + '" name="is_hot">');
 			}
 			$.session.set('pro_id',aData.pro_id);
+			//将五个说明分开显示
+			var pro_intro_list = aData.pro_intro.split(";");
+			for(var key in pro_intro_list){
+				var temp = pro_intro_list[key].split(":");
+				var temp_key = parseInt(key) +1;
+				$("#pro_intro"+temp_key+"_key").val(temp[0]);
+				$("#pro_intro"+temp_key+"_value").val(temp[1]);
+			}
 		}
 
 		var table = $('#sample_editable_1');
@@ -278,6 +286,20 @@ $('#edit_save_button').click(function restoreRow(e) {
     	}
     }
     param.pro_id = $.session.get('pro_id');
+    //拼接五个说明
+    var pro_intro1_key = $('#pro_intro1_key').val();
+    var pro_intro1_value = $('#pro_intro1_value').val();
+    var pro_intro2_key = $('#pro_intro2_key').val();
+    var pro_intro2_value = $('#pro_intro2_value').val();
+    var pro_intro3_key = $('#pro_intro3_key').val();
+    var pro_intro3_value = $('#pro_intro3_value').val();
+    var pro_intro4_key = $('#pro_intro4_key').val();
+    var pro_intro4_value = $('#pro_intro4_value').val();
+    var pro_intro5_key = $('#pro_intro5_key').val();
+    var pro_intro5_value = $('#pro_intro5_value').val();
+    param.pro_intro = pro_intro1_key+":"+pro_intro1_value+";"+pro_intro2_key+":"+pro_intro2_value+";"+pro_intro3_key+":"+pro_intro3_value+";"+
+    				  pro_intro4_key+":"+pro_intro4_value+";"+pro_intro5_key+":"+pro_intro5_value;
+    
 	AjaxHelper.call({
 		url : "/zncrm/rest/pro_lib",
 		data : JSON.stringify(param),
@@ -307,6 +329,18 @@ $('#save_button').click(function (e) {
     	param[jqInputs[i].name]=jqInputs[i].value;
     }
     //拼接那五个输入框
+    var pro_intro1_key = $('#pro_intro1_save_key').val();
+    var pro_intro1_value = $('#pro_intro1_save_value').val();
+    var pro_intro2_key = $('#pro_intro2_save_key').val();
+    var pro_intro2_value = $('#pro_intro2_save_value').val();
+    var pro_intro3_key = $('#pro_intro3_save_key').val();
+    var pro_intro3_value = $('#pro_intro3_save_value').val();
+    var pro_intro4_key = $('#pro_intro4_save_key').val();
+    var pro_intro4_value = $('#pro_intro4_save_value').val();
+    var pro_intro5_key = $('#pro_intro5_save_key').val();
+    var pro_intro5_value = $('#pro_intro5_save_value').val();
+    param.pro_intro = pro_intro1_key+":"+pro_intro1_value+";"+pro_intro2_key+":"+pro_intro2_value+";"+pro_intro3_key+":"+pro_intro3_value+";"+
+    				  pro_intro4_key+":"+pro_intro4_value+";"+pro_intro5_key+":"+pro_intro5_value;
     
     param.pro_name_id = $.session.get('menu_id');
     AjaxHelper.call({
@@ -370,6 +404,7 @@ var manager = {
 	showPrice : false,
 	showUpdate : false,
 	showDel : false,
+	showLinkman : false,
 	fuzzySearch : false,
 	getQueryCondition : function(data) {
 		var param = {};
@@ -754,8 +789,16 @@ var AuthInit = function() {
 		if($.inArray("9", authArray)!=-1){
 			manager.showDel = true;
 		}
+		//显示价格
 		if($.session.get('role_id')=='admin'||$.session.get('role_id')=='财务'){
 			manager.showPrice = true;
+		}
+		//显示联系人
+		if($.inArray("22", authArray)!=-1){
+			manager.showLinkman = true;
+			$("#pro_lib_linkman").show();
+		}else{
+			$("#pro_lib_linkman").hide();
 		}
 	}
 

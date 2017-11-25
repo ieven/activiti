@@ -55,6 +55,7 @@ var TableEditable = function() {
 				success : function(result) {
 					result = eval("(" + result + ")");
 					result = result.DATA;
+					console.log(result);
 					var menuList = result.menuList;
 					var authorities = result.authorities;
 					var checkboxs = $(":checkbox");
@@ -67,6 +68,9 @@ var TableEditable = function() {
 						else if($.inArray(checkboxs[key].value, authorities)!=-1&&$.inArray(checkboxs[key].id, menu_checkbox_ids)==-1){
 							$("#uniform-"+checkboxs[key].id).children("span").addClass("checked");
 							$("#"+checkboxs[key].id).attr("checked", true);
+						}else{
+							$("#uniform-"+checkboxs[key].id).children("span").removeClass("checked");
+							$("#"+checkboxs[key].id).attr("checked", false);
 						}
 					}
 				},
@@ -174,6 +178,7 @@ $('#save_button').click(
 			var menuParamP = 0;
 			var authoritiesParam = {};
 			var sb=new StringBuffer();
+			console.log(jqInputs);
 			for (var i = 0, iLen = jqInputs.length; i < iLen; i++) {
 				if (jqInputs[i].checked) {
 					if (jqInputs[i].id == 'home_s' || jqInputs[i].id == 'gzl_o'

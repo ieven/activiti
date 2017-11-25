@@ -21,60 +21,65 @@ var TableEditable = function() {
 					if(key=='cus_require'){
 						var requires = result[key].split(";");
 						//有的浏览器怎么都不生效，我只能这么干了
-						if($.inArray("泊声",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"bosheng\" value=\"泊声\" checked />泊声</label>");
+						if($.inArray("背景音乐",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"bosheng\" value=\"背景音乐\" checked />背景音乐</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"bosheng\" value=\"泊声\" />泊声</label>");
-						}
-						if($.inArray("悠达",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"youda\" value=\"悠达\" checked />悠达</label>");
-						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"youda\" value=\"悠达\" />悠达</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"bosheng\" value=\"背景音乐\" />背景音乐</label>");
 						}
 						if($.inArray("视听室",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shitingshi\" value=\"视听室\" checked />视听室</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"youda\" value=\"视听室\" checked />视听室</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shitingshi\" value=\"视听室\" />视听室</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"youda\" value=\"视听室\" />视听室</label>");
 						}
-						if($.inArray("影院",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"yingyuan\" value=\"影院\" checked />影院</label>");
+						if($.inArray("客厅影院",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shitingshi\" value=\"客厅影院\" checked />客厅影院</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"yingyuan\" value=\"影院\" />影院</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shitingshi\" value=\"客厅影院\" />客厅影院</label>");
 						}
-						if($.inArray("水处理",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shuichuli\" value=\"水处理\" checked />水处理</label>");
+						if($.inArray("智能控制",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"yingyuan\" value=\"智能控制\" checked />智能控制</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shuichuli\" value=\"水处理\" />水处理</label>");
-						}
-						if($.inArray("除尘",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"chuchen\" value=\"除尘\" checked />除尘</label>");
-						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"chuchen\" value=\"除尘\" />除尘</label>");
-						}
-						if($.inArray("新风",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"xinfeng\" value=\"新风\" checked />新风</label>");
-						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"xinfeng\" value=\"新风\" />新风</label>");
-						}
-						if($.inArray("安防",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"anfang\" value=\"安防\" checked />安防</label>");
-						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"anfang\" value=\"安防\" />安防</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"yingyuan\" value=\"智能控制\" />智能控制</label>");
 						}
 						if($.inArray("电动窗帘",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"ddcl\" value=\"电动窗帘\" checked />电动窗帘</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shuichuli\" value=\"电动窗帘\" checked />电动窗帘</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"ddcl\" value=\"电动窗帘\" />电动窗帘</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"shuichuli\" value=\"电动窗帘\" />电动窗帘</label>");
 						}
-						if($.inArray("智能照明",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"znzm\" value=\"智能照明\" checked />智能照明</label>");
+						if($.inArray("安防",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"chuchen\" value=\"安防\" checked />安防</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"znzm\" value=\"智能照明\" />智能照明</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"chuchen\" value=\"安防\" />安防</label>");
 						}
-						if($.inArray("集中控制",requires)!=-1){
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"jzkz\" value=\"集中控制\" checked />集中控制</label>");
+						if($.inArray("监控",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"xinfeng\" value=\"监控\" checked />监控</label>");
 						}else{
-							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"jzkz\" value=\"集中控制\" />集中控制</label>");
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"xinfeng\" value=\"监控\" />监控</label>");
+						}
+						if($.inArray("水处理",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"anfang\" value=\"水处理\" checked />水处理</label>");
+						}else{
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"anfang\" value=\"水处理\" />水处理</label>");
+						}
+						if($.inArray("新风",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"ddcl\" value=\"新风\" checked />新风</label>");
+						}else{
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"ddcl\" value=\"新风\" />新风</label>");
+						}
+						if($.inArray("除尘",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"znzm\" value=\"除尘\" checked />除尘</label>");
+						}else{
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"znzm\" value=\"除尘\" />除尘</label>");
+						}
+						if($.inArray("激光电视",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"jzkz\" value=\"激光电视\" checked />激光电视</label>");
+						}else{
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"jzkz\" value=\"激光电视\" />激光电视</label>");
+						}
+						if($.inArray("WIFI",requires)!=-1){
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"WIFI\" value=\"WIFI\" checked />WIFI</label>");
+						}else{
+							sb.append("<label class=\"checkbox-inline\"> <input type=\"checkbox\" id=\"WIFI\" value=\"WIFI\" />WIFI</label>");
 						}
 					}
 					if(key=='others'){

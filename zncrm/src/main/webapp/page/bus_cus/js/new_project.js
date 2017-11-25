@@ -72,6 +72,8 @@ $('#save_btn').click(function(e) {
         names = names+$(item).attr("value")+";";
     });
     param.receptionist = names;
+    //备注信息
+	param.note = $("#note").val();
     
 	AjaxHelper.call({
 		url : "/zncrm/rest/bus_cus/add",

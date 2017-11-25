@@ -92,6 +92,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="../../assets/admin/layout/css/custom.css" rel="stylesheet"
 	type="text/css" />
 <link href="./css/project_detail.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="./css/zoomify.min.css">
+<link rel="stylesheet" href="./css/style.css">
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico" />
 <style type="text/css">
@@ -137,7 +141,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
 							<div class="form-body">
-								<h3 class="form-section">基本信息</h3>
+								<h3 class="form-section" style="display: inline-block;">基本信息</h3><button type="button" id="save_btn" class="btn green pull-right" style="display: inline;">修改</button>
 								<div class="row" style="border-bottom: 1px solid #eee">
 									<div class="col-md-3">
 										<div class="form-group">
@@ -225,17 +229,25 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="row" style="border-bottom: 1px solid #eee">
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label col-md-4 key-style">客户邮箱</label>
+											<label class="control-label col-md-4 key-style">第二联系人</label>
 											<div class="col-md-8">
-												<p id="cus_email" class="form-control-static"></p>
+												<p id="linkman_name2" class="form-control-static"></p>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label col-md-4 key-style">施工地址</label>
+											<label class="control-label col-md-4 key-style">第二联系人电话</label>
 											<div class="col-md-8">
-												<p id="con_add" class="form-control-static"></p>
+												<p id="linkman_phone2" class="form-control-static"></p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label col-md-4 key-style">客户邮箱</label>
+											<div class="col-md-8">
+												<p id="cus_email" class="form-control-static"></p>
 											</div>
 										</div>
 									</div>
@@ -355,17 +367,9 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="row" style="border-bottom: 1px solid #eee">
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label col-md-4 key-style">第二联系人</label>
+											<label class="control-label col-md-4 key-style">施工地址</label>
 											<div class="col-md-8">
-												<p id="linkman_name2" class="form-control-static"></p>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label class="control-label col-md-4 key-style">第二联系人电话</label>
-											<div class="col-md-8">
-												<p id="linkman_phone2" class="form-control-static"></p>
+												<p id="con_add" class="form-control-static"></p>
 											</div>
 										</div>
 									</div>
@@ -382,7 +386,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 								</div>
 							</div>
-							<div class="form-actions" id="update_bus_cus">
+							<!-- <div class="form-actions" id="update_bus_cus">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="row">
@@ -393,7 +397,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</div>
 									<div class="col-md-6"></div>
 								</div>
-							</div>
+							</div> -->
 							<!-- END FORM-->
 						</div>
 					</div>
@@ -459,10 +463,10 @@ License: You must have a valid license purchased only from themeforest(the above
 				</div>
 				<div class="form-actions">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="row">
-								<div class="col-md-offset-3 col-md-9">
-									<button type="button" id="submit_btn" class="btn green">提交</button>
+								<div class="col-md-offset-3 col-md-7">
+									<button type="button" id="submit_btn" class="btn green pull-right">提交记录</button>
 								</div>
 							</div>
 						</div>
@@ -667,6 +671,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script
 		src="../../js/common/jquery-fileupload/jquery.iframe-transport.js"></script>
 	<script src="../../js/common/jquery-fileupload/jquery.ui.widget.js"></script>
+	
+	<script src="./js/zoomify.js"></script>
 	<script>
 		jQuery(document).ready(function() {
 			Metronic.init(); // init metronic core components
@@ -677,6 +683,17 @@ License: You must have a valid license purchased only from themeforest(the above
 			ComponentsEditors.init();
 			FormFileUpload.init();
 			AuthInit.init();
+			var height = $('#sample_editable_1').height();
+			$('img').zoomify().on({
+
+				'zoom-in.zoomify':function(){
+					$('#sample_editable_1').css('height',$(window).height());
+
+				},'zoom-out.zoomify':function(){
+
+					$('#sample_editable_1').css('height',height);
+
+					}});
 		});
 	</script>
 </body>

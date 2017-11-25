@@ -242,9 +242,9 @@ var Project = function() {
 				var role_id = $.session.get('role_id');
 				var real_name = $.session.get('real_name');
 				if(recorder==real_name||role_id=='admin'){
-					$("#update_bus_cus").show();
+					$("#save_btn").show();
 				}else{
-					$("#update_bus_cus").hide();
+					$("#save_btn").hide();
 				}
 			},
 			error : function(result) {
